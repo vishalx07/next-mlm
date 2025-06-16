@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+/* add these two lines */
+@import "@jamsr-ui/theme/styles.css";
+@source "../../../../node_modules/@jamsr-ui";
+/* add these two lines */

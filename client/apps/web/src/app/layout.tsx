@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+
 import "@/styles/globals.css";
+
+import { AppProvider } from "@/providers/app";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AppProvider>{children}</AppProvider>
+      </body>
     </html>
   );
 }
