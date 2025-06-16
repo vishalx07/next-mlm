@@ -1,0 +1,12 @@
+{
+  "name": "@repo/nextjs-config",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "main": "index.ts",
+  "devDependencies": {
+    "@types/node": "^24.0.1",
+    "next": "^15.3.3",
+    "typescript": "^5.8.3"
+  }
+}
