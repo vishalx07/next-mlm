@@ -1,12 +1,11 @@
 {
-  "name": "@repo/nextjs-config",
+  "name": "@repo/app-config",
   "version": "1.0.0",
   "type": "module",
   "private": true,
   "main": "index.ts",
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "next": "^15.3.3",
     "typescript": "^5.8.3"
   }
 }

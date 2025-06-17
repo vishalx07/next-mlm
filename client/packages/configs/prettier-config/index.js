@@ -23,6 +23,7 @@ export const sharedConfig = {
     "<THIRD_PARTY_MODULES>",
     "^@jamsr-ui(.*)$",
     "@repo(.*)$",
+    "@/(.*)$",
     "^[./]",
     "",
   ],
