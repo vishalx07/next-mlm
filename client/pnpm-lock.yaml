@@ -26,13 +26,22 @@ importers:
 
   apps/web:
     dependencies:
+      '@hookform/resolvers':
+        specifier: ^5.1.1
+        version: 5.1.1(react-hook-form@7.58.0(react@19.1.0))
+      '@jamsr-ui/next':
+        specifier: ^0.1.6
+        version: 0.1.6(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(next@15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
       '@jamsr-ui/react':
         specifier: ^0.1.11
         version: 0.1.11(@tanstack/react-table@8.21.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@tiptap/pm@2.14.0)(@types/react@19.1.8)(highlight.js@11.11.1)(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)(use-sync-external-store@1.5.0(react@19.1.0))
+      '@jamsr-ui/rhf':
+        specifier: ^0.1.12
+        version: 0.1.12(@tiptap/pm@2.14.0)(highlight.js@11.11.1)(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-hook-form@7.58.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
       '@repo/nextjs-config':
         specifier: workspace:*
         version: link:../../packages/configs/nextjs-config
-      framer-motion:
+      motion:
         specifier: ^12.18.1
         version: 12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       next:
@@ -44,10 +53,19 @@ importers:
       react-dom:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
+      react-hook-form:
+        specifier: ^7.58.0
+        version: 7.58.0(react@19.1.0)
+      zod:
+        specifier: ^3.25.67
+        version: 3.25.67
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/configs/eslint-config
+      '@repo/libs':
+        specifier: workspace:*
+        version: link:../../packages/libs
       '@repo/prettier-config':
         specifier: workspace:*
         version: link:../../packages/configs/prettier-config
@@ -77,6 +95,15 @@ importers:
         version: 4.1.10
       typescript:
         specifier: 5.8.3
+        version: 5.8.3
+
+  packages/configs/app-config:
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      typescript:
+        specifier: ^5.8.3
         version: 5.8.3
 
   packages/configs/eslint-config:
@@ -117,9 +144,9 @@ importers:
 
   packages/configs/nextjs-config:
     devDependencies:
-      '@types/node':
-        specifier: ^24.0.1
-        version: 24.0.1
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
       next:
         specifier: ^15.3.3
         version: 15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -130,6 +157,25 @@ importers:
   packages/configs/prettier-config: {}
 
   packages/configs/typescript-config: {}
+
+  packages/libs:
+    dependencies:
+      zod:
+        specifier: ^3.25.67
+        version: 3.25.67
+    devDependencies:
+      '@repo/app-config':
+        specifier: workspace:*
+        version: link:../configs/app-config
+      '@repo/prettier-config':
+        specifier: workspace:*
+        version: link:../configs/prettier-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../configs/typescript-config
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
 
   packages/ui:
     dependencies:
@@ -328,6 +374,11 @@ packages:
 
   '@floating-ui/utils@0.2.9':
     resolution: {integrity: sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==}
+
+  '@hookform/resolvers@5.1.1':
+    resolution: {integrity: sha512-J/NVING3LMAEvexJkyTLjruSm7aOFx7QX21pzkiJfMoNG0wl5aFEjLTl7ay7IQb9EWY6AkrBy7tHL2Alijpdcg==}
+    peerDependencies:
+      react-hook-form: ^7.55.0
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -670,6 +721,13 @@ packages:
       react: '>=19'
       react-dom: '>=19'
 
+  '@jamsr-ui/next@0.1.6':
+    resolution: {integrity: sha512-li+Pg+42WmA61TYoyg+J/xTCpK/q/x8zj8yf0XCBOWJeDRgUBGl46qzGYciuVcTCbfKLgiPrHH5JPio6GmjzXg==}
+    peerDependencies:
+      next: '>=15'
+      react: '>=19'
+      react-dom: '>=19'
+
   '@jamsr-ui/otp-input@0.1.3':
     resolution: {integrity: sha512-es3m8qQo6C0WP2rxxtfrjDCjuKYPVantar17kIKY56rSi/DvlPQ4fCrFOj+XATx4+qHaU317kO7fMbaU7zzoVQ==}
     peerDependencies:
@@ -704,6 +762,14 @@ packages:
     peerDependencies:
       react: '>=19'
       react-dom: '>=19'
+
+  '@jamsr-ui/rhf@0.1.12':
+    resolution: {integrity: sha512-2XtUdVBbHBxDMYhRC8AeZk3BozNqinbAyvlnM1yHowN0v9/NKyD9oOH6JGgu6FDI5f5P56W1bT6HaniZqBij8Q==}
+    peerDependencies:
+      motion: '>=12'
+      react: '>=19'
+      react-dom: '>=19'
+      react-hook-form: '>=7'
 
   '@jamsr-ui/ripple@0.1.3':
     resolution: {integrity: sha512-eTzCPL0uQ1A/e6Nq40du+JyruWm5f9fedQCBqQF035UXZwBejUZtt09uJwV5bLt/mPgD70mtCQQuUVM9+rvT8g==}
@@ -896,6 +962,9 @@ packages:
 
   '@remirror/core-constants@3.0.0':
     resolution: {integrity: sha512-42aWfPrimMfDKDi4YegyS7x+/0tlzaqwPQCULLanv3DMIlu96KTJR0fM5isWX2UViOqlGnX6YFgqWepcX+XMNg==}
+
+  '@standard-schema/utils@0.3.0':
+    resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
 
   '@swc/counter@0.1.3':
     resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
@@ -2859,6 +2928,12 @@ packages:
     peerDependencies:
       react: '>= 16.8 || 18.0.0'
 
+  react-hook-form@7.58.0:
+    resolution: {integrity: sha512-zGijmEed35oNfOfy7ub99jfjkiLhHwA3dl5AgyKdWC6QQzhnc7tkWewSa+T+A2EpLrc6wo5DUoZctS9kufWJjA==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18 || ^19
+
   react-hot-toast@2.5.2:
     resolution: {integrity: sha512-Tun3BbCxzmXXM7C+NI4qiv6lT0uwGh4oAfeJyNOjYUejTsm35mK9iCaYLGv8cBz9L5YxZLx/2ii7zsIwPtPUdw==}
     engines: {node: '>=10'}
@@ -3382,6 +3457,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  zod@3.25.67:
+    resolution: {integrity: sha512-idA2YXwpCdqUSKRCACDE6ItZD9TZzy3OZMtpfLoh6oPR47lipysRrJfjzMqFxQ3uJuUPyUeWe1r9vLH33xO/Qw==}
+
   zustand@5.0.3:
     resolution: {integrity: sha512-14fwWQtU3pH4dE0dOpdMiWjddcH+QzKIgk1cl8epwSE7yag43k/AD/m4L6+K7DytAOr9gGBe3/EXj9g7cdostg==}
     engines: {node: '>=12.20.0'}
@@ -3594,6 +3672,11 @@ snapshots:
       tabbable: 6.2.0
 
   '@floating-ui/utils@0.2.9': {}
+
+  '@hookform/resolvers@5.1.1(react-hook-form@7.58.0(react@19.1.0))':
+    dependencies:
+      '@standard-schema/utils': 0.3.0
+      react-hook-form: 7.58.0(react@19.1.0)
 
   '@humanfs/core@0.19.1': {}
 
@@ -4098,6 +4181,19 @@ snapshots:
     transitivePeerDependencies:
       - tailwindcss
 
+  '@jamsr-ui/next@0.1.6(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(next@15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)':
+    dependencies:
+      '@jamsr-ui/avatar': 0.1.3(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/config': 0.1.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@jamsr-ui/link': 0.1.4(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/utils': 0.1.3(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      next: 15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+    transitivePeerDependencies:
+      - motion
+      - tailwindcss
+
   '@jamsr-ui/otp-input@0.1.3(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)':
     dependencies:
       '@jamsr-ui/config': 0.1.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -4211,6 +4307,31 @@ snapshots:
     dependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
+
+  '@jamsr-ui/rhf@0.1.12(@tiptap/pm@2.14.0)(highlight.js@11.11.1)(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-hook-form@7.58.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)':
+    dependencies:
+      '@jamsr-ui/autocomplete': 0.1.5(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/checkbox': 0.1.4(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/editor': 0.1.9(@tiptap/pm@2.14.0)(highlight.js@11.11.1)(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/file-upload-multi': 0.1.3(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/file-upload-single': 0.1.3(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/input': 0.1.5(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/otp-input': 0.1.3(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/radio': 0.1.4(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/rating': 0.1.3(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/select': 0.1.5(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/switch': 0.1.5(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/tags-input': 0.1.6(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/textarea': 0.1.5(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      '@jamsr-ui/utils': 0.1.3(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)
+      motion: 12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+      react-hook-form: 7.58.0(react@19.1.0)
+    transitivePeerDependencies:
+      - '@tiptap/pm'
+      - highlight.js
+      - tailwindcss
 
   '@jamsr-ui/ripple@0.1.3(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)':
     dependencies:
@@ -4456,6 +4577,8 @@ snapshots:
   '@popperjs/core@2.11.8': {}
 
   '@remirror/core-constants@3.0.0': {}
+
+  '@standard-schema/utils@0.3.0': {}
 
   '@swc/counter@0.1.3': {}
 
@@ -6697,6 +6820,10 @@ snapshots:
       prop-types: 15.8.1
       react: 19.1.0
 
+  react-hook-form@7.58.0(react@19.1.0):
+    dependencies:
+      react: 19.1.0
+
   react-hot-toast@2.5.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
       csstype: 3.1.3
@@ -7305,6 +7432,8 @@ snapshots:
   yn@3.1.1: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@3.25.67: {}
 
   zustand@5.0.3(@types/react@19.1.8)(react@19.1.0)(use-sync-external-store@1.5.0(react@19.1.0)):
     optionalDependencies:

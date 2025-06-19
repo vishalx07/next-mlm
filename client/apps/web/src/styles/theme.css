@@ -1,0 +1,18 @@
+/* @see https://tailwindcss.com/docs/theme#what-are-theme-variables */
+/* @see https://tailwindcss.com/docs/theme#theme-variable-namespaces */
+/* @see https://tailwindcss.com/docs/colors  */
+
+@theme {
+  /* Blur */
+  --blur-header: 8px;
+
+  /* Shadow */
+  --shadow-2xs: var(--ui-box-shadow-2xs);
+  --shadow-xs: var(--ui-box-shadow-xs);
+  --shadow-sm: var(--ui-box-shadow-sm);
+  --shadow-md: var(--ui-box-shadow-md);
+  --shadow-lg: var(--ui-box-shadow-lg);
+  --shadow-xl: var(--ui-box-shadow-xl);
+  --shadow-2xl: var(--ui-box-shadow-2xl);
+  --shadow-card: var(--ui-box-shadow-card);
+}

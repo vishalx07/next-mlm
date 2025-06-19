@@ -1,0 +1,385 @@
+:root {
+  /* ... */
+  --header-mobile-height: 64px;
+  --header-desktop-height: 72px;
+}
+
+:root {
+  --ui-fs-2xs: clamp(0.66rem, -0.08vi + 0.68rem, 0.58rem);
+  --ui-fs-xs: clamp(0.72rem, -0.03vi + 0.73rem, 0.69rem);
+  --ui-fs-sm: clamp(0.8rem, 0.04vi + 0.79rem, 0.83rem);
+  --ui-fs-base: clamp(0.82rem, 0.13vi + 0.84rem, 0.9rem);
+  --ui-fs-md: clamp(0.9rem, 0.13vi + 0.84rem, 1.05rem);
+  --ui-fs-lg: clamp(0.96rem, 0.25vi + 0.9rem, 1.2rem);
+  --ui-fs-xl: clamp(1.06rem, 0.4vi + 0.96rem, 1.44rem);
+  --ui-fs-2xl: clamp(1.16rem, 0.59vi + 1.02rem, 1.73rem);
+  --ui-fs-3xl: clamp(1.28rem, 0.83vi + 1.07rem, 2.07rem);
+  --ui-fs-4xl: clamp(1.41rem, 1.14vi + 1.13rem, 2.49rem);
+  --ui-fs-5xl: clamp(1.55rem, 1.51vi + 1.17rem, 2.99rem);
+}
+
+:root {
+  /* Common Colors */
+  --common-white: oklch(100% 0 0);
+  --common-black: oklch(0% 0 0);
+
+  /* Default Colors */
+  --default-50: oklch(0.99 0.0029 264.54);
+  --default-100: oklch(0.97 0.0069 247.9);
+  --default-200: oklch(0.92 0.0144 238.02);
+  --default-300: oklch(0.87 0.0176 248.03);
+  --default-400: oklch(0.72 0.0129 248.01);
+  --default-500: oklch(0.52 0.0172 251.29);
+  --default-600: oklch(0.48 0.0197 251.03);
+  --default-700: oklch(0.34 0.0134 248.22);
+  --default-800: oklch(0.26 0.0081 240.18);
+  --default-900: oklch(0.19 0.0062 236.91);
+  --default-950: oklch(0.14 0.0028 247.09);
+
+  /* Primary Colors */
+  --primary-50: oklch(95.97% 0.02 238.66);
+  --primary-100: oklch(92.22% 0.041 238.05);
+  --primary-200: oklch(83.84% 0.085 240.02);
+  --primary-300: oklch(76.59% 0.123 241.79);
+  --primary-400: oklch(69.77% 0.159 245.22);
+  --primary-500: oklch(63.22% 0.175 249.61);
+  --primary-600: oklch(53.4% 0.145 248.9);
+  --primary-700: oklch(44.24% 0.117 248.07);
+  --primary-800: oklch(33.11% 0.084 246.86);
+  --primary-900: oklch(22.55% 0.052 242.47);
+
+  /* Secondary Colors */
+  --secondary-50: oklch(94.8% 0.023 308.2);
+  --secondary-100: oklch(89.3% 0.046 307.9);
+  --secondary-200: oklch(78.5% 0.095 307.1);
+  --secondary-300: oklch(67.8% 0.145 305.9);
+  --secondary-400: oklch(57.7% 0.192 304);
+  --secondary-500: oklch(48.8% 0.225 300.5);
+  --secondary-600: oklch(41.7% 0.189 300.8);
+  --secondary-700: oklch(34.2% 0.151 301.3);
+  --secondary-800: oklch(26.4% 0.11 302.1);
+  --secondary-900: oklch(18.1% 0.064 303.7);
+
+  /* Success Colors */
+  --success-50: oklch(96.9% 0.023 161.8);
+  --success-100: oklch(93.7% 0.045 160.4);
+  --success-200: oklch(87.6% 0.09 159.1);
+  --success-300: oklch(82.4% 0.133 156.8);
+  --success-400: oklch(77.4% 0.168 154.2);
+  --success-500: oklch(73.3% 0.193 150.8);
+  --success-600: oklch(62.2% 0.163 151);
+  --success-700: oklch(50.6% 0.13 151.4);
+  --success-800: oklch(38% 0.094 152.3);
+  --success-900: oklch(24.6% 0.055 154.1);
+
+  /* Warning Colors */
+  --warning-50: oklch(98.7% 0.026 102.2);
+  --warning-100: oklch(95.2% 0.038 80);
+  --warning-200: oklch(90.6% 0.076 79.6);
+  --warning-300: oklch(86.2% 0.11 78.3);
+  --warning-400: oklch(82% 0.139 76.3);
+  --warning-500: oklch(78.2% 0.158 72.3);
+  --warning-600: oklch(66.3% 0.133 72.6);
+  --warning-700: oklch(53.8% 0.106 73.1);
+  --warning-800: oklch(40.6% 0.078 74.2);
+  --warning-900: oklch(26.2% 0.046 76.3);
+
+  /* Danger Colors */
+  --danger-50: oklch(94.9% 0.027 354.5);
+  --danger-100: oklch(90% 0.054 356.3);
+  --danger-200: oklch(80.4% 0.113 357.7);
+  --danger-300: oklch(72.2% 0.171 0.4);
+  --danger-400: oklch(65.6% 0.218 4.6);
+  --danger-500: oklch(61.9% 0.242 11.3);
+  --danger-600: oklch(52.4% 0.204 10.7);
+  --danger-700: oklch(42.6% 0.164 9.9);
+  --danger-800: oklch(32.1% 0.121 8.8);
+  --danger-900: oklch(20.8% 0.073 5.6);
+}
+
+:root,
+.light,
+[data-theme="light"] {
+  /* Background Colors */
+  --ui-background: var(--common-white);
+  --ui-background-secondary: var(--common-white);
+  --ui-background-tertiary: var(--common-white);
+  --ui-background-inverse: var(--common-black);
+
+  /* Foreground Colors */
+  --ui-foreground-50: var(--default-50);
+  --ui-foreground-100: var(--default-100);
+  --ui-foreground-200: var(--default-200);
+  --ui-foreground-300: var(--default-300);
+  --ui-foreground-400: var(--default-400);
+  --ui-foreground-500: var(--default-500);
+  --ui-foreground-600: var(--default-600);
+  --ui-foreground-700: var(--default-700);
+  --ui-foreground-800: var(--default-800);
+  --ui-foreground-900: var(--default-900);
+  --ui-foreground: var(--default-800);
+  --ui-foreground-link: var(--ui-primary);
+  --ui-foreground-secondary: var(--default-500);
+  --ui-foreground-tertiary: var(--default-400);
+  --ui-foreground-inverse: var(--common-white);
+
+  /* Divider Colors */
+  --ui-divider-light: --alpha(var(--ui-default-200) / 50%);
+  --ui-divider: var(--ui-default-200);
+  --ui-divider-dark: var(--ui-default-300);
+
+  /* Focus Color */
+  --ui-focus: var(--ui-primary);
+
+  /* Overlay Color */
+  --ui-overlay: var(--common-black);
+
+  /* Content Colors */
+  --ui-content1: var(--common-white);
+  --ui-content1-foreground: var(--default-900);
+  --ui-content2: var(--default-100);
+  --ui-content2-foreground: var(--default-800);
+  --ui-content3: var(--default-200);
+  --ui-content3-foreground: var(--default-700);
+  --ui-content4: var(--default-300);
+  --ui-content4-foreground: var(--default-600);
+
+  /* Default Colors */
+  --ui-default-50: var(--default-50);
+  --ui-default-100: var(--default-100);
+  --ui-default-200: var(--default-200);
+  --ui-default-300: var(--default-300);
+  --ui-default-400: var(--default-400);
+  --ui-default-500: var(--default-500);
+  --ui-default-600: var(--default-600);
+  --ui-default-700: var(--default-700);
+  --ui-default-800: var(--default-800);
+  --ui-default-900: var(--default-900);
+  --ui-default-foreground: var(--default-800);
+  --ui-default: var(--default-200);
+
+  /* Primary Colors */
+  --ui-primary-50: var(--primary-50);
+  --ui-primary-100: var(--primary-100);
+  --ui-primary-200: var(--primary-200);
+  --ui-primary-300: var(--primary-300);
+  --ui-primary-400: var(--primary-400);
+  --ui-primary-500: var(--primary-500);
+  --ui-primary-600: var(--primary-600);
+  --ui-primary-700: var(--primary-700);
+  --ui-primary-800: var(--primary-800);
+  --ui-primary-900: var(--primary-900);
+  --ui-primary-foreground: var(--common-white);
+  --ui-primary: var(--primary-500);
+
+  /* Secondary Colors */
+  --ui-secondary-50: var(--secondary-50);
+  --ui-secondary-100: var(--secondary-100);
+  --ui-secondary-200: var(--secondary-200);
+  --ui-secondary-300: var(--secondary-300);
+  --ui-secondary-400: var(--secondary-400);
+  --ui-secondary-500: var(--secondary-500);
+  --ui-secondary-600: var(--secondary-600);
+  --ui-secondary-700: var(--secondary-700);
+  --ui-secondary-800: var(--secondary-800);
+  --ui-secondary-900: var(--secondary-900);
+  --ui-secondary-foreground: var(--common-white);
+  --ui-secondary: var(--secondary-500);
+
+  /* Success Colors */
+  --ui-success-50: var(--success-50);
+  --ui-success-100: var(--success-100);
+  --ui-success-200: var(--success-200);
+  --ui-success-300: var(--success-300);
+  --ui-success-400: var(--success-400);
+  --ui-success-500: var(--success-500);
+  --ui-success-600: var(--success-600);
+  --ui-success-700: var(--success-700);
+  --ui-success-800: var(--success-800);
+  --ui-success-900: var(--success-900);
+  --ui-success-foreground: var(--default-800);
+  --ui-success: var(--success-500);
+
+  /* Warning Colors */
+  --ui-warning-50: var(--warning-50);
+  --ui-warning-100: var(--warning-100);
+  --ui-warning-200: var(--warning-200);
+  --ui-warning-300: var(--warning-300);
+  --ui-warning-400: var(--warning-400);
+  --ui-warning-500: var(--warning-500);
+  --ui-warning-600: var(--warning-600);
+  --ui-warning-700: var(--warning-700);
+  --ui-warning-800: var(--warning-800);
+  --ui-warning-900: var(--warning-900);
+  --ui-warning-foreground: var(--default-800);
+  --ui-warning: var(--warning-500);
+
+  /* Danger Colors */
+  --ui-danger-50: var(--danger-50);
+  --ui-danger-100: var(--danger-100);
+  --ui-danger-200: var(--danger-200);
+  --ui-danger-300: var(--danger-300);
+  --ui-danger-400: var(--danger-400);
+  --ui-danger-500: var(--danger-500);
+  --ui-danger-600: var(--danger-600);
+  --ui-danger-700: var(--danger-700);
+  --ui-danger-800: var(--danger-800);
+  --ui-danger-900: var(--danger-900);
+  --ui-danger-foreground: var(--common-white);
+  --ui-danger: var(--danger-500);
+
+  /* Shadows */
+  --ui-box-shadow-2xs: 0 1px 2px 0 --alpha(var(--ui-default-500) / 16%);
+  --ui-box-shadow-xs: 0 4px 8px 0 --alpha(var(--ui-default-500) / 16%);
+  --ui-box-shadow-sm: 0 8px 16px 0 --alpha(var(--ui-default-500) / 16%);
+  --ui-box-shadow-md: 0 12px 24px -4px --alpha(var(--ui-default-500) / 16%);
+  --ui-box-shadow-lg: 0 16px 32px -4px --alpha(var(--ui-default-500) / 16%);
+  --ui-box-shadow-xl: 0 20px 40px -4px --alpha(var(--ui-default-500) / 16%);
+  --ui-box-shadow-2xl: 0 24px 48px 0 --alpha(var(--ui-default-500) / 16%);
+  --ui-box-shadow-card:
+    --alpha(var(--common-black) / 4%) 0px 5px 22px 0px,
+    --alpha(var(--common-black) / 6%) 0px 0px 0px 1px;
+}
+
+.dark,
+[data-theme="dark"] {
+  /* Background Colors */
+  --ui-background: var(--common-black);
+  --ui-background-secondary: var(--common-black);
+  --ui-background-tertiary: var(--common-black);
+  --ui-background-inverse: var(--common-white);
+
+  /* Foreground Colors */
+  --ui-foreground-50: var(--default-900);
+  --ui-foreground-100: var(--default-800);
+  --ui-foreground-200: var(--default-700);
+  --ui-foreground-300: var(--default-600);
+  --ui-foreground-400: var(--default-500);
+  --ui-foreground-500: var(--default-400);
+  --ui-foreground-600: var(--default-300);
+  --ui-foreground-700: var(--default-200);
+  --ui-foreground-800: var(--default-100);
+  --ui-foreground-900: var(--default-50);
+  --ui-foreground: var(--common-white);
+  --ui-foreground-link: var(--ui-primary);
+  --ui-foreground-secondary: var(--default-400);
+  --ui-foreground-tertiary: var(--default-500);
+  --ui-foreground-inverse: var(--default-800);
+
+  /* Divider Colors */
+  --ui-divider-light: --alpha(var(--ui-default-200) / 30%);
+  --ui-divider: --alpha(var(--ui-default-200) / 50%);
+  --ui-divider-dark: var(--ui-default-200);
+
+  /* Focus Color */
+  --ui-focus: var(--ui-primary);
+
+  /* Overlay Color */
+  --ui-overlay: var(--common-black);
+
+  /* Content Colors */
+  --ui-content1: var(--default-900);
+  --ui-content1-foreground: var(--default-50);
+  --ui-content2: var(--default-800);
+  --ui-content2-foreground: var(--default-100);
+  --ui-content3: var(--default-700);
+  --ui-content3-foreground: var(--default-200);
+  --ui-content4: var(--default-600);
+  --ui-content4-foreground: var(--default-300);
+
+  /* Default Colors */
+  --ui-default-50: var(--default-900);
+  --ui-default-100: var(--default-800);
+  --ui-default-200: var(--default-700);
+  --ui-default-300: var(--default-600);
+  --ui-default-400: var(--default-500);
+  --ui-default-500: var(--default-400);
+  --ui-default-600: var(--default-300);
+  --ui-default-700: var(--default-200);
+  --ui-default-800: var(--default-100);
+  --ui-default-900: var(--default-50);
+  --ui-default-foreground: var(--common-white);
+  --ui-default: var(--default-700);
+
+  /* Primary Colors */
+  --ui-primary-50: var(--primary-900);
+  --ui-primary-100: var(--primary-800);
+  --ui-primary-200: var(--primary-700);
+  --ui-primary-300: var(--primary-600);
+  --ui-primary-400: var(--primary-500);
+  --ui-primary-500: var(--primary-400);
+  --ui-primary-600: var(--primary-300);
+  --ui-primary-700: var(--primary-200);
+  --ui-primary-800: var(--primary-100);
+  --ui-primary-900: var(--primary-50);
+  --ui-primary-foreground: var(--common-white);
+  --ui-primary: var(--primary-500);
+
+  /* Secondary Colors */
+  --ui-secondary-50: var(--secondary-900);
+  --ui-secondary-100: var(--secondary-800);
+  --ui-secondary-200: var(--secondary-700);
+  --ui-secondary-300: var(--secondary-600);
+  --ui-secondary-400: var(--secondary-500);
+  --ui-secondary-500: var(--secondary-400);
+  --ui-secondary-600: var(--secondary-300);
+  --ui-secondary-700: var(--secondary-200);
+  --ui-secondary-800: var(--secondary-100);
+  --ui-secondary-900: var(--secondary-50);
+  --ui-secondary-foreground: var(--common-white);
+  --ui-secondary: var(--secondary-500);
+
+  /* Success Colors */
+  --ui-success-50: var(--success-900);
+  --ui-success-100: var(--success-800);
+  --ui-success-200: var(--success-700);
+  --ui-success-300: var(--success-600);
+  --ui-success-400: var(--success-500);
+  --ui-success-500: var(--success-400);
+  --ui-success-600: var(--success-300);
+  --ui-success-700: var(--success-200);
+  --ui-success-800: var(--success-100);
+  --ui-success-900: var(--success-50);
+  --ui-success-foreground: var(--default-800);
+  --ui-success: var(--success-500);
+
+  /* Warning Colors */
+  --ui-warning-50: var(--warning-900);
+  --ui-warning-100: var(--warning-800);
+  --ui-warning-200: var(--warning-700);
+  --ui-warning-300: var(--warning-600);
+  --ui-warning-400: var(--warning-500);
+  --ui-warning-500: var(--warning-400);
+  --ui-warning-600: var(--warning-300);
+  --ui-warning-700: var(--warning-200);
+  --ui-warning-800: var(--warning-100);
+  --ui-warning-900: var(--warning-50);
+  --ui-warning-foreground: var(--default-800);
+  --ui-warning: var(--warning-500);
+
+  /* Danger Colors */
+  --ui-danger-50: var(--danger-900);
+  --ui-danger-100: var(--danger-800);
+  --ui-danger-200: var(--danger-700);
+  --ui-danger-300: var(--danger-600);
+  --ui-danger-400: var(--danger-500);
+  --ui-danger-500: var(--danger-400);
+  --ui-danger-600: var(--danger-300);
+  --ui-danger-700: var(--danger-200);
+  --ui-danger-800: var(--danger-100);
+  --ui-danger-900: var(--danger-50);
+  --ui-danger-foreground: var(--common-white);
+  --ui-danger: var(--danger-500);
+
+  /* Shadows */
+  --ui-box-shadow-2xs: 0 1px 2px 0 --alpha(var(--common-black) / 16%);
+  --ui-box-shadow-xs: 0 4px 8px 0 --alpha(var(--common-black) / 16%);
+  --ui-box-shadow-sm: 0 8px 16px 0 --alpha(var(--common-black) / 16%);
+  --ui-box-shadow-md: 0 12px 24px -4px --alpha(var(--common-black) / 16%);
+  --ui-box-shadow-lg: 0 16px 32px -4px --alpha(var(--common-black) / 16%);
+  --ui-box-shadow-xl: 0 20px 40px -4px --alpha(var(--common-black) / 16%);
+  --ui-box-shadow-2xl: 0 24px 48px 0 --alpha(var(--common-black) / 16%);
+  --ui-box-shadow-card:
+    --alpha(var(--common-black) / 24%) 0px 5px 22px 0px,
+    --alpha(var(--common-white) / 12%) 0px 0px 0px 1px;
+}

@@ -12,15 +12,21 @@
     "lint": "next lint --max-warnings 0"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
+    "@jamsr-ui/next": "^0.1.6",
     "@jamsr-ui/react": "^0.1.11",
+    "@jamsr-ui/rhf": "^0.1.12",
     "@repo/nextjs-config": "workspace:*",
-    "framer-motion": "^12.18.1",
+    "motion": "^12.18.1",
     "next": "^15.3.3",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-hook-form": "^7.58.0",
+    "zod": "^3.25.67"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
+    "@repo/libs": "workspace:*",
     "@repo/prettier-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@tailwindcss/postcss": "^4.1.10",
