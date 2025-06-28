@@ -1,16 +1,13 @@
 {
-  "name": "@repo/libs",
+  "name": "@repo/utils",
   "version": "1.0.0",
   "type": "module",
   "private": true,
   "exports": {
     "./*": "./src/*.ts"
   },
-  "dependencies": {
-    "zod": "^3.25.67"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@repo/app-config": "workspace:*",
     "@repo/prettier-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "typescript": "^5.8.3"
