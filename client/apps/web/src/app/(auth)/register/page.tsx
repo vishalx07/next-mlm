@@ -11,14 +11,20 @@ export default function page() {
           as="h1"
           variant="h3"
         >
-          Welcome Back
+          Create New Account
         </Text>
         <Text
           as="p"
-          variant="paragraph"
-          className="text-foreground-secondary"
+          variant="paragraph2"
+          className="text-foreground-secondary text-center"
         >
-          Sign in to access your dashboard
+          Already have account?{" "}
+          <Link
+            href={"/login"}
+            className="font-medium"
+          >
+            Sign in
+          </Link>
         </Text>
       </div>
 
@@ -41,15 +47,24 @@ export default function page() {
 
       <Text
         as="p"
-        variant="paragraph2"
+        variant="lead"
         className="text-foreground-secondary mt-4 text-center"
       >
-        New to Next MLM?{" "}
+        By signing up, I agree to&nbsp;
         <Link
-          href={"/register"}
-          className="font-medium"
+          href={"#"}
+          underline="always"
+          className="text-foreground font-medium"
         >
-          Join Us
+          Terms & Conditions
+        </Link>
+        &nbsp;and&nbsp;
+        <Link
+          href={"#"}
+          underline="always"
+          className="text-foreground font-medium"
+        >
+          Privacy Policy
         </Link>
       </Text>
     </>

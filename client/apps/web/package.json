@@ -22,13 +22,16 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.58.0",
-    "zod": "^3.25.67"
+    "zod": "^3.25.67",
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
+    "@repo/app-config": "workspace:*",
     "@repo/eslint-config": "workspace:*",
     "@repo/libs": "workspace:*",
     "@repo/prettier-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@repo/utils": "workspace:*",
     "@tailwindcss/postcss": "^4.1.10",
     "@types/node": "^24.0.1",
     "@types/react": "19.1.8",

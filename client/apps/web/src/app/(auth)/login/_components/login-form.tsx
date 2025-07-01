@@ -42,7 +42,6 @@ export const LoginForm = () => {
 
       <Button
         fullWidth
-        size="lg"
         type="submit"
         variant="flat"
         isLoading={isPending}
