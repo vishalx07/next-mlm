@@ -35,9 +35,10 @@ type User struct {
 	Avatar        string                 `protobuf:"bytes,8,opt,name=avatar,proto3" json:"avatar,omitempty"`
 	Country       string                 `protobuf:"bytes,9,opt,name=country,proto3" json:"country,omitempty"`
 	PhoneNumber   string                 `protobuf:"bytes,10,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
-	Level         uint32                 `protobuf:"varint,11,opt,name=level,proto3" json:"level,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	ReferralId    int32                  `protobuf:"varint,11,opt,name=referral_id,json=referralId,proto3" json:"referral_id,omitempty"`
+	Level         uint32                 `protobuf:"varint,12,opt,name=level,proto3" json:"level,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -142,6 +143,13 @@ func (x *User) GetPhoneNumber() string {
 	return ""
 }
 
+func (x *User) GetReferralId() int32 {
+	if x != nil {
+		return x.ReferralId
+	}
+	return 0
+}
+
 func (x *User) GetLevel() uint32 {
 	if x != nil {
 		return x.Level
@@ -167,7 +175,7 @@ var File_types_v1_user_proto protoreflect.FileDescriptor
 
 const file_types_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x13types/v1/user.proto\x12\btypes.v1\x1a\x14enums/v1/enums.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb4\x03\n" +
+	"\x13types/v1/user.proto\x12\btypes.v1\x1a\x14enums/v1/enums.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xd5\x03\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x05R\x06userId\x12\x1a\n" +
@@ -179,12 +187,14 @@ const file_types_v1_user_proto_rawDesc = "" +
 	"\x06avatar\x18\b \x01(\tR\x06avatar\x12\x18\n" +
 	"\acountry\x18\t \x01(\tR\acountry\x12!\n" +
 	"\fphone_number\x18\n" +
-	" \x01(\tR\vphoneNumber\x12\x14\n" +
-	"\x05level\x18\v \x01(\rR\x05level\x129\n" +
+	" \x01(\tR\vphoneNumber\x12\x1f\n" +
+	"\vreferral_id\x18\v \x01(\x05R\n" +
+	"referralId\x12\x14\n" +
+	"\x05level\x18\f \x01(\rR\x05level\x129\n" +
 	"\n" +
-	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtB\x8e\x01\n" +
+	"updated_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtB\x8e\x01\n" +
 	"\fcom.types.v1B\tUserProtoP\x01Z2github.com/vishalx07/next-mlm/gen/types/v1;typesv1\xa2\x02\x03TXX\xaa\x02\bTypes.V1\xca\x02\bTypes\\V1\xe2\x02\x14Types\\V1\\GPBMetadata\xea\x02\tTypes::V1b\x06proto3"
 
 var (
