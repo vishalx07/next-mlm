@@ -4,6 +4,7 @@ import (
 	"log"
 
 	config "github.com/vishalx07/next-mlm/internal/configs"
+	DB "github.com/vishalx07/next-mlm/internal/db"
 )
 
 func main() {
@@ -14,10 +15,18 @@ func main() {
 
 func run() error {
 	// load env
-	_, err := config.LoadEnv()
+	env, err := config.LoadEnv()
 	if err != nil {
 		return err
 	}
+
+	// connect to db
+	db, err := DB.ConnectDB(env)
+	if err != nil {
+		return err
+	}
+
+	println(db)
 
 	return nil
 }
