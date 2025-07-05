@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package auth.v1;
+
+import "buf/validate/validate.proto";
+import "types/v1/user.proto";
+
+service AuthService {
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc RegisterStep1(RegisterStep1Request) returns (RegisterStep1Response);
+  rpc RegisterStep2(RegisterStep2Request) returns (RegisterStep2Response);
+  rpc RegisterStep3(RegisterStep3Request) returns (RegisterStep3Response);
+}
+
+// LOGIN MESSAGE
+message LoginRequest {
+  string email = 1 [(buf.validate.field).required = true];
+  string password = 2 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.min_len = 6
+  ];
+}
+
+message LoginResponse {
+  string message = 1;
+  string token = 2;
+  types.v1.User user = 3;
+}
+
+// REGISTER MESSAGE
+// Step 1
+message RegisterStep1Request {
+  int32 referal_id = 1 [(buf.validate.field).required = true];
+  string fullname = 2 [(buf.validate.field).required = true];
+  string username = 3 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.min_len = 3
+  ];
+  string country = 4 [(buf.validate.field).required = true];
+  string phone_number = 5 [(buf.validate.field).required = true];
+}
+
+message RegisterStep1Response {
+  string message = 1;
+}
+
+// Step 2
+message RegisterStep2Request {
+  string email = 1 [(buf.validate.field).string.email = true];
+  string password = 2 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.min_len = 6
+  ];
+}
+
+message RegisterStep2Response {
+  string message = 1;
+}
+
+// Step 3
+message RegisterStep3Request {
+  string otp = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.min_len = 6
+  ];
+  RegisterStep1Request step1 = 2;
+  RegisterStep2Request step2 = 3;
+}
+
+message RegisterStep3Response {
+  string message = 1;
+  string token = 2;
+  types.v1.User user = 3;
+}
