@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	config "github.com/vishalx07/next-mlm/internal/configs"
+	config "github.com/vishalx07/next-mlm/internal/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"

@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	config "github.com/vishalx07/next-mlm/internal/configs"
+	config "github.com/vishalx07/next-mlm/internal/config"
 	DB "github.com/vishalx07/next-mlm/internal/db"
 )
 
