@@ -8,6 +8,8 @@ import (
 )
 
 func main() {
+	// DB.AtlasMigration()
+
 	if err := run(); err != nil {
 		log.Fatal(err)
 	}
@@ -26,7 +28,13 @@ func run() error {
 		return err
 	}
 
-	println(db)
+	// migrate
+	if err := DB.CreateEnumTypes(db); err != nil {
+		return err
+	}
+	if err := DB.AutoMigrate(db); err != nil {
+		return err
+	}
 
 	return nil
 }
