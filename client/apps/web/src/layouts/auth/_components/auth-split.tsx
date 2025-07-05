@@ -1,4 +1,6 @@
 import { Card } from "@jamsr-ui/react";
+import { Logo } from "@repo/components/logo";
+import { cn } from "@repo/utils/index";
 
 type Props = {
   children: React.ReactNode;
@@ -7,7 +9,9 @@ type Props = {
 
 export const AuthSplit = ({ children, className }: Props) => {
   return (
-    <div className={`flex flex-1 items-center justify-center p-6 ${className}`}>
+    <div
+      className={cn("flex flex-1 items-center justify-center p-6", className)}
+    >
       <Card className="w-full max-w-screen-lg">
         <div className="grid h-full grid-cols-2">
           {/* left section */}
@@ -17,7 +21,9 @@ export const AuthSplit = ({ children, className }: Props) => {
           {/* right section */}
           <div className="flex flex-col p-10">
             {/* logo */}
-            <div className="border-divider mx-auto mb-6 size-[76px] rounded-full border-2" />
+            <div className="border-divider mx-auto mb-6 flex size-[76px] items-center justify-center rounded-full border-2">
+              <Logo />
+            </div>
 
             {children}
           </div>

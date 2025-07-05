@@ -1,39 +1,30 @@
 {
-  "name": "web",
-  "version": "0.1.0",
+  "name": "@repo/components",
+  "version": "1.0.0",
   "type": "module",
   "private": true,
+  "exports": {
+    "./*": "./src/*.tsx"
+  },
   "scripts": {
-    "dev": "next dev --port 3003",
-    "build": "next build",
-    "start": "next start --port 3003",
-    "preview": "next build && next start --port 3003",
-    "check-types": "tsc --noEmit",
-    "lint": "next lint --max-warnings 0"
+    "lint": "eslint . --max-warnings 0",
+    "generate:component": "turbo gen react-component",
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "@repo/app-config": "workspace:*",
-    "@repo/components": "workspace:*",
-    "@repo/libs": "workspace:*",
-    "@repo/nextjs-config": "workspace:*",
     "@repo/utils": "workspace:*",
-    "@hookform/resolvers": "^5.1.1",
     "@jamsr-ui/next": "^0.1.6",
     "@jamsr-ui/react": "^0.1.11",
-    "@jamsr-ui/rhf": "^0.1.12",
     "motion": "^12.18.1",
-    "next": "^15.3.3",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-hook-form": "^7.58.0",
-    "zod": "^3.25.67",
-    "zustand": "^5.0.6"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/prettier-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@tailwindcss/postcss": "^4.1.10",
+    "@turbo/gen": "^2.5.0",
     "@types/node": "^24.0.1",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
