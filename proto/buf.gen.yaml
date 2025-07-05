@@ -14,7 +14,7 @@ managed:
   enabled: true
   override:
     - file_option: go_package_prefix
-      value: github.com/vishalx07/grpc-auth/gen
+      value: github.com/vishalx07/next-mlm/gen
   # Don't modify any file option or field option for protovalidate. Without
   # this, generated Go will fail to compile.
   disable:

@@ -3,11 +3,14 @@ module github.com/vishalx07/next-mlm
 go 1.24.0
 
 require (
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.6-20250625184727-c923a0c2a132.1
+	connectrpc.com/connect v1.18.1
 	github.com/caarlos0/env/v11 v11.3.1
 	github.com/go-playground/validator/v10 v10.27.0
 	github.com/joho/godotenv v1.5.1
 	github.com/nrednav/cuid2 v1.0.1
 	golang.org/x/crypto v0.33.0
+	google.golang.org/protobuf v1.36.6
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/gorm v1.30.0
 )
