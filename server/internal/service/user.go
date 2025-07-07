@@ -4,6 +4,7 @@ import (
 	"errors"
 
 	models "github.com/vishalx07/next-mlm/internal/models"
+	bcrypt "github.com/vishalx07/next-mlm/internal/pkg/bcrypt"
 	message "github.com/vishalx07/next-mlm/internal/pkg/message"
 	enums "github.com/vishalx07/next-mlm/internal/pkg/types/enums"
 	repo "github.com/vishalx07/next-mlm/internal/repository"
@@ -13,13 +14,20 @@ import (
 type UserServiceInterface interface {
 	Create(*models.User) error
 	Update(*models.User) error
-	GetByID(id string) (*models.User, error)
+	GetById(id string) (*models.User, error)
+	GetByUserId(userId int32) (*models.User, error)
 	GetByEmail(email string) (*models.User, error)
+	GetByUsername(username string) (*models.User, error)
 	GetAll() ([]*models.User, error)
 	Delete(id string) error
 	CheckUserExist(email string) (*models.User, error)
 	IsEmailAlreadyExist(email string) error
+	IsUsernameAlreadyExist(username string) error
+	CheckReferralIdExist(referralId int32) error
 	ValidateStatus(*models.User) error
+	GetPasswordOrThrowError(user *models.User) (string, error)
+	ValidatePassword(*models.User, string) error
+	GenerateUserId() (int32, error)
 }
 
 type UserService struct {
@@ -46,13 +54,25 @@ func (s *UserService) Update(user *models.User) error {
 	return nil
 }
 
-func (s *UserService) GetByID(id string) (*models.User, error) {
-	user, err := s.userRepo.GetByID(id)
+func (s *UserService) GetById(id string) (*models.User, error) {
+	user, err := s.userRepo.GetById(id)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, message.ErrUserNotFound
 		}
-		return nil, message.ErrUserFailedToGetByID(err)
+		return nil, message.ErrUserFailedToGetById(err)
+	}
+
+	return user, nil
+}
+
+func (s *UserService) GetByUserId(userId int32) (*models.User, error) {
+	user, err := s.userRepo.GetByUserId(userId)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, message.ErrUserNotFound
+		}
+		return nil, message.ErrUserFailedToGetByUserId(err)
 	}
 
 	return user, nil
@@ -65,6 +85,18 @@ func (s *UserService) GetByEmail(email string) (*models.User, error) {
 			return nil, message.ErrUserNotFound
 		}
 		return nil, message.ErrUserFailedToGetByEmail(err)
+	}
+
+	return user, nil
+}
+
+func (s *UserService) GetByUsername(username string) (*models.User, error) {
+	user, err := s.userRepo.GetByUsername(username)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, message.ErrUserNotFound
+		}
+		return nil, message.ErrUserFailedToGetByUsername(err)
 	}
 
 	return user, nil
@@ -104,7 +136,29 @@ func (s *UserService) IsEmailAlreadyExist(email string) error {
 		return message.ErrUserFailedToGetByEmail(err)
 	}
 
-	return message.ErrUserAlreadyExist
+	return message.ErrUserEmailAlreadyExist
+}
+
+func (s *UserService) IsUsernameAlreadyExist(username string) error {
+	if _, err := s.userRepo.GetByUsername(username); err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil
+		}
+		return message.ErrUserFailedToGetByUsername(err)
+	}
+
+	return message.ErrUsernameAlreadyExist
+}
+
+func (s *UserService) CheckReferralIdExist(referralId int32) error {
+	if _, err := s.GetByUserId(referralId); err != nil {
+		if errors.Is(err, message.ErrUserNotFound) {
+			return message.ErrUserReferralIdNotExist
+		}
+		return err
+	}
+
+	return nil
 }
 
 func (s *UserService) ValidateStatus(user *models.User) error {
@@ -113,4 +167,30 @@ func (s *UserService) ValidateStatus(user *models.User) error {
 	}
 
 	return nil
+}
+
+func (s *UserService) GetPasswordOrThrowError(user *models.User) (string, error) {
+	if user.Password == nil {
+		return "", message.ErrPasswordNotUsed
+	}
+	return *user.Password, nil
+}
+
+func (s *UserService) ValidatePassword(user *models.User, password string) error {
+	passwordFromDB, err := s.GetPasswordOrThrowError(user)
+	if err != nil {
+		return err
+	}
+	if err := bcrypt.VerifyPassword(password, passwordFromDB); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *UserService) GenerateUserId() (int32, error) {
+	userId, err := s.userRepo.GenerateUserId()
+	if err != nil {
+		return 0, message.ErrUserFailedToGenerateUserId(err)
+	}
+	return userId, nil
 }

@@ -29,13 +29,13 @@ func (repo *OtpRepo) Create(otp *models.Otp) error {
 type GetOtpArgs struct {
 	Email   string
 	Purpose enums.OtpPurpose
-	OTP     int
+	Otp     int32
 }
 
 func (repo *OtpRepo) Get(args *GetOtpArgs) (*models.Otp, error) {
 	var otp models.Otp
 	err := repo.db.
-		Where("email = ? AND purpose = ? AND otp = ?", args.Email, args.Purpose, args.OTP).
+		Where("email = ? AND purpose = ? AND otp = ?", args.Email, args.Purpose, args.Otp).
 		Order("valid_till DESC").
 		Take(&otp).
 		Error

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"time"
 
+	config "github.com/vishalx07/next-mlm/internal/config"
 	models "github.com/vishalx07/next-mlm/internal/models"
 	message "github.com/vishalx07/next-mlm/internal/pkg/message"
 	number "github.com/vishalx07/next-mlm/internal/pkg/number"
@@ -16,7 +17,7 @@ type OtpServiceInterface interface {
 	Create(*models.Otp) error
 	Get(args *repo.GetOtpArgs) (*models.Otp, error)
 	Delete(id string) error
-	SendOtp(email string, purpose enums.OtpPurpose) (code int, err error)
+	SendOtp(email string, purpose enums.OtpPurpose) (code int32, err error)
 	VerifyOtp(args *VerifyOtpArgs) error
 }
 
@@ -56,13 +57,13 @@ func (s *OtpService) Delete(id string) error {
 	return nil
 }
 
-func (s *OtpService) SendOtp(email string, purpose enums.OtpPurpose) (cdoe int, err error) {
-	code := number.GenerateRandomNumberOfDigits(6)
+func (s *OtpService) SendOtp(email string, purpose enums.OtpPurpose) (cdoe int32, err error) {
+	code := number.GenerateRandomNumberOfDigits(config.OTP_LENGTH)
 	// otp will be valid for 3 minutes
-	validTill := time.Now().Add(time.Minute * 3)
+	validTill := time.Now().Add(config.OTP_EXPIRE_TIME)
 
 	otp := models.Otp{
-		OTP:       code,
+		Otp:       int32(code),
 		Email:     email,
 		Purpose:   purpose,
 		ValidTill: validTill,
@@ -72,7 +73,7 @@ func (s *OtpService) SendOtp(email string, purpose enums.OtpPurpose) (cdoe int, 
 		return 0, err
 	}
 
-	return otp.OTP, nil
+	return otp.Otp, nil
 }
 
 type VerifyOtpArgs struct {
@@ -83,7 +84,7 @@ func (s *OtpService) VerifyOtp(args *VerifyOtpArgs) error {
 	getOtpArgs := repo.GetOtpArgs{
 		Email:   args.Email,
 		Purpose: args.Purpose,
-		OTP:     args.OTP,
+		Otp:     args.Otp,
 	}
 	otp, err := s.Get(&getOtpArgs)
 	if err != nil {

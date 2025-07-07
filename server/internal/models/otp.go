@@ -8,7 +8,7 @@ import (
 
 type Otp struct {
 	ID
-	OTP       int              `gorm:"type:integer;not null"`
+	Otp       int32            `gorm:"type:integer;not null"`
 	Email     string           `gorm:"size:256;not null"`
 	Purpose   enums.OtpPurpose `gorm:"type:otp_purpose;not null"`
 	ValidTill time.Time        `gorm:"not null"`
