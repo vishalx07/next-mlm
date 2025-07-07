@@ -1,13 +1,15 @@
+import { useMutation } from "@connectrpc/connect-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { login } from "@repo/gen/services/auth/v1/auth-AuthService_connectquery";
 import { authValidator } from "@/validators";
 
 const schema = authValidator.login;
 export type FormValues = authValidator.Login;
 
 const defaultValues: FormValues = {
-  email: "",
-  password: "",
+  email: "demo123@example.com",
+  password: "demo123",
 };
 
 export const useLoginForm = () => {
@@ -15,12 +17,16 @@ export const useLoginForm = () => {
     defaultValues,
     resolver: zodResolver(schema),
   });
-  const { reset, handleSubmit } = methods;
+  const { handleSubmit } = methods;
+
+  const { mutate, isPending } = useMutation(login);
 
   const onSubmit = handleSubmit((formData) => {
-    console.log(formData);
-    // mutation.mutate(formData);
+    mutate({
+      email: formData.email,
+      password: formData.password,
+    });
   });
 
-  return { methods, isPending: false, onSubmit };
+  return { methods, isPending, onSubmit };
 };

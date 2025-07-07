@@ -15,7 +15,7 @@ export const registerStep_1 = z.object({
   fullname: ZOD_SCHEMA.str().min(1, "Fullname is required"),
   username: ZOD_SCHEMA.username(),
   country: ZOD_SCHEMA.str().min(1, "Country is required"),
-  phoneNumber: ZOD_SCHEMA.number().min(1, "Phone number is required"),
+  phoneNumber: ZOD_SCHEMA.str().min(1, "Phone number is required"),
 });
 export type RegisterSetp_1 = z.input<typeof registerStep_1>;
 
