@@ -8,10 +8,11 @@ import (
 )
 
 type Env struct {
-	Port        string `env:"PORT,required,notEmpty" envDefault:"8080"`
-	ApiUrl      string `env:"API_URL,required,notEmpty"`
-	DatabaseUrl string `env:"DATABASE_URL,required,notEmpty"`
-	JWTSecret   string `env:"JWT_SECRET,required,notEmpty"`
+	Port           string `env:"PORT,required,notEmpty" envDefault:"8080"`
+	ApiUrl         string `env:"API_URL,required,notEmpty"`
+	AllowedOrigins string `env:"ALLOWED_ORIGINS,required"`
+	DatabaseUrl    string `env:"DATABASE_URL,required,notEmpty"`
+	JWTSecret      string `env:"JWT_SECRET,required,notEmpty"`
 }
 
 func LoadEnv() (*Env, error) {

@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"ariga.io/atlas-provider-gorm/gormschema"
-	"github.com/vishalx07/next-mlm/internal/models"
-	"github.com/vishalx07/next-mlm/internal/pkg/types/enums"
+	models "github.com/vishalx07/next-mlm/internal/models"
+	enums "github.com/vishalx07/next-mlm/internal/pkg/types/enums"
 	"gorm.io/gorm"
 )
 

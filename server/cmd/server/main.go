@@ -2,9 +2,11 @@ package main
 
 import (
 	"log"
+	"net/http"
 
 	config "github.com/vishalx07/next-mlm/internal/config"
 	DB "github.com/vishalx07/next-mlm/internal/db"
+	server "github.com/vishalx07/next-mlm/internal/pkg/server"
 )
 
 func main() {
@@ -31,6 +33,15 @@ func run() error {
 		return err
 	}
 	if err := DB.AutoMigrate(db); err != nil {
+		return err
+	}
+
+	// Set up HTTP server
+	mux := http.NewServeMux()
+
+	server := server.NewServer(db, env, mux)
+
+	if err := server.Run(); err != nil {
 		return err
 	}
 
