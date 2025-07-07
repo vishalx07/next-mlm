@@ -480,9 +480,9 @@ var File_auth_v1_auth_proto protoreflect.FileDescriptor
 
 const file_auth_v1_auth_proto_rawDesc = "" +
 	"\n" +
-	"\x12auth/v1/auth.proto\x12\aauth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x13types/v1/user.proto\"T\n" +
-	"\fLoginRequest\x12\x1c\n" +
-	"\x05email\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x05email\x12&\n" +
+	"\x12auth/v1/auth.proto\x12\aauth.v1\x1a\x1bbuf/validate/validate.proto\x1a\x13types/v1/user.proto\"U\n" +
+	"\fLoginRequest\x12\x1d\n" +
+	"\x05email\x18\x01 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12&\n" +
 	"\bpassword\x18\x02 \x01(\tB\n" +
 	"\xbaH\a\xc8\x01\x01r\x02\x10\x06R\bpassword\"c\n" +
 	"\rLoginResponse\x12\x18\n" +

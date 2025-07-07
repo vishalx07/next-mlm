@@ -14,7 +14,7 @@ service AuthService {
 
 // LOGIN MESSAGE
 message LoginRequest {
-  string email = 1 [(buf.validate.field).required = true];
+  string email = 1 [(buf.validate.field).string.email = true];
   string password = 2 [
     (buf.validate.field).required = true,
     (buf.validate.field).string.min_len = 6
