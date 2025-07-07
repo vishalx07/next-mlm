@@ -139,23 +139,11 @@ func (h *AuthHandler) RegisterStep2(
 	return resp, nil
 }
 
-func (h *AuthHandler) RegisterStep3(ctx context.Context, req *connect.Request[authv1.RegisterStep3Request]) (*connect.Response[authv1.RegisterStep3Response], error) {
+func (h *AuthHandler) Register(
+	ctx context.Context,
+	req *connect.Request[authv1.RegisterRequest],
+) (*connect.Response[authv1.RegisterResponse], error) {
 	user := h.transformUserRPC(req)
-
-	// verify otp
-	verifyOtpArgs := &service.VerifyOtpArgs{
-		GetOtpArgs: repo.GetOtpArgs{
-			Email:   user.Email,
-			Purpose: enums.OtpPurpose_REGISTER,
-			Otp:     req.Msg.Otp,
-		},
-	}
-	if err := h.otpService.VerifyOtp(verifyOtpArgs); err != nil {
-		if errors.Is(err, message.ErrOtpExpired) {
-			return nil, connect.NewError(connect.CodeFailedPrecondition, err)
-		}
-		return nil, connect.NewError(connect.CodeInternal, err)
-	}
 
 	// check referral id exist
 	if err := h.userService.CheckReferralIdExist(user.ReferralId); err != nil {
@@ -195,6 +183,33 @@ func (h *AuthHandler) RegisterStep3(ctx context.Context, req *connect.Request[au
 	}
 	user.UserId = userId
 
+	// generate token
+	token, err := jwt.GenerateToken(&jwt.GenerateTokenArgs{
+		Id:      user.Id,
+		Purpose: enums.Session_USER_SESSION,
+		Expiry:  config.TOKEN_EXPIRE_TIME,
+		Env:     h.env,
+	})
+	if err != nil {
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	// verify otp
+	verifyOtpArgs := repo.GetOtpArgs{
+		Email:   user.Email,
+		Purpose: enums.OtpPurpose_REGISTER,
+		Otp:     req.Msg.Otp,
+	}
+	if err := h.otpService.VerifyOtp(&verifyOtpArgs); err != nil {
+		if errors.Is(err, message.ErrInvalidOtp) {
+			return nil, connect.NewError(connect.CodeInvalidArgument, err)
+		}
+		if errors.Is(err, message.ErrOtpExpired) {
+			return nil, connect.NewError(connect.CodeFailedPrecondition, err)
+		}
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
 	// create user
 	if err = h.userService.Create(user); err != nil {
 		return nil, connect.NewError(connect.CodeInternal, err)
@@ -202,8 +217,9 @@ func (h *AuthHandler) RegisterStep3(ctx context.Context, req *connect.Request[au
 
 	// todo: send register success email
 
-	resp := connect.NewResponse(&authv1.RegisterStep3Response{
+	resp := connect.NewResponse(&authv1.RegisterResponse{
 		Message: message.RegisterSuccess,
+		Token:   token,
 		User:    h.transformUserModel(user),
 	})
 
@@ -211,15 +227,15 @@ func (h *AuthHandler) RegisterStep3(ctx context.Context, req *connect.Request[au
 }
 
 // Transforms
-func (h *AuthHandler) transformUserRPC(req *connect.Request[authv1.RegisterStep3Request]) *models.User {
+func (h *AuthHandler) transformUserRPC(req *connect.Request[authv1.RegisterRequest]) *models.User {
 	return &models.User{
+		ReferralId: req.Msg.Step1.ReferralId,
 		Fullname:   req.Msg.Step1.Fullname,
 		Username:   req.Msg.Step1.Username,
 		Email:      req.Msg.Step2.Email,
 		Password:   &req.Msg.Step2.Password,
 		Country:    req.Msg.Step1.Country,
 		Phone:      req.Msg.Step1.PhoneNumber,
-		ReferralId: req.Msg.Step1.ReferralId,
 	}
 }
 

@@ -18,7 +18,7 @@ type OtpServiceInterface interface {
 	Get(args *repo.GetOtpArgs) (*models.Otp, error)
 	Delete(id string) error
 	SendOtp(email string, purpose enums.OtpPurpose) (code int32, err error)
-	VerifyOtp(args *VerifyOtpArgs) error
+	VerifyOtp(args *repo.GetOtpArgs) error
 }
 
 type OtpService struct {
@@ -76,17 +76,8 @@ func (s *OtpService) SendOtp(email string, purpose enums.OtpPurpose) (cdoe int32
 	return otp.Otp, nil
 }
 
-type VerifyOtpArgs struct {
-	repo.GetOtpArgs
-}
-
-func (s *OtpService) VerifyOtp(args *VerifyOtpArgs) error {
-	getOtpArgs := repo.GetOtpArgs{
-		Email:   args.Email,
-		Purpose: args.Purpose,
-		Otp:     args.Otp,
-	}
-	otp, err := s.Get(&getOtpArgs)
+func (s *OtpService) VerifyOtp(args *repo.GetOtpArgs) error {
+	otp, err := s.Get(args)
 	if err != nil {
 		return err
 	}
