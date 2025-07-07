@@ -3,10 +3,10 @@ inputs:
   - directory: .
 plugins:
   - remote: buf.build/bufbuild/es:v2.5.2
-    out: ../client/src/gen
+    out: ../client/packages/gen/src/services
     include_imports: true
     opt: target=ts
   - remote: buf.build/connectrpc/query-es:v2.1.0
-    out: ../client/src/gen
+    out: ../client/packages/gen/src/services
     include_imports: true
     opt: target=ts
