@@ -358,7 +358,7 @@ func (x *RegisterStep2Response) GetMessage() string {
 // Step 3
 type RegisterStep3Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Otp           string                 `protobuf:"bytes,1,opt,name=otp,proto3" json:"otp,omitempty"`
+	Otp           int32                  `protobuf:"varint,1,opt,name=otp,proto3" json:"otp,omitempty"`
 	Step1         *RegisterStep1Request  `protobuf:"bytes,2,opt,name=step1,proto3" json:"step1,omitempty"`
 	Step2         *RegisterStep2Request  `protobuf:"bytes,3,opt,name=step2,proto3" json:"step2,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -395,11 +395,11 @@ func (*RegisterStep3Request) Descriptor() ([]byte, []int) {
 	return file_auth_v1_auth_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *RegisterStep3Request) GetOtp() string {
+func (x *RegisterStep3Request) GetOtp() int32 {
 	if x != nil {
 		return x.Otp
 	}
-	return ""
+	return 0
 }
 
 func (x *RegisterStep3Request) GetStep1() *RegisterStep1Request {
@@ -504,10 +504,9 @@ const file_auth_v1_auth_proto_rawDesc = "" +
 	"\bpassword\x18\x02 \x01(\tB\n" +
 	"\xbaH\a\xc8\x01\x01r\x02\x10\x06R\bpassword\"1\n" +
 	"\x15RegisterStep2Response\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"\x9e\x01\n" +
-	"\x14RegisterStep3Request\x12\x1c\n" +
-	"\x03otp\x18\x01 \x01(\tB\n" +
-	"\xbaH\a\xc8\x01\x01r\x02\x10\x06R\x03otp\x123\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\xa4\x01\n" +
+	"\x14RegisterStep3Request\x12\"\n" +
+	"\x03otp\x18\x01 \x01(\x05B\x10\xbaH\r\xc8\x01\x01\x1a\b\x18\xbf\x84=(\xa0\x8d\x06R\x03otp\x123\n" +
 	"\x05step1\x18\x02 \x01(\v2\x1d.auth.v1.RegisterStep1RequestR\x05step1\x123\n" +
 	"\x05step2\x18\x03 \x01(\v2\x1d.auth.v1.RegisterStep2RequestR\x05step2\"k\n" +
 	"\x15RegisterStep3Response\x12\x18\n" +

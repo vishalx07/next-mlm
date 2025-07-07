@@ -59,9 +59,10 @@ message RegisterStep2Response {
 
 // Step 3
 message RegisterStep3Request {
-  string otp = 1 [
+  int32 otp = 1 [
     (buf.validate.field).required = true,
-    (buf.validate.field).string.min_len = 6
+    (buf.validate.field).int32.gte = 100000,
+    (buf.validate.field).int32.lte = 999999
   ];
   RegisterStep1Request step1 = 2;
   RegisterStep2Request step2 = 3;
