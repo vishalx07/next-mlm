@@ -356,7 +356,7 @@ func (x *RegisterStep2Response) GetMessage() string {
 }
 
 // Step 3
-type RegisterStep3Request struct {
+type RegisterRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Otp           int32                  `protobuf:"varint,1,opt,name=otp,proto3" json:"otp,omitempty"`
 	Step1         *RegisterStep1Request  `protobuf:"bytes,2,opt,name=step1,proto3" json:"step1,omitempty"`
@@ -365,20 +365,20 @@ type RegisterStep3Request struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RegisterStep3Request) Reset() {
-	*x = RegisterStep3Request{}
+func (x *RegisterRequest) Reset() {
+	*x = RegisterRequest{}
 	mi := &file_auth_v1_auth_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RegisterStep3Request) String() string {
+func (x *RegisterRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RegisterStep3Request) ProtoMessage() {}
+func (*RegisterRequest) ProtoMessage() {}
 
-func (x *RegisterStep3Request) ProtoReflect() protoreflect.Message {
+func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_auth_v1_auth_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -390,33 +390,33 @@ func (x *RegisterStep3Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RegisterStep3Request.ProtoReflect.Descriptor instead.
-func (*RegisterStep3Request) Descriptor() ([]byte, []int) {
+// Deprecated: Use RegisterRequest.ProtoReflect.Descriptor instead.
+func (*RegisterRequest) Descriptor() ([]byte, []int) {
 	return file_auth_v1_auth_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *RegisterStep3Request) GetOtp() int32 {
+func (x *RegisterRequest) GetOtp() int32 {
 	if x != nil {
 		return x.Otp
 	}
 	return 0
 }
 
-func (x *RegisterStep3Request) GetStep1() *RegisterStep1Request {
+func (x *RegisterRequest) GetStep1() *RegisterStep1Request {
 	if x != nil {
 		return x.Step1
 	}
 	return nil
 }
 
-func (x *RegisterStep3Request) GetStep2() *RegisterStep2Request {
+func (x *RegisterRequest) GetStep2() *RegisterStep2Request {
 	if x != nil {
 		return x.Step2
 	}
 	return nil
 }
 
-type RegisterStep3Response struct {
+type RegisterResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
 	Token         string                 `protobuf:"bytes,2,opt,name=token,proto3" json:"token,omitempty"`
@@ -425,20 +425,20 @@ type RegisterStep3Response struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RegisterStep3Response) Reset() {
-	*x = RegisterStep3Response{}
+func (x *RegisterResponse) Reset() {
+	*x = RegisterResponse{}
 	mi := &file_auth_v1_auth_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RegisterStep3Response) String() string {
+func (x *RegisterResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RegisterStep3Response) ProtoMessage() {}
+func (*RegisterResponse) ProtoMessage() {}
 
-func (x *RegisterStep3Response) ProtoReflect() protoreflect.Message {
+func (x *RegisterResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_auth_v1_auth_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -450,26 +450,26 @@ func (x *RegisterStep3Response) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RegisterStep3Response.ProtoReflect.Descriptor instead.
-func (*RegisterStep3Response) Descriptor() ([]byte, []int) {
+// Deprecated: Use RegisterResponse.ProtoReflect.Descriptor instead.
+func (*RegisterResponse) Descriptor() ([]byte, []int) {
 	return file_auth_v1_auth_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *RegisterStep3Response) GetMessage() string {
+func (x *RegisterResponse) GetMessage() string {
 	if x != nil {
 		return x.Message
 	}
 	return ""
 }
 
-func (x *RegisterStep3Response) GetToken() string {
+func (x *RegisterResponse) GetToken() string {
 	if x != nil {
 		return x.Token
 	}
 	return ""
 }
 
-func (x *RegisterStep3Response) GetUser() *v1.User {
+func (x *RegisterResponse) GetUser() *v1.User {
 	if x != nil {
 		return x.User
 	}
@@ -504,20 +504,22 @@ const file_auth_v1_auth_proto_rawDesc = "" +
 	"\bpassword\x18\x02 \x01(\tB\n" +
 	"\xbaH\a\xc8\x01\x01r\x02\x10\x06R\bpassword\"1\n" +
 	"\x15RegisterStep2Response\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"\xa4\x01\n" +
-	"\x14RegisterStep3Request\x12\"\n" +
-	"\x03otp\x18\x01 \x01(\x05B\x10\xbaH\r\xc8\x01\x01\x1a\b\x18\xbf\x84=(\xa0\x8d\x06R\x03otp\x123\n" +
-	"\x05step1\x18\x02 \x01(\v2\x1d.auth.v1.RegisterStep1RequestR\x05step1\x123\n" +
-	"\x05step2\x18\x03 \x01(\v2\x1d.auth.v1.RegisterStep2RequestR\x05step2\"k\n" +
-	"\x15RegisterStep3Response\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\xec\x01\n" +
+	"\x0fRegisterRequest\x12_\n" +
+	"\x03otp\x18\x01 \x01(\x05BM\xbaHJ\xba\x01D\n" +
+	"\n" +
+	"otp.digits\x12\x14otp must be 6 digits\x1a this >= 100000 && this <= 999999\xc8\x01\x01R\x03otp\x12;\n" +
+	"\x05step1\x18\x02 \x01(\v2\x1d.auth.v1.RegisterStep1RequestB\x06\xbaH\x03\xc8\x01\x01R\x05step1\x12;\n" +
+	"\x05step2\x18\x03 \x01(\v2\x1d.auth.v1.RegisterStep2RequestB\x06\xbaH\x03\xc8\x01\x01R\x05step2\"f\n" +
+	"\x10RegisterResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12\"\n" +
-	"\x04user\x18\x03 \x01(\v2\x0e.types.v1.UserR\x04user2\xb5\x02\n" +
+	"\x04user\x18\x03 \x01(\v2\x0e.types.v1.UserR\x04user2\xa6\x02\n" +
 	"\vAuthService\x126\n" +
 	"\x05Login\x12\x15.auth.v1.LoginRequest\x1a\x16.auth.v1.LoginResponse\x12N\n" +
 	"\rRegisterStep1\x12\x1d.auth.v1.RegisterStep1Request\x1a\x1e.auth.v1.RegisterStep1Response\x12N\n" +
-	"\rRegisterStep2\x12\x1d.auth.v1.RegisterStep2Request\x1a\x1e.auth.v1.RegisterStep2Response\x12N\n" +
-	"\rRegisterStep3\x12\x1d.auth.v1.RegisterStep3Request\x1a\x1e.auth.v1.RegisterStep3ResponseB\x87\x01\n" +
+	"\rRegisterStep2\x12\x1d.auth.v1.RegisterStep2Request\x1a\x1e.auth.v1.RegisterStep2Response\x12?\n" +
+	"\bRegister\x12\x18.auth.v1.RegisterRequest\x1a\x19.auth.v1.RegisterResponseB\x87\x01\n" +
 	"\vcom.auth.v1B\tAuthProtoP\x01Z0github.com/vishalx07/next-mlm/gen/auth/v1;authv1\xa2\x02\x03AXX\xaa\x02\aAuth.V1\xca\x02\aAuth\\V1\xe2\x02\x13Auth\\V1\\GPBMetadata\xea\x02\bAuth::V1b\x06proto3"
 
 var (
@@ -540,23 +542,23 @@ var file_auth_v1_auth_proto_goTypes = []any{
 	(*RegisterStep1Response)(nil), // 3: auth.v1.RegisterStep1Response
 	(*RegisterStep2Request)(nil),  // 4: auth.v1.RegisterStep2Request
 	(*RegisterStep2Response)(nil), // 5: auth.v1.RegisterStep2Response
-	(*RegisterStep3Request)(nil),  // 6: auth.v1.RegisterStep3Request
-	(*RegisterStep3Response)(nil), // 7: auth.v1.RegisterStep3Response
+	(*RegisterRequest)(nil),       // 6: auth.v1.RegisterRequest
+	(*RegisterResponse)(nil),      // 7: auth.v1.RegisterResponse
 	(*v1.User)(nil),               // 8: types.v1.User
 }
 var file_auth_v1_auth_proto_depIdxs = []int32{
 	8, // 0: auth.v1.LoginResponse.user:type_name -> types.v1.User
-	2, // 1: auth.v1.RegisterStep3Request.step1:type_name -> auth.v1.RegisterStep1Request
-	4, // 2: auth.v1.RegisterStep3Request.step2:type_name -> auth.v1.RegisterStep2Request
-	8, // 3: auth.v1.RegisterStep3Response.user:type_name -> types.v1.User
+	2, // 1: auth.v1.RegisterRequest.step1:type_name -> auth.v1.RegisterStep1Request
+	4, // 2: auth.v1.RegisterRequest.step2:type_name -> auth.v1.RegisterStep2Request
+	8, // 3: auth.v1.RegisterResponse.user:type_name -> types.v1.User
 	0, // 4: auth.v1.AuthService.Login:input_type -> auth.v1.LoginRequest
 	2, // 5: auth.v1.AuthService.RegisterStep1:input_type -> auth.v1.RegisterStep1Request
 	4, // 6: auth.v1.AuthService.RegisterStep2:input_type -> auth.v1.RegisterStep2Request
-	6, // 7: auth.v1.AuthService.RegisterStep3:input_type -> auth.v1.RegisterStep3Request
+	6, // 7: auth.v1.AuthService.Register:input_type -> auth.v1.RegisterRequest
 	1, // 8: auth.v1.AuthService.Login:output_type -> auth.v1.LoginResponse
 	3, // 9: auth.v1.AuthService.RegisterStep1:output_type -> auth.v1.RegisterStep1Response
 	5, // 10: auth.v1.AuthService.RegisterStep2:output_type -> auth.v1.RegisterStep2Response
-	7, // 11: auth.v1.AuthService.RegisterStep3:output_type -> auth.v1.RegisterStep3Response
+	7, // 11: auth.v1.AuthService.Register:output_type -> auth.v1.RegisterResponse
 	8, // [8:12] is the sub-list for method output_type
 	4, // [4:8] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name

@@ -9,7 +9,7 @@ service AuthService {
   rpc Login(LoginRequest) returns (LoginResponse);
   rpc RegisterStep1(RegisterStep1Request) returns (RegisterStep1Response);
   rpc RegisterStep2(RegisterStep2Request) returns (RegisterStep2Response);
-  rpc RegisterStep3(RegisterStep3Request) returns (RegisterStep3Response);
+  rpc Register(RegisterRequest) returns (RegisterResponse);
 }
 
 // LOGIN MESSAGE
@@ -58,17 +58,20 @@ message RegisterStep2Response {
 }
 
 // Step 3
-message RegisterStep3Request {
+message RegisterRequest {
   int32 otp = 1 [
     (buf.validate.field).required = true,
-    (buf.validate.field).int32.gte = 100000,
-    (buf.validate.field).int32.lte = 999999
+    (buf.validate.field).cel = {
+      id: "otp.digits"
+      message: "otp must be 6 digits"
+      expression: "this >= 100000 && this <= 999999"
+    }
   ];
-  RegisterStep1Request step1 = 2;
-  RegisterStep2Request step2 = 3;
+  RegisterStep1Request step1 = 2 [(buf.validate.field).required = true];
+  RegisterStep2Request step2 = 3 [(buf.validate.field).required = true];
 }
 
-message RegisterStep3Response {
+message RegisterResponse {
   string message = 1;
   string token = 2;
   types.v1.User user = 3;

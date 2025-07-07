@@ -41,9 +41,8 @@ const (
 	// AuthServiceRegisterStep2Procedure is the fully-qualified name of the AuthService's RegisterStep2
 	// RPC.
 	AuthServiceRegisterStep2Procedure = "/auth.v1.AuthService/RegisterStep2"
-	// AuthServiceRegisterStep3Procedure is the fully-qualified name of the AuthService's RegisterStep3
-	// RPC.
-	AuthServiceRegisterStep3Procedure = "/auth.v1.AuthService/RegisterStep3"
+	// AuthServiceRegisterProcedure is the fully-qualified name of the AuthService's Register RPC.
+	AuthServiceRegisterProcedure = "/auth.v1.AuthService/Register"
 )
 
 // AuthServiceClient is a client for the auth.v1.AuthService service.
@@ -51,7 +50,7 @@ type AuthServiceClient interface {
 	Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error)
 	RegisterStep1(context.Context, *connect.Request[v1.RegisterStep1Request]) (*connect.Response[v1.RegisterStep1Response], error)
 	RegisterStep2(context.Context, *connect.Request[v1.RegisterStep2Request]) (*connect.Response[v1.RegisterStep2Response], error)
-	RegisterStep3(context.Context, *connect.Request[v1.RegisterStep3Request]) (*connect.Response[v1.RegisterStep3Response], error)
+	Register(context.Context, *connect.Request[v1.RegisterRequest]) (*connect.Response[v1.RegisterResponse], error)
 }
 
 // NewAuthServiceClient constructs a client for the auth.v1.AuthService service. By default, it uses
@@ -83,10 +82,10 @@ func NewAuthServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 			connect.WithSchema(authServiceMethods.ByName("RegisterStep2")),
 			connect.WithClientOptions(opts...),
 		),
-		registerStep3: connect.NewClient[v1.RegisterStep3Request, v1.RegisterStep3Response](
+		register: connect.NewClient[v1.RegisterRequest, v1.RegisterResponse](
 			httpClient,
-			baseURL+AuthServiceRegisterStep3Procedure,
-			connect.WithSchema(authServiceMethods.ByName("RegisterStep3")),
+			baseURL+AuthServiceRegisterProcedure,
+			connect.WithSchema(authServiceMethods.ByName("Register")),
 			connect.WithClientOptions(opts...),
 		),
 	}
@@ -97,7 +96,7 @@ type authServiceClient struct {
 	login         *connect.Client[v1.LoginRequest, v1.LoginResponse]
 	registerStep1 *connect.Client[v1.RegisterStep1Request, v1.RegisterStep1Response]
 	registerStep2 *connect.Client[v1.RegisterStep2Request, v1.RegisterStep2Response]
-	registerStep3 *connect.Client[v1.RegisterStep3Request, v1.RegisterStep3Response]
+	register      *connect.Client[v1.RegisterRequest, v1.RegisterResponse]
 }
 
 // Login calls auth.v1.AuthService.Login.
@@ -115,9 +114,9 @@ func (c *authServiceClient) RegisterStep2(ctx context.Context, req *connect.Requ
 	return c.registerStep2.CallUnary(ctx, req)
 }
 
-// RegisterStep3 calls auth.v1.AuthService.RegisterStep3.
-func (c *authServiceClient) RegisterStep3(ctx context.Context, req *connect.Request[v1.RegisterStep3Request]) (*connect.Response[v1.RegisterStep3Response], error) {
-	return c.registerStep3.CallUnary(ctx, req)
+// Register calls auth.v1.AuthService.Register.
+func (c *authServiceClient) Register(ctx context.Context, req *connect.Request[v1.RegisterRequest]) (*connect.Response[v1.RegisterResponse], error) {
+	return c.register.CallUnary(ctx, req)
 }
 
 // AuthServiceHandler is an implementation of the auth.v1.AuthService service.
@@ -125,7 +124,7 @@ type AuthServiceHandler interface {
 	Login(context.Context, *connect.Request[v1.LoginRequest]) (*connect.Response[v1.LoginResponse], error)
 	RegisterStep1(context.Context, *connect.Request[v1.RegisterStep1Request]) (*connect.Response[v1.RegisterStep1Response], error)
 	RegisterStep2(context.Context, *connect.Request[v1.RegisterStep2Request]) (*connect.Response[v1.RegisterStep2Response], error)
-	RegisterStep3(context.Context, *connect.Request[v1.RegisterStep3Request]) (*connect.Response[v1.RegisterStep3Response], error)
+	Register(context.Context, *connect.Request[v1.RegisterRequest]) (*connect.Response[v1.RegisterResponse], error)
 }
 
 // NewAuthServiceHandler builds an HTTP handler from the service implementation. It returns the path
@@ -153,10 +152,10 @@ func NewAuthServiceHandler(svc AuthServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(authServiceMethods.ByName("RegisterStep2")),
 		connect.WithHandlerOptions(opts...),
 	)
-	authServiceRegisterStep3Handler := connect.NewUnaryHandler(
-		AuthServiceRegisterStep3Procedure,
-		svc.RegisterStep3,
-		connect.WithSchema(authServiceMethods.ByName("RegisterStep3")),
+	authServiceRegisterHandler := connect.NewUnaryHandler(
+		AuthServiceRegisterProcedure,
+		svc.Register,
+		connect.WithSchema(authServiceMethods.ByName("Register")),
 		connect.WithHandlerOptions(opts...),
 	)
 	return "/auth.v1.AuthService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -167,8 +166,8 @@ func NewAuthServiceHandler(svc AuthServiceHandler, opts ...connect.HandlerOption
 			authServiceRegisterStep1Handler.ServeHTTP(w, r)
 		case AuthServiceRegisterStep2Procedure:
 			authServiceRegisterStep2Handler.ServeHTTP(w, r)
-		case AuthServiceRegisterStep3Procedure:
-			authServiceRegisterStep3Handler.ServeHTTP(w, r)
+		case AuthServiceRegisterProcedure:
+			authServiceRegisterHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -190,6 +189,6 @@ func (UnimplementedAuthServiceHandler) RegisterStep2(context.Context, *connect.R
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("auth.v1.AuthService.RegisterStep2 is not implemented"))
 }
 
-func (UnimplementedAuthServiceHandler) RegisterStep3(context.Context, *connect.Request[v1.RegisterStep3Request]) (*connect.Response[v1.RegisterStep3Response], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("auth.v1.AuthService.RegisterStep3 is not implemented"))
+func (UnimplementedAuthServiceHandler) Register(context.Context, *connect.Request[v1.RegisterRequest]) (*connect.Response[v1.RegisterResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("auth.v1.AuthService.Register is not implemented"))
 }
