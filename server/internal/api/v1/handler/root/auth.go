@@ -90,7 +90,7 @@ func (h *AuthHandler) RegisterStep1(
 	req *connect.Request[authv1.RegisterStep1Request],
 ) (*connect.Response[authv1.RegisterStep1Response], error) {
 	// check referral id exist
-	if err := h.userService.CheckReferralIdExist(req.Msg.ReferalId); err != nil {
+	if err := h.userService.CheckReferralIdExist(req.Msg.ReferralId); err != nil {
 		if errors.Is(err, message.ErrUserReferralIdNotExist) {
 			return nil, connect.NewError(connect.CodeNotFound, err)
 		}
@@ -219,7 +219,7 @@ func (h *AuthHandler) transformUserRPC(req *connect.Request[authv1.RegisterStep3
 		Password:   &req.Msg.Step2.Password,
 		Country:    req.Msg.Step1.Country,
 		Phone:      req.Msg.Step1.PhoneNumber,
-		ReferralId: req.Msg.Step1.ReferalId,
+		ReferralId: req.Msg.Step1.ReferralId,
 	}
 }
 

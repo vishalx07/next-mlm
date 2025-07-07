@@ -11,7 +11,7 @@ export type Login = z.input<typeof login>;
 
 // register
 export const registerStep_1 = z.object({
-  referalId: ZOD_SCHEMA.number().min(1, "Referral Id is required"),
+  referralId: ZOD_SCHEMA.number().min(1, "Referral Id is required"),
   fullname: ZOD_SCHEMA.str().min(1, "Fullname is required"),
   username: ZOD_SCHEMA.username(),
   country: ZOD_SCHEMA.str().min(1, "Country is required"),

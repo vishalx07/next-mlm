@@ -19,7 +19,7 @@ export const EnterDetails = ({ defaultValues }: Props) => {
       >
         <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
           <RHFInput<FormValues>
-            name="referalId"
+            name="referralId"
             label="Referral Id"
             isFilled
             isNumberInput

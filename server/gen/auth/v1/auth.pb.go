@@ -140,7 +140,7 @@ func (x *LoginResponse) GetUser() *v1.User {
 // Step 1
 type RegisterStep1Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ReferalId     int32                  `protobuf:"varint,1,opt,name=referal_id,json=referalId,proto3" json:"referal_id,omitempty"`
+	ReferralId    int32                  `protobuf:"varint,1,opt,name=referral_id,json=referralId,proto3" json:"referral_id,omitempty"`
 	Fullname      string                 `protobuf:"bytes,2,opt,name=fullname,proto3" json:"fullname,omitempty"`
 	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
 	Country       string                 `protobuf:"bytes,4,opt,name=country,proto3" json:"country,omitempty"`
@@ -179,9 +179,9 @@ func (*RegisterStep1Request) Descriptor() ([]byte, []int) {
 	return file_auth_v1_auth_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *RegisterStep1Request) GetReferalId() int32 {
+func (x *RegisterStep1Request) GetReferralId() int32 {
 	if x != nil {
-		return x.ReferalId
+		return x.ReferralId
 	}
 	return 0
 }
@@ -488,10 +488,10 @@ const file_auth_v1_auth_proto_rawDesc = "" +
 	"\rLoginResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12\"\n" +
-	"\x04user\x18\x03 \x01(\v2\x0e.types.v1.UserR\x04user\"\xd6\x01\n" +
-	"\x14RegisterStep1Request\x12%\n" +
-	"\n" +
-	"referal_id\x18\x01 \x01(\x05B\x06\xbaH\x03\xc8\x01\x01R\treferalId\x12\"\n" +
+	"\x04user\x18\x03 \x01(\v2\x0e.types.v1.UserR\x04user\"\xd8\x01\n" +
+	"\x14RegisterStep1Request\x12'\n" +
+	"\vreferral_id\x18\x01 \x01(\x05B\x06\xbaH\x03\xc8\x01\x01R\n" +
+	"referralId\x12\"\n" +
 	"\bfullname\x18\x02 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\bfullname\x12&\n" +
 	"\busername\x18\x03 \x01(\tB\n" +
 	"\xbaH\a\xc8\x01\x01r\x02\x10\x03R\busername\x12 \n" +

@@ -30,7 +30,7 @@ message LoginResponse {
 // REGISTER MESSAGE
 // Step 1
 message RegisterStep1Request {
-  int32 referal_id = 1 [(buf.validate.field).required = true];
+  int32 referral_id = 1 [(buf.validate.field).required = true];
   string fullname = 2 [(buf.validate.field).required = true];
   string username = 3 [
     (buf.validate.field).required = true,

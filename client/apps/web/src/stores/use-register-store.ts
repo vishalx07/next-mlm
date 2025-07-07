@@ -17,7 +17,7 @@ type State = Step1 | Step2 | Step3;
 
 const defaultValues: State = {
   step: 1,
-  referalId: "",
+  referralId: "",
   fullname: "",
   username: "",
   country: "",
