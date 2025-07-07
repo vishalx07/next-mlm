@@ -1,0 +1,48 @@
+package handler
+
+import (
+	"log"
+
+	"connectrpc.com/connect"
+	"connectrpc.com/validate"
+	"github.com/vishalx07/next-mlm/gen/auth/v1/authv1connect"
+	root_handler "github.com/vishalx07/next-mlm/internal/api/v1/handler/root"
+	server "github.com/vishalx07/next-mlm/internal/pkg/server"
+	repo "github.com/vishalx07/next-mlm/internal/repository"
+	service "github.com/vishalx07/next-mlm/internal/service"
+)
+
+func newValidationInterceptor() *validate.Interceptor {
+	// Create the validation interceptor provided by connectrpc.com/validate.
+	validateInterceptor, err := validate.NewInterceptor()
+	if err != nil {
+		log.Fatalf("🚫 Error creating validation interceptor: %v", err)
+	}
+
+	return validateInterceptor
+}
+
+func RegisterHandler(s *server.Server) {
+	db := s.DB
+	env := s.Env
+	mux := s.Mux
+	validateInterceptor := newValidationInterceptor()
+
+	// =============================== REPOSITORIES ===============================
+	userRepo := repo.NewUserRepo(db)
+	otpRepo := repo.NewOtpRepo(db)
+
+	// =============================== SERVICES ===============================
+	userService := service.NewUserService(userRepo)
+	otpService := service.NewOtpService(otpRepo)
+
+	// =============================== ROOT SERVICES ===============================
+	// Auth Service
+	authHandler := root_handler.NewAuthHandler(env, userService, otpService)
+	authServicePath, authServiceHandler := authv1connect.NewAuthServiceHandler(authHandler, connect.WithInterceptors(validateInterceptor))
+	mux.Handle(authServicePath, authServiceHandler)
+
+	// =============================== USER SERVICES ===============================
+
+	// =============================== ADMIN SERVICES ===============================
+}

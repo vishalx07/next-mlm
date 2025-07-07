@@ -1,0 +1,248 @@
+package root_handler
+
+import (
+	"context"
+	"errors"
+
+	"connectrpc.com/connect"
+	authv1 "github.com/vishalx07/next-mlm/gen/auth/v1"
+	"github.com/vishalx07/next-mlm/gen/auth/v1/authv1connect"
+	typesv1 "github.com/vishalx07/next-mlm/gen/types/v1"
+	config "github.com/vishalx07/next-mlm/internal/config"
+	models "github.com/vishalx07/next-mlm/internal/models"
+	bcrypt "github.com/vishalx07/next-mlm/internal/pkg/bcrypt"
+	jwt "github.com/vishalx07/next-mlm/internal/pkg/jwt"
+	message "github.com/vishalx07/next-mlm/internal/pkg/message"
+	enums "github.com/vishalx07/next-mlm/internal/pkg/types/enums"
+	repo "github.com/vishalx07/next-mlm/internal/repository"
+	service "github.com/vishalx07/next-mlm/internal/service"
+	"google.golang.org/protobuf/types/known/timestamppb"
+)
+
+type AuthHandler struct {
+	env         *config.Env
+	userService service.UserServiceInterface
+	otpService  service.OtpServiceInterface
+	authv1connect.UnimplementedAuthServiceHandler
+}
+
+func NewAuthHandler(
+	env *config.Env,
+	userService service.UserServiceInterface,
+	otpService service.OtpServiceInterface) *AuthHandler {
+	return &AuthHandler{
+		env:         env,
+		userService: userService,
+		otpService:  otpService,
+	}
+}
+
+// Login
+func (h *AuthHandler) Login(
+	ctx context.Context,
+	req *connect.Request[authv1.LoginRequest],
+) (*connect.Response[authv1.LoginResponse], error) {
+	// check user exist
+	user, err := h.userService.CheckUserExist(req.Msg.Email)
+	if err != nil {
+		if errors.Is(err, message.ErrUserNotFound) {
+			return nil, connect.NewError(connect.CodeNotFound, err)
+		}
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	// check user status
+	if err := h.userService.ValidateStatus(user); err != nil {
+		return nil, connect.NewError(connect.CodeFailedPrecondition, err)
+	}
+
+	// verify password
+	if err := h.userService.ValidatePassword(user, req.Msg.Password); err != nil {
+		if errors.Is(err, message.ErrPasswordNotUsed) {
+			return nil, connect.NewError(connect.CodeFailedPrecondition, err)
+		}
+		return nil, connect.NewError(connect.CodeInvalidArgument, err)
+	}
+
+	// generate token
+	token, err := jwt.GenerateToken(&jwt.GenerateTokenArgs{
+		Id:      user.Id,
+		Purpose: enums.Session_USER_SESSION,
+		Expiry:  config.TOKEN_EXPIRE_TIME,
+		Env:     h.env,
+	})
+	if err != nil {
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	resp := connect.NewResponse(&authv1.LoginResponse{
+		Message: message.LoginSuccess,
+		Token:   token,
+		User:    h.transformUserModel(user),
+	})
+
+	return resp, nil
+}
+
+// Register
+func (h *AuthHandler) RegisterStep1(
+	ctx context.Context,
+	req *connect.Request[authv1.RegisterStep1Request],
+) (*connect.Response[authv1.RegisterStep1Response], error) {
+	// check referral id exist
+	if err := h.userService.CheckReferralIdExist(req.Msg.ReferalId); err != nil {
+		if errors.Is(err, message.ErrUserReferralIdNotExist) {
+			return nil, connect.NewError(connect.CodeNotFound, err)
+		}
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	// check username already exist
+	if err := h.userService.IsUsernameAlreadyExist(req.Msg.Username); err != nil {
+		if errors.Is(err, message.ErrUsernameAlreadyExist) {
+			return nil, connect.NewError(connect.CodeAlreadyExists, err)
+		}
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	resp := connect.NewResponse(&authv1.RegisterStep1Response{
+		Message: message.RegisterStep1Success,
+	})
+
+	return resp, nil
+}
+
+func (h *AuthHandler) RegisterStep2(
+	ctx context.Context,
+	req *connect.Request[authv1.RegisterStep2Request],
+) (*connect.Response[authv1.RegisterStep2Response], error) {
+	// check email already exist
+	if err := h.userService.IsEmailAlreadyExist(req.Msg.Email); err != nil {
+		if errors.Is(err, message.ErrUserEmailAlreadyExist) {
+			return nil, connect.NewError(connect.CodeAlreadyExists, err)
+		}
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	// send otp
+	_, err := h.otpService.SendOtp(req.Msg.Email, enums.OtpPurpose_REGISTER)
+	if err != nil {
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	// todo: send otp to email
+
+	resp := connect.NewResponse(&authv1.RegisterStep2Response{
+		Message: message.RegisterStep2Success,
+	})
+
+	return resp, nil
+}
+
+func (h *AuthHandler) RegisterStep3(ctx context.Context, req *connect.Request[authv1.RegisterStep3Request]) (*connect.Response[authv1.RegisterStep3Response], error) {
+	user := h.transformUserRPC(req)
+
+	// verify otp
+	verifyOtpArgs := &service.VerifyOtpArgs{
+		GetOtpArgs: repo.GetOtpArgs{
+			Email:   user.Email,
+			Purpose: enums.OtpPurpose_REGISTER,
+			Otp:     req.Msg.Otp,
+		},
+	}
+	if err := h.otpService.VerifyOtp(verifyOtpArgs); err != nil {
+		if errors.Is(err, message.ErrOtpExpired) {
+			return nil, connect.NewError(connect.CodeFailedPrecondition, err)
+		}
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	// check referral id exist
+	if err := h.userService.CheckReferralIdExist(user.ReferralId); err != nil {
+		if errors.Is(err, message.ErrUserReferralIdNotExist) {
+			return nil, connect.NewError(connect.CodeNotFound, err)
+		}
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	// check email already exist
+	if err := h.userService.IsEmailAlreadyExist(user.Email); err != nil {
+		if errors.Is(err, message.ErrUserEmailAlreadyExist) {
+			return nil, connect.NewError(connect.CodeAlreadyExists, err)
+		}
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	// check username already exist
+	if err := h.userService.IsUsernameAlreadyExist(user.Username); err != nil {
+		if errors.Is(err, message.ErrUsernameAlreadyExist) {
+			return nil, connect.NewError(connect.CodeAlreadyExists, err)
+		}
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	// hash password
+	hashedPassword, err := bcrypt.HashPassword(*user.Password)
+	if err != nil {
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+	user.Password = &hashedPassword
+
+	// generate user id
+	userId, err := h.userService.GenerateUserId()
+	if err != nil {
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+	user.UserId = userId
+
+	// create user
+	if err = h.userService.Create(user); err != nil {
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	// todo: send register success email
+
+	resp := connect.NewResponse(&authv1.RegisterStep3Response{
+		Message: message.RegisterSuccess,
+		User:    h.transformUserModel(user),
+	})
+
+	return resp, nil
+}
+
+// Transforms
+func (h *AuthHandler) transformUserRPC(req *connect.Request[authv1.RegisterStep3Request]) *models.User {
+	return &models.User{
+		Fullname:   req.Msg.Step1.Fullname,
+		Username:   req.Msg.Step1.Username,
+		Email:      req.Msg.Step2.Email,
+		Password:   &req.Msg.Step2.Password,
+		Country:    req.Msg.Step1.Country,
+		Phone:      req.Msg.Step1.PhoneNumber,
+		ReferralId: req.Msg.Step1.ReferalId,
+	}
+}
+
+func (h *AuthHandler) transformUserModel(user *models.User) *typesv1.User {
+	var avatar string
+	if user.Avatar != nil {
+		avatar = *user.Avatar
+	}
+
+	return &typesv1.User{
+		Id:          user.Id,
+		UserId:      user.UserId,
+		Fullname:    user.Fullname,
+		Username:    user.Username,
+		Email:       user.Email,
+		Role:        enums.UserRoleToProto(user.Role),
+		Status:      enums.UserStatusToProto(user.Status),
+		Avatar:      avatar,
+		Country:     user.Country,
+		PhoneNumber: user.Phone,
+		ReferralId:  user.ReferralId,
+		Level:       user.Level,
+		CreatedAt:   timestamppb.New(user.CreatedAt),
+		UpdatedAt:   timestamppb.New(user.UpdatedAt),
+	}
+}
