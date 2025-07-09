@@ -1,5 +1,5 @@
-import { Logo } from "@repo/components/logo";
-import { cn } from "@repo/utils/index";
+import { Logo } from "@repo/ui/components/logo";
+import { cn } from "@repo/ui/utils";
 
 type Props = {
   children: React.ReactNode;
@@ -16,7 +16,7 @@ export const AuthCenter = ({ children, className }: Props) => {
     >
       <div className="w-full max-w-[420px]">
         {/* logo */}
-        <div className="border-divider mx-auto mb-6 size-[76px] rounded-full border-2">
+        <div className="border-divider mx-auto mb-6 flex size-[76px] items-center justify-center rounded-full border">
           <Logo />
         </div>
         {children}

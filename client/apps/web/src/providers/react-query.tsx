@@ -9,7 +9,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import * as z from "zod/v4";
 import { toast } from "@jamsr-ui/react";
 import { transport } from "@repo/gen/lib/grpc-client";
-import { convertToMilliseconds } from "@repo/utils/time";
+import { convertToMilliseconds } from "@repo/ui/utils/time";
 
 type Props = {
   children: React.ReactNode;

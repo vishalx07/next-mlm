@@ -1,5 +1,5 @@
 import * as z from "zod/v4";
-import { ZOD_SCHEMA } from "@repo/libs/zod";
+import { ZOD_SCHEMA } from "@repo/ui/libs/zod";
 
 // login
 export const login = z.object({

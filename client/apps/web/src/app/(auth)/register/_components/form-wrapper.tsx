@@ -1,6 +1,6 @@
 "use client";
 
-import { switchInvalidCase } from "@repo/utils/index";
+import { switchInvalidCase } from "@repo/ui/utils";
 import { useRegisterStore } from "@/stores/use-register-store";
 import { EnterDetails } from "./enter-details";
 import { EnterEmail } from "./enter-email";

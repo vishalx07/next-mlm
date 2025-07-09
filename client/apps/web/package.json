@@ -12,12 +12,8 @@
     "lint": "next lint --max-warnings 0"
   },
   "dependencies": {
-    "@repo/app-config": "workspace:*",
-    "@repo/components": "workspace:*",
     "@repo/gen": "workspace:*",
-    "@repo/libs": "workspace:*",
-    "@repo/nextjs-config": "workspace:*",
-    "@repo/utils": "workspace:*",
+    "@repo/ui": "workspace:*",
     "@connectrpc/connect": "^2.0.2",
     "@connectrpc/connect-query": "^2.1.0",
     "@connectrpc/connect-web": "^2.0.2",
@@ -36,7 +32,6 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
-    "@repo/prettier-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@tailwindcss/postcss": "^4.1.10",
     "@tanstack/react-query-devtools": "^5.81.5",

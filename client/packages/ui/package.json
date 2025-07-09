@@ -1,0 +1,50 @@
+{
+  "name": "@repo/ui",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "lint": "eslint . --max-warnings 0"
+  },
+  "exports": {
+    "./components/*": "./src/components/*.tsx",
+    "./config": "./src/config/index.ts",
+    "./config/*": "./src/config/*.ts",
+    "./hooks/*": "./src/hooks/*.ts",
+    "./libs/*": "./src/libs/*.ts",
+    "./stores/*": "./src/stores/*.ts",
+    "./styles/*": "./src/styles/*.css",
+    "./types": "./src/types/index.ts",
+    "./types/*": "./src/types/*.ts",
+    "./utils": "./src/utils/index.ts",
+    "./utils/*": "./src/utils/*.ts",
+    "./postcss.config": "./postcss.config.mjs",
+    "./prettier.config": "./prettier.config.js"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "dayjs": "^1.11.13",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@tailwindcss/postcss": "^4.1.10",
+    "@types/node": "^24.0.1",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "eslint": "^9.29.0",
+    "postcss": "^8.5.5",
+    "tailwindcss": "^4.1.10",
+    "typescript": "5.8.3"
+  },
+  "peerDependencies": {
+    "@jamsr-ui/next": "^0.1.6",
+    "@jamsr-ui/react": "^0.1.11",
+    "motion": "^12.18.1",
+    "next": "^15.3.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zod": "^3.25.67"
+  }
+}

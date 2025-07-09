@@ -1,6 +1,6 @@
 import { Card } from "@jamsr-ui/react";
-import { Logo } from "@repo/components/logo";
-import { cn } from "@repo/utils/index";
+import { Logo } from "@repo/ui/components/logo";
+import { cn } from "@repo/ui/utils";
 
 type Props = {
   children: React.ReactNode;
@@ -21,7 +21,7 @@ export const AuthSplit = ({ children, className }: Props) => {
           {/* right section */}
           <div className="flex flex-col p-10">
             {/* logo */}
-            <div className="border-divider mx-auto mb-6 flex size-[76px] items-center justify-center rounded-full border-2">
+            <div className="border-divider mx-auto mb-6 flex size-[76px] items-center justify-center rounded-full border">
               <Logo />
             </div>
 

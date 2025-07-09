@@ -1,6 +1,6 @@
 import { Button, Text } from "@jamsr-ui/react";
 import { RHFOtpInput, RHFProvider } from "@jamsr-ui/rhf";
-import { OTP_LENGTH } from "@repo/app-config";
+import { OTP_LENGTH } from "@repo/ui/config/app-config";
 import { onBack } from "@/stores/use-register-store";
 import { useVerifyOtp, type FormValues } from "../hooks/use-verify-otp";
 
