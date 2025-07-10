@@ -1,7 +1,7 @@
 import { useMutation } from "@connectrpc/connect-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { registerStep2 } from "@repo/gen/services/auth/v1/auth-AuthService_connectquery";
+import { registerStep2 } from "@repo/gen/auth/v1/auth-AuthService_connectquery";
 import { onSuccessStep2 } from "@/stores/use-register-store";
 import { authValidator } from "@/validators";
 

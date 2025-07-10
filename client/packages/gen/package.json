@@ -4,7 +4,8 @@
   "type": "module",
   "private": true,
   "exports": {
-    "./*": "./src/*.ts"
+    "./grpc-client": "./src/grpc-client.ts",
+    "./*": "./src/services/*.ts"
   },
   "dependencies": {
     "@bufbuild/protobuf": "^2.6.0",

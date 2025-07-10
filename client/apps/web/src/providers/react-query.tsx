@@ -1,3 +1,4 @@
+import { ConnectError } from "@connectrpc/connect";
 import { TransportProvider } from "@connectrpc/connect-query";
 import {
   MutationCache,
@@ -8,7 +9,7 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import * as z from "zod/v4";
 import { toast } from "@jamsr-ui/react";
-import { transport } from "@repo/gen/lib/grpc-client";
+import { transport } from "@repo/gen/grpc-client";
 import { convertToMilliseconds } from "@repo/ui/utils/time";
 
 type Props = {
@@ -48,7 +49,7 @@ const queryClient = new QueryClient({
 });
 
 function onError(error: unknown) {
-  if (error instanceof Error) {
+  if (error instanceof ConnectError) {
     toast.error(error.message);
     return;
   }

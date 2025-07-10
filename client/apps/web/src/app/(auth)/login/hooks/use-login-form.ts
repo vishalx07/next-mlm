@@ -1,7 +1,7 @@
 import { useMutation } from "@connectrpc/connect-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { login } from "@repo/gen/services/auth/v1/auth-AuthService_connectquery";
+import { login } from "@repo/gen/auth/v1/auth-AuthService_connectquery";
 import { authValidator } from "@/validators";
 
 const schema = authValidator.login;
