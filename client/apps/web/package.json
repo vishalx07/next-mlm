@@ -19,6 +19,7 @@
     "@jamsr-ui/next": "^0.1.6",
     "@jamsr-ui/react": "^0.1.11",
     "@jamsr-ui/rhf": "^0.1.12",
+    "@repo/env": "workspace:*",
     "@repo/gen": "workspace:*",
     "@repo/ui": "workspace:*",
     "@tanstack/react-query": "^5.81.5",
