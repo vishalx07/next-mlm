@@ -8,11 +8,11 @@ type Props = { navItems: NavItem[]; logoHref?: Route };
 
 export const SidebarMini = ({ navItems, logoHref }: Props) => {
   return (
-    <Sidebar className={"sticky top-0 w-full p-0"}>
-      <div className="flex justify-center py-5">
+    <Sidebar className={"sticky top-0 w-full bg-transparent p-0"}>
+      <div className="flex justify-center p-4">
         <Logo href={logoHref} />
       </div>
-      <SidebarContent className="scrollbar-hide gap-1 overflow-hidden overflow-y-auto px-1 py-0 pb-4">
+      <SidebarContent className="scrollbar-hidden gap-1 overflow-hidden overflow-y-auto px-1 py-4">
         {navItems.map(({ title, items = [] }) => (
           <SidebarMenu
             key={title}

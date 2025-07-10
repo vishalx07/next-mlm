@@ -23,7 +23,7 @@ export const Logo = ({ isFullLogo, disableLink, href, ...props }: Props) => {
     <img
       src="/nextmlm_full_logo.png"
       alt="logo"
-      className={cn("", props.className)}
+      className={cn("h-10", props.className)}
       {...props}
     />
   );

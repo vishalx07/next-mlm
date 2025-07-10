@@ -64,7 +64,7 @@ const Trigger = React.memo((props: Props & { hasChild: boolean }) => {
           {icon}
         </span>
       )}
-      <span className="text-center text-[10px] leading-4 font-semibold">
+      <span className="text-center text-[10px] leading-4 font-medium">
         {title}
       </span>
       {hasChild && (

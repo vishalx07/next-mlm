@@ -20,13 +20,15 @@ type Props = {
 export const SidebarVertical = (props: Props) => {
   const { logoHref, navItems, header, footer } = props;
   return (
-    <Sidebar className={"sticky top-0 w-full p-0"}>
-      <div className="pt-5 pb-2 pl-7">
-        <Logo href={logoHref} />
+    <Sidebar className={"sticky top-0 w-full bg-transparent p-0"}>
+      <div className="p-4">
+        <Logo
+          isFullLogo
+          href={logoHref}
+        />
       </div>
       {header}
-      {/* scrollbar-thin class from global.css */}
-      <SidebarContent className="scrollbar-thin overflow-hidden overflow-y-auto pr-2 pl-4">
+      <SidebarContent className="scrollbar-hidden overflow-hidden overflow-y-auto px-2 py-4">
         {navItems.map((item) => {
           const { title, items = [] } = item;
           return (
@@ -34,7 +36,7 @@ export const SidebarVertical = (props: Props) => {
               key={title}
               className="gap-3"
             >
-              <SidebarGroupLabel className="pl-3 font-bold uppercase opacity-80">
+              <SidebarGroupLabel className="text-foreground font-semibold uppercase">
                 {title}
               </SidebarGroupLabel>
               <SidebarMenu className="flex flex-col gap-1">

@@ -7,7 +7,7 @@ export const Header = () => {
   return (
     <UIHeader
       isBordered
-      className="bg-content1/[80%] backdrop-blur-header container h-(--header-mobile-height) max-w-full justify-between lg:h-(--header-desktop-height) lg:px-10"
+      className="backdrop-blur-header container h-(--header-mobile-height) max-w-full justify-between bg-transparent lg:h-(--header-desktop-height) lg:px-10"
     >
       <div>
         <MenuButton />

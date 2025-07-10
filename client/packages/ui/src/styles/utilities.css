@@ -5,3 +5,9 @@
 @utility dashboard-container {
   @apply mx-auto w-full max-w-(--breakpoint-2xl) p-4 pb-12!;
 }
+
+@utility scrollbar-hidden {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
