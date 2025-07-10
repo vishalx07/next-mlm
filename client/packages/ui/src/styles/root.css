@@ -2,6 +2,15 @@
   /* ... */
   --header-mobile-height: 64px;
   --header-desktop-height: 72px;
+  /* ... */
+  --dashboard-w: 280px;
+  --dashboard-mini-w: 88px;
+  /* ... */
+  --dashboard-item-h: 40px;
+  --dashboard-sub-item-h: 36px;
+  /* ... */
+  --dashboard-item-icon: 24px;
+  --dashboard-mini-item-icon: 22px;
 }
 
 :root {

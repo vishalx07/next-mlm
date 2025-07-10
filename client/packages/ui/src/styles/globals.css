@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@source "../**/*.{ts,tsx}";
+
+/* add these two lines */
+@import "@jamsr-ui/theme/styles.css";
+@source "../../../../node_modules/@jamsr-ui";
+/* add these two lines */
+
+@import "./root.css";
+@import "./theme.css";
+@import "./utilities.css";

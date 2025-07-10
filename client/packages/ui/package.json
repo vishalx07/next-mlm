@@ -7,13 +7,13 @@
     "lint": "eslint . --max-warnings 0"
   },
   "exports": {
-    "./components/*": "./src/components/*.tsx",
+    "./components/*": "./src/components/*/index.ts",
     "./config": "./src/config/index.ts",
     "./config/*": "./src/config/*.ts",
     "./hooks/*": "./src/hooks/*.ts",
     "./libs/*": "./src/libs/*.ts",
     "./stores/*": "./src/stores/*.ts",
-    "./styles/*": "./src/styles/*.css",
+    "./globals.css": "./src/styles/globals.css",
     "./types": "./src/types/index.ts",
     "./types/*": "./src/types/*.ts",
     "./utils": "./src/utils/index.ts",
@@ -45,6 +45,7 @@
     "next": "^15.3.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "zod": "^3.25.67"
+    "zod": "^3.25.67",
+    "zustand": "^5.0.6"
   }
 }

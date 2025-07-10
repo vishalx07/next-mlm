@@ -1,3 +1,3 @@
 import ArrowIosForward from "../../public/icons/eva-arrow-ios-forward-fill.svg";
 
-export const EvaIcons = { ArrowIosForward };
+export const EvaIcon = { ArrowIosForward };
