@@ -4,19 +4,17 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"strings"
 
 	config "github.com/vishalx07/next-mlm/internal/config"
 	models "github.com/vishalx07/next-mlm/internal/models"
 	jwt "github.com/vishalx07/next-mlm/internal/pkg/jwt"
-	enums "github.com/vishalx07/next-mlm/internal/pkg/types/enums"
 	service "github.com/vishalx07/next-mlm/internal/service"
 )
 
 type contextKey string
 
 const KeyUser contextKey = "user"
-
-var sessionKey enums.Session = enums.Session_USER_SESSION
 
 // Middleware reads cookie, validates JWT, fetches user, injects into context
 func AuthMiddleware(
@@ -25,29 +23,25 @@ func AuthMiddleware(
 	userService service.UserServiceInterface,
 ) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		token := r.Header.Get("Authorization")
-		if token == "" {
-			if cookie, err := r.Cookie(sessionKey.String()); err == nil {
-				token = cookie.Value
-			}
-		}
+		bearerToken := r.Header.Get("Authorization")
 
-		if token == "" {
+		if (bearerToken == "") || !strings.HasPrefix(bearerToken, "Bearer ") {
 			http.Error(w, "Unauthorized", http.StatusUnauthorized)
 			return
 		}
 
-		tokenClaims, err := jwt.VerifyToken(&jwt.VerifyTokenArgs{
-			Token:   token,
-			Purpose: enums.Session_USER_SESSION,
-			Env:     env,
+		token := strings.TrimPrefix(bearerToken, "Bearer ")
+
+		id, err := jwt.VerifyToken(&jwt.VerifyTokenArgs{
+			Token: token,
+			Env:   env,
 		})
 		if err != nil {
 			http.Error(w, "Unauthorized", http.StatusUnauthorized)
 			return
 		}
 
-		user, err := userService.GetById(tokenClaims.Id)
+		user, err := userService.GetById(id)
 		if err != nil {
 			http.Error(w, "Unauthorized", http.StatusUnauthorized)
 			return

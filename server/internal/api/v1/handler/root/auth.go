@@ -66,10 +66,9 @@ func (h *AuthHandler) Login(
 
 	// generate token
 	token, err := jwt.GenerateToken(&jwt.GenerateTokenArgs{
-		Id:      user.Id,
-		Purpose: enums.Session_USER_SESSION,
-		Expiry:  config.TOKEN_EXPIRE_TIME,
-		Env:     h.env,
+		Id:     user.Id,
+		Expiry: config.TOKEN_EXPIRE_TIME,
+		Env:    h.env,
 	})
 	if err != nil {
 		return nil, connect.NewError(connect.CodeInternal, err)
@@ -185,10 +184,9 @@ func (h *AuthHandler) Register(
 
 	// generate token
 	token, err := jwt.GenerateToken(&jwt.GenerateTokenArgs{
-		Id:      user.Id,
-		Purpose: enums.Session_USER_SESSION,
-		Expiry:  config.TOKEN_EXPIRE_TIME,
-		Env:     h.env,
+		Id:     user.Id,
+		Expiry: config.TOKEN_EXPIRE_TIME,
+		Env:    h.env,
 	})
 	if err != nil {
 		return nil, connect.NewError(connect.CodeInternal, err)
