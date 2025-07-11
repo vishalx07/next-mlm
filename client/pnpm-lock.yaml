@@ -185,16 +185,25 @@ importers:
       '@repo/env':
         specifier: workspace:*
         version: link:../configs/env
+      js-cookie:
+        specifier: ^3.0.5
+        version: 3.0.5
     devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../configs/typescript-config
+      '@types/js-cookie':
+        specifier: ^3.0.6
+        version: 3.0.6
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
 
   packages/ui:
     dependencies:
+      '@connectrpc/connect':
+        specifier: ^2.0.2
+        version: 2.0.2(@bufbuild/protobuf@2.6.0)
       '@jamsr-ui/next':
         specifier: ^0.1.6
         version: 0.1.6(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(next@15.3.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(tailwindcss@4.1.10)

@@ -8,13 +8,15 @@
     "./*": "./src/services/*.ts"
   },
   "dependencies": {
-    "@repo/env": "workspace:*",
     "@bufbuild/protobuf": "^2.6.0",
     "@connectrpc/connect": "^2.0.2",
-    "@connectrpc/connect-web": "^2.0.2"
+    "@connectrpc/connect-web": "^2.0.2",
+    "@repo/env": "workspace:*",
+    "js-cookie": "^3.0.5"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
+    "@types/js-cookie": "^3.0.6",
     "typescript": "^5.8.3"
   }
 }

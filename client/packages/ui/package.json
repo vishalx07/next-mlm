@@ -39,6 +39,7 @@
     "typescript": "5.8.3"
   },
   "peerDependencies": {
+    "@connectrpc/connect": "^2.0.2",
     "@jamsr-ui/next": "^0.1.6",
     "@jamsr-ui/react": "^0.1.11",
     "motion": "^12.18.1",
