@@ -43,6 +43,9 @@ func RegisterHandler(s *server.Server) {
 	mux.Handle(authServicePath, authServiceHandler)
 
 	// =============================== USER SERVICES ===============================
+	// userMw := func(next http.Handler) http.Handler {
+	// 	return middleware.AuthMiddleware(next, env, userService)
+	// }
 
 	// =============================== ADMIN SERVICES ===============================
 }
