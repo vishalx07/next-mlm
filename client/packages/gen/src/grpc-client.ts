@@ -5,6 +5,7 @@ import { env } from "@repo/env";
 
 export const transport = createConnectTransport({
   baseUrl: env.NEXT_PUBLIC_API_URL,
+  fetch: (input, init) => fetch(input, { ...init, credentials: "include" }),
 });
 
 export const authClient = createClient(AuthService, transport);

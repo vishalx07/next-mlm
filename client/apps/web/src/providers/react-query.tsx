@@ -53,5 +53,9 @@ function onError(error: unknown) {
     toast.error(error.message);
     return;
   }
+  if (error instanceof Error) {
+    toast.error(error.message);
+    return;
+  }
   toast.error("Something went wrong");
 }
