@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package user.profile.v1;
+
+import "types/v1/user.proto";
+
+service ProfileService {
+  rpc GetProfile(GetProfileRequest) returns (GetProfileResponse);
+  // rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse);
+  // rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);
+}
+
+message GetProfileRequest {}
+
+message GetProfileResponse {
+  types.v1.User user = 1;
+}
