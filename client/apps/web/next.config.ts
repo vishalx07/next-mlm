@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
     },
     // typedEnv: true,
     // typedRoutes: true,
+    serverComponentsHmrCache: false,
   },
   images: {
     remotePatterns: [
