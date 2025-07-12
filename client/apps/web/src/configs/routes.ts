@@ -12,6 +12,7 @@ export const ROUTES = {
   user: {
     root: userRoute(""),
     dashboard: userRoute("/dashboard"),
+    plans: userRoute("/plans"),
     profile: userRoute("/profile"),
   },
 };

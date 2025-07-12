@@ -20,8 +20,9 @@ export const SidebarMenuItem = React.memo(({ items = [], ...props }: Props) => {
     <JamsrUiSidebarMenuItem>
       {hasChild ? (
         <Menu
-          placement="right"
+          placement="right-start"
           triggerOn="hover"
+          offset={8 + 2}
           trigger={
             <Trigger
               hasChild={hasChild}
@@ -88,7 +89,8 @@ const NestedMenuItem = React.memo(({ items }: NestedMenuItemProps) => {
       <Menu
         key={title}
         trigger={title}
-        placement="right"
+        placement="right-start"
+        offset={8}
         classNames={{
           menuItem: "data-[active=true]:bg-content2/50!",
         }}

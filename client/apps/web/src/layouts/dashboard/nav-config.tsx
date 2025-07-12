@@ -1,8 +1,6 @@
 import type { NavItem } from "@repo/ui/components/sidebar";
-import { EvaIcon } from "@repo/ui/config/icons";
+import { DashboardIcon } from "@repo/ui/config/icons";
 import { ROUTES } from "@/configs/routes";
-
-// import { DashboardIcon } from "@/config/icons";
 
 export const navConfig: NavItem[] = [
   {
@@ -10,23 +8,18 @@ export const navConfig: NavItem[] = [
     items: [
       {
         title: "Dashboard",
-        icon: <EvaIcon.ArrowIosForward />,
+        icon: <DashboardIcon.Dashboard />,
         url: ROUTES.user.dashboard,
       },
       {
-        title: "Profile",
-        icon: <EvaIcon.ArrowIosForward />,
-        url: ROUTES.user.profile,
-      },
-      {
-        title: "Settings",
-        icon: <EvaIcon.ArrowIosForward />,
-        url: "#",
-      },
-      {
         title: "Plans",
-        icon: <EvaIcon.ArrowIosForward />,
-        url: "#",
+        icon: <DashboardIcon.Plan />,
+        url: ROUTES.user.plans,
+      },
+      {
+        title: "Profile",
+        icon: <DashboardIcon.Profile />,
+        url: ROUTES.user.profile,
       },
     ],
   },
@@ -35,71 +28,65 @@ export const navConfig: NavItem[] = [
     items: [
       {
         title: "Levels",
-        icon: <EvaIcon.ArrowIosForward />,
+        icon: <DashboardIcon.Level />,
         url: "#",
         items: [
           {
             title: "Level 1",
-            icon: <EvaIcon.ArrowIosForward />,
             url: "#",
           },
           {
             title: "Level 2",
-            icon: <EvaIcon.ArrowIosForward />,
             url: "#",
             items: [
               {
                 title: "Level 2.1",
-                icon: <EvaIcon.ArrowIosForward />,
                 url: "#",
               },
               {
                 title: "Level 2.2",
-                icon: <EvaIcon.ArrowIosForward />,
                 url: "#",
               },
               {
                 title: "Level 2.3",
-                icon: <EvaIcon.ArrowIosForward />,
                 url: "#",
               },
             ],
           },
           {
             title: "Level 3",
-            icon: <EvaIcon.ArrowIosForward />,
             url: "#",
           },
         ],
       },
       {
         title: "Level 1",
-        icon: <EvaIcon.ArrowIosForward />,
+        icon: <DashboardIcon.Level />,
         url: "#",
       },
       {
         title: "Level 2",
-        icon: <EvaIcon.ArrowIosForward />,
+        icon: <DashboardIcon.Level />,
         url: "#",
       },
       {
         title: "Level 3",
-        icon: <EvaIcon.ArrowIosForward />,
+        icon: <DashboardIcon.Level />,
         url: "#",
       },
       {
         title: "Level 4",
-        icon: <EvaIcon.ArrowIosForward />,
+        icon: <DashboardIcon.Level />,
         url: "#",
       },
       {
         title: "Level 5",
-        icon: <EvaIcon.ArrowIosForward />,
+        icon: <DashboardIcon.Level />,
         url: "#",
       },
       {
         title: "Level 6",
-        icon: <EvaIcon.ArrowIosForward />,
+        icon: <DashboardIcon.Level />,
         url: "#",
       },
     ],
