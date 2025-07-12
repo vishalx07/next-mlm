@@ -15,3 +15,9 @@ export const ROUTES = {
     profile: userRoute("/profile"),
   },
 };
+
+export const AUTH_ROUTES = new Set<string>([
+  ROUTES.login,
+  ROUTES.register,
+  ROUTES.forgotPassword,
+]);
