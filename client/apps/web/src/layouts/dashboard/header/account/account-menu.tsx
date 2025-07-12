@@ -2,13 +2,13 @@ import { type Route } from "next";
 import NextLink from "next/link";
 import { Avatar, Menu, MenuItem, Text } from "@jamsr-ui/react";
 import type { User } from "@repo/gen/types/v1/user_pb";
-// import { APP_ROUTES } from "@/config/routes";
+import { ROUTES } from "@/configs/routes";
 // import { getFileSrc } from "@/utils/url";
 import { LogoutMenuItem } from "./logout-menu-item";
 
 const MENU_ITEMS: { label: string; href: Route }[] = [
-  { label: "Home", href: "/" },
-  { label: "Profile", href: "/user/profile" },
+  { label: "Home", href: ROUTES.home },
+  { label: "Profile", href: ROUTES.user.profile },
 ];
 
 type Props = {

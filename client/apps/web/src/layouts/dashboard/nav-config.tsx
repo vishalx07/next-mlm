@@ -1,5 +1,6 @@
 import type { NavItem } from "@repo/ui/components/sidebar";
 import { EvaIcon } from "@repo/ui/config/icons";
+import { ROUTES } from "@/configs/routes";
 
 // import { DashboardIcon } from "@/config/icons";
 
@@ -10,14 +11,12 @@ export const navConfig: NavItem[] = [
       {
         title: "Dashboard",
         icon: <EvaIcon.ArrowIosForward />,
-        url: "/user/dashboard",
-        // url: SELLER_ROUTES.general.dashboard,
+        url: ROUTES.user.dashboard,
       },
       {
         title: "Profile",
         icon: <EvaIcon.ArrowIosForward />,
-        url: "#",
-        // url: SELLER_ROUTES.general.myStore,
+        url: ROUTES.user.profile,
       },
       {
         title: "Settings",

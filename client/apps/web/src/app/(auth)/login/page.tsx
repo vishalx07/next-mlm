@@ -1,5 +1,6 @@
 import { Link } from "@jamsr-ui/next";
 import { Button, Divider, Text } from "@jamsr-ui/react";
+import { ROUTES } from "@/configs/routes";
 import { AuthCenter, AuthSplit } from "@/layouts/auth";
 import { FormWrapper } from "./_components/form-wrapper";
 
@@ -46,7 +47,7 @@ export default function page() {
       >
         New to Next MLM?{" "}
         <Link
-          href={"/register"}
+          href={ROUTES.register}
           className="font-medium"
         >
           Join Us

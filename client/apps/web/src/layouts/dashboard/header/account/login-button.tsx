@@ -6,15 +6,14 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { Button } from "@jamsr-ui/react";
 import { SessionKey } from "@/configs";
-
-// import { APP_ROUTES } from "@/config/routes";
+import { ROUTES } from "@/configs/routes";
 
 export const LoginButton = () => {
   const router = useRouter();
 
   useEffect(() => {
     Cookies.remove(SessionKey);
-    router.push("/login");
+    router.push(ROUTES.login);
   }, []);
 
   return (
@@ -22,7 +21,7 @@ export const LoginButton = () => {
       radius="full"
       color="primary"
       as={NextLink}
-      href={"/login"}
+      href={ROUTES.login}
     >
       Login
     </Button>

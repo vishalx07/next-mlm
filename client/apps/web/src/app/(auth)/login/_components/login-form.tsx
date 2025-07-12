@@ -1,6 +1,7 @@
 import { Link } from "@jamsr-ui/next";
 import { Button, Checkbox } from "@jamsr-ui/react";
 import { RHFInput, RHFProvider } from "@jamsr-ui/rhf";
+import { ROUTES } from "@/configs/routes";
 import { useLoginForm, type FormValues } from "../hooks/use-login-form";
 
 export const LoginForm = () => {
@@ -32,7 +33,7 @@ export const LoginForm = () => {
           checked
         />
         <Link
-          href={"/forgot-password"}
+          href={ROUTES.forgotPassword}
           variant="paragraph2"
           className="self-end font-medium"
         >

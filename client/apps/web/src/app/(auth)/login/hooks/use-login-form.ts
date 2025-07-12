@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
 import { login } from "@repo/gen/auth/v1/auth-AuthService_connectquery";
 import { SessionKey } from "@/configs";
+import { ROUTES } from "@/configs/routes";
 import { authValidator } from "@/validators";
 
 const schema = authValidator.login;
@@ -30,7 +31,7 @@ export const useLoginForm = () => {
         expires: 1,
         sameSite: "None",
       });
-      router.replace("/user/dashboard");
+      router.replace(ROUTES.user.dashboard);
       router.refresh();
     },
   });

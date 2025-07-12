@@ -5,8 +5,6 @@ import Cookies from "js-cookie";
 import { MenuItem } from "@jamsr-ui/react";
 import { SessionKey } from "@/configs";
 
-// import { APP_ROUTES } from "@/config/routes";
-
 export const LogoutMenuItem = () => {
   const router = useRouter();
 
