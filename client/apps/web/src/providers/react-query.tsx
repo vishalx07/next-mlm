@@ -39,6 +39,9 @@ const queryClient = new QueryClient({
   mutationCache: new MutationCache({
     onError: (error) => onError(error),
     onSuccess(data) {
+      if (process.env.NODE_ENV !== "production") {
+        console.log(data);
+      }
       const result = z.object({ message: z.string() }).safeParse(data);
       if (result.success) {
         const { message } = result.data;

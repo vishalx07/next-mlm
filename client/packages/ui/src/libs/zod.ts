@@ -5,6 +5,11 @@ import { MIN_PASSWORD_LENGTH, OTP_LENGTH } from "../config/app-config";
 
 const str = () => z.string().trim();
 
+const strNullable = () =>
+  str()
+    .nullable()
+    .transform((value) => (value === "" ? null : value));
+
 const number = () => z.coerce.number();
 
 const email = () => z.email("Invalid eamil address").trim().toLowerCase();
@@ -30,6 +35,7 @@ const otp = (name: string = "OTP") =>
 
 export const ZOD_SCHEMA = {
   str,
+  strNullable,
   number,
   email,
   username,

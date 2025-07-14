@@ -51,3 +51,17 @@ export const convertToMilliseconds = (
 export const getFutureTime = (ms: number): Date => {
   return new Date(Date.now() + ms);
 };
+
+export const timestampToDate = (timestamp: {
+  seconds: bigint;
+  nanos: number;
+}): Date => {
+  // Convert the seconds part to milliseconds
+  const milliseconds = Number(timestamp.seconds) * 1000;
+
+  // Convert nanos part into a fraction of a millisecond
+  const nanos = timestamp.nanos / 1000000; // 1 millisecond = 1,000,000 nanoseconds
+
+  // Return the final Date object
+  return new Date(milliseconds + nanos);
+};
