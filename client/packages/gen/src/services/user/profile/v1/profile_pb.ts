@@ -4,6 +4,7 @@
 
 import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
+import { file_buf_validate_validate } from "../../../buf/validate/validate_pb";
 import type { User } from "../../../types/v1/user_pb";
 import { file_types_v1_user } from "../../../types/v1/user_pb";
 import type { Message } from "@bufbuild/protobuf";
@@ -12,7 +13,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file user/profile/v1/profile.proto.
  */
 export const file_user_profile_v1_profile: GenFile = /*@__PURE__*/
-  fileDesc("Ch11c2VyL3Byb2ZpbGUvdjEvcHJvZmlsZS5wcm90bxIPdXNlci5wcm9maWxlLnYxIhMKEUdldFByb2ZpbGVSZXF1ZXN0IjIKEkdldFByb2ZpbGVSZXNwb25zZRIcCgR1c2VyGAEgASgLMg4udHlwZXMudjEuVXNlcjJnCg5Qcm9maWxlU2VydmljZRJVCgpHZXRQcm9maWxlEiIudXNlci5wcm9maWxlLnYxLkdldFByb2ZpbGVSZXF1ZXN0GiMudXNlci5wcm9maWxlLnYxLkdldFByb2ZpbGVSZXNwb25zZWIGcHJvdG8z", [file_types_v1_user]);
+  fileDesc("Ch11c2VyL3Byb2ZpbGUvdjEvcHJvZmlsZS5wcm90bxIPdXNlci5wcm9maWxlLnYxIhMKEUdldFByb2ZpbGVSZXF1ZXN0IjIKEkdldFByb2ZpbGVSZXNwb25zZRIcCgR1c2VyGAEgASgLMg4udHlwZXMudjEuVXNlciJ3ChRVcGRhdGVQcm9maWxlUmVxdWVzdBIOCgZhdmF0YXIYASABKAkSGAoIZnVsbG5hbWUYAiABKAlCBrpIA8gBARIXCgdjb3VudHJ5GAMgASgJQga6SAPIAQESHAoMcGhvbmVfbnVtYmVyGAQgASgJQga6SAPIAQEiRgoVVXBkYXRlUHJvZmlsZVJlc3BvbnNlEg8KB21lc3NhZ2UYASABKAkSHAoEdXNlchgCIAEoCzIOLnR5cGVzLnYxLlVzZXIyxwEKDlByb2ZpbGVTZXJ2aWNlElUKCkdldFByb2ZpbGUSIi51c2VyLnByb2ZpbGUudjEuR2V0UHJvZmlsZVJlcXVlc3QaIy51c2VyLnByb2ZpbGUudjEuR2V0UHJvZmlsZVJlc3BvbnNlEl4KDVVwZGF0ZVByb2ZpbGUSJS51c2VyLnByb2ZpbGUudjEuVXBkYXRlUHJvZmlsZVJlcXVlc3QaJi51c2VyLnByb2ZpbGUudjEuVXBkYXRlUHJvZmlsZVJlc3BvbnNlYgZwcm90bzM", [file_buf_validate_validate, file_types_v1_user]);
 
 /**
  * @generated from message user.profile.v1.GetProfileRequest
@@ -45,19 +46,80 @@ export const GetProfileResponseSchema: GenMessage<GetProfileResponse> = /*@__PUR
   messageDesc(file_user_profile_v1_profile, 1);
 
 /**
+ * @generated from message user.profile.v1.UpdateProfileRequest
+ */
+export type UpdateProfileRequest = Message<"user.profile.v1.UpdateProfileRequest"> & {
+  /**
+   * @generated from field: string avatar = 1;
+   */
+  avatar: string;
+
+  /**
+   * @generated from field: string fullname = 2;
+   */
+  fullname: string;
+
+  /**
+   * @generated from field: string country = 3;
+   */
+  country: string;
+
+  /**
+   * @generated from field: string phone_number = 4;
+   */
+  phoneNumber: string;
+};
+
+/**
+ * Describes the message user.profile.v1.UpdateProfileRequest.
+ * Use `create(UpdateProfileRequestSchema)` to create a new message.
+ */
+export const UpdateProfileRequestSchema: GenMessage<UpdateProfileRequest> = /*@__PURE__*/
+  messageDesc(file_user_profile_v1_profile, 2);
+
+/**
+ * @generated from message user.profile.v1.UpdateProfileResponse
+ */
+export type UpdateProfileResponse = Message<"user.profile.v1.UpdateProfileResponse"> & {
+  /**
+   * @generated from field: string message = 1;
+   */
+  message: string;
+
+  /**
+   * @generated from field: types.v1.User user = 2;
+   */
+  user?: User;
+};
+
+/**
+ * Describes the message user.profile.v1.UpdateProfileResponse.
+ * Use `create(UpdateProfileResponseSchema)` to create a new message.
+ */
+export const UpdateProfileResponseSchema: GenMessage<UpdateProfileResponse> = /*@__PURE__*/
+  messageDesc(file_user_profile_v1_profile, 3);
+
+/**
  * @generated from service user.profile.v1.ProfileService
  */
 export const ProfileService: GenService<{
   /**
-   * rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse);
-   * rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);
-   *
    * @generated from rpc user.profile.v1.ProfileService.GetProfile
    */
   getProfile: {
     methodKind: "unary";
     input: typeof GetProfileRequestSchema;
     output: typeof GetProfileResponseSchema;
+  },
+  /**
+   * rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);
+   *
+   * @generated from rpc user.profile.v1.ProfileService.UpdateProfile
+   */
+  updateProfile: {
+    methodKind: "unary";
+    input: typeof UpdateProfileRequestSchema;
+    output: typeof UpdateProfileResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_user_profile_v1_profile, 0);

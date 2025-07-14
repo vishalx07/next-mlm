@@ -34,7 +34,7 @@ func (repo *UserRepo) Create(user *models.User) error {
 }
 
 func (repo *UserRepo) Update(user *models.User) error {
-	err := repo.db.Where("id = ?", user.ID).Updates(user).Error
+	err := repo.db.Where("id = ?", user.Id).Updates(user).Error
 
 	return err
 }

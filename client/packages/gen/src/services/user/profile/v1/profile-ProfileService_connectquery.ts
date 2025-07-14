@@ -5,9 +5,13 @@
 import { ProfileService } from "./profile_pb";
 
 /**
- * rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse);
- * rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);
- *
  * @generated from rpc user.profile.v1.ProfileService.GetProfile
  */
 export const getProfile = ProfileService.method.getProfile;
+
+/**
+ * rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);
+ *
+ * @generated from rpc user.profile.v1.ProfileService.UpdateProfile
+ */
+export const updateProfile = ProfileService.method.updateProfile;

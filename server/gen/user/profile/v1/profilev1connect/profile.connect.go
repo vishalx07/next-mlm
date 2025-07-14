@@ -36,11 +36,15 @@ const (
 	// ProfileServiceGetProfileProcedure is the fully-qualified name of the ProfileService's GetProfile
 	// RPC.
 	ProfileServiceGetProfileProcedure = "/user.profile.v1.ProfileService/GetProfile"
+	// ProfileServiceUpdateProfileProcedure is the fully-qualified name of the ProfileService's
+	// UpdateProfile RPC.
+	ProfileServiceUpdateProfileProcedure = "/user.profile.v1.ProfileService/UpdateProfile"
 )
 
 // ProfileServiceClient is a client for the user.profile.v1.ProfileService service.
 type ProfileServiceClient interface {
 	GetProfile(context.Context, *connect.Request[v1.GetProfileRequest]) (*connect.Response[v1.GetProfileResponse], error)
+	UpdateProfile(context.Context, *connect.Request[v1.UpdateProfileRequest]) (*connect.Response[v1.UpdateProfileResponse], error)
 }
 
 // NewProfileServiceClient constructs a client for the user.profile.v1.ProfileService service. By
@@ -60,12 +64,19 @@ func NewProfileServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(profileServiceMethods.ByName("GetProfile")),
 			connect.WithClientOptions(opts...),
 		),
+		updateProfile: connect.NewClient[v1.UpdateProfileRequest, v1.UpdateProfileResponse](
+			httpClient,
+			baseURL+ProfileServiceUpdateProfileProcedure,
+			connect.WithSchema(profileServiceMethods.ByName("UpdateProfile")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // profileServiceClient implements ProfileServiceClient.
 type profileServiceClient struct {
-	getProfile *connect.Client[v1.GetProfileRequest, v1.GetProfileResponse]
+	getProfile    *connect.Client[v1.GetProfileRequest, v1.GetProfileResponse]
+	updateProfile *connect.Client[v1.UpdateProfileRequest, v1.UpdateProfileResponse]
 }
 
 // GetProfile calls user.profile.v1.ProfileService.GetProfile.
@@ -73,9 +84,15 @@ func (c *profileServiceClient) GetProfile(ctx context.Context, req *connect.Requ
 	return c.getProfile.CallUnary(ctx, req)
 }
 
+// UpdateProfile calls user.profile.v1.ProfileService.UpdateProfile.
+func (c *profileServiceClient) UpdateProfile(ctx context.Context, req *connect.Request[v1.UpdateProfileRequest]) (*connect.Response[v1.UpdateProfileResponse], error) {
+	return c.updateProfile.CallUnary(ctx, req)
+}
+
 // ProfileServiceHandler is an implementation of the user.profile.v1.ProfileService service.
 type ProfileServiceHandler interface {
 	GetProfile(context.Context, *connect.Request[v1.GetProfileRequest]) (*connect.Response[v1.GetProfileResponse], error)
+	UpdateProfile(context.Context, *connect.Request[v1.UpdateProfileRequest]) (*connect.Response[v1.UpdateProfileResponse], error)
 }
 
 // NewProfileServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -91,10 +108,18 @@ func NewProfileServiceHandler(svc ProfileServiceHandler, opts ...connect.Handler
 		connect.WithSchema(profileServiceMethods.ByName("GetProfile")),
 		connect.WithHandlerOptions(opts...),
 	)
+	profileServiceUpdateProfileHandler := connect.NewUnaryHandler(
+		ProfileServiceUpdateProfileProcedure,
+		svc.UpdateProfile,
+		connect.WithSchema(profileServiceMethods.ByName("UpdateProfile")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/user.profile.v1.ProfileService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ProfileServiceGetProfileProcedure:
 			profileServiceGetProfileHandler.ServeHTTP(w, r)
+		case ProfileServiceUpdateProfileProcedure:
+			profileServiceUpdateProfileHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -106,4 +131,8 @@ type UnimplementedProfileServiceHandler struct{}
 
 func (UnimplementedProfileServiceHandler) GetProfile(context.Context, *connect.Request[v1.GetProfileRequest]) (*connect.Response[v1.GetProfileResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.profile.v1.ProfileService.GetProfile is not implemented"))
+}
+
+func (UnimplementedProfileServiceHandler) UpdateProfile(context.Context, *connect.Request[v1.UpdateProfileRequest]) (*connect.Response[v1.UpdateProfileResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.profile.v1.ProfileService.UpdateProfile is not implemented"))
 }

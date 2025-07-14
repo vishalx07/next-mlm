@@ -6,9 +6,12 @@ import (
 )
 
 var (
+	UserUpdateSuccess = "User updated successfully"
+)
+
+var (
 	ErrUserNotFound           = errors.New("user not found")
 	ErrUserEmailAlreadyExist  = errors.New("email is already exist")
-	ErrUsernameAlreadyExist   = errors.New("username is already exist")
 	ErrUserBlocked            = errors.New("your account has been blocked")
 	ErrPasswordNotUsed        = errors.New("account not use email & password")
 	ErrUserReferralIdNotExist = errors.New("referral id not exist")
@@ -36,10 +39,6 @@ func ErrUserFailedToGetByUserId(err error) error {
 
 func ErrUserFailedToGetByEmail(err error) error {
 	return fmt.Errorf("error getting user by email: %w", err)
-}
-
-func ErrUserFailedToGetByUsername(err error) error {
-	return fmt.Errorf("error getting user by username: %w", err)
 }
 
 func ErrUserFailedToGetAll(err error) error {

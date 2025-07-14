@@ -8,6 +8,7 @@ import (
 	profilev1 "github.com/vishalx07/next-mlm/gen/user/profile/v1"
 	middleware "github.com/vishalx07/next-mlm/internal/middleware"
 	models "github.com/vishalx07/next-mlm/internal/models"
+	message "github.com/vishalx07/next-mlm/internal/pkg/message"
 	enums "github.com/vishalx07/next-mlm/internal/pkg/types/enums"
 	service "github.com/vishalx07/next-mlm/internal/service"
 	"google.golang.org/protobuf/types/known/timestamppb"
@@ -29,6 +30,30 @@ func (h *ProfileHandler) GetProfile(
 
 	resp := connect.NewResponse(&profilev1.GetProfileResponse{
 		User: h.transformUserModel(user),
+	})
+
+	return resp, nil
+}
+
+func (h *ProfileHandler) UpdateProfile(
+	ctx context.Context,
+	req *connect.Request[profilev1.UpdateProfileRequest],
+) (*connect.Response[profilev1.UpdateProfileResponse], error) {
+	user := middleware.UserFromContext(ctx)
+
+	user.Avatar = &req.Msg.Avatar
+	user.Fullname = req.Msg.Fullname
+	user.Country = req.Msg.Country
+	user.Phone = req.Msg.PhoneNumber
+
+	err := h.userService.Update(user)
+	if err != nil {
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	resp := connect.NewResponse(&profilev1.UpdateProfileResponse{
+		Message: message.UserUpdateSuccess,
+		User:    h.transformUserModel(user),
 	})
 
 	return resp, nil

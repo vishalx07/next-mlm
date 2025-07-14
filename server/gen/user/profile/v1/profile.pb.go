@@ -7,6 +7,7 @@
 package profilev1
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	v1 "github.com/vishalx07/next-mlm/gen/types/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -102,17 +103,146 @@ func (x *GetProfileResponse) GetUser() *v1.User {
 	return nil
 }
 
+type UpdateProfileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Avatar        string                 `protobuf:"bytes,1,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Fullname      string                 `protobuf:"bytes,2,opt,name=fullname,proto3" json:"fullname,omitempty"`
+	Country       string                 `protobuf:"bytes,3,opt,name=country,proto3" json:"country,omitempty"`
+	PhoneNumber   string                 `protobuf:"bytes,4,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateProfileRequest) Reset() {
+	*x = UpdateProfileRequest{}
+	mi := &file_user_profile_v1_profile_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateProfileRequest) ProtoMessage() {}
+
+func (x *UpdateProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_profile_v1_profile_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateProfileRequest.ProtoReflect.Descriptor instead.
+func (*UpdateProfileRequest) Descriptor() ([]byte, []int) {
+	return file_user_profile_v1_profile_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UpdateProfileRequest) GetAvatar() string {
+	if x != nil {
+		return x.Avatar
+	}
+	return ""
+}
+
+func (x *UpdateProfileRequest) GetFullname() string {
+	if x != nil {
+		return x.Fullname
+	}
+	return ""
+}
+
+func (x *UpdateProfileRequest) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *UpdateProfileRequest) GetPhoneNumber() string {
+	if x != nil {
+		return x.PhoneNumber
+	}
+	return ""
+}
+
+type UpdateProfileResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	User          *v1.User               `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateProfileResponse) Reset() {
+	*x = UpdateProfileResponse{}
+	mi := &file_user_profile_v1_profile_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateProfileResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateProfileResponse) ProtoMessage() {}
+
+func (x *UpdateProfileResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_profile_v1_profile_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateProfileResponse.ProtoReflect.Descriptor instead.
+func (*UpdateProfileResponse) Descriptor() ([]byte, []int) {
+	return file_user_profile_v1_profile_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *UpdateProfileResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *UpdateProfileResponse) GetUser() *v1.User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
 var File_user_profile_v1_profile_proto protoreflect.FileDescriptor
 
 const file_user_profile_v1_profile_proto_rawDesc = "" +
 	"\n" +
-	"\x1duser/profile/v1/profile.proto\x12\x0fuser.profile.v1\x1a\x13types/v1/user.proto\"\x13\n" +
+	"\x1duser/profile/v1/profile.proto\x12\x0fuser.profile.v1\x1a\x1bbuf/validate/validate.proto\x1a\x13types/v1/user.proto\"\x13\n" +
 	"\x11GetProfileRequest\"8\n" +
 	"\x12GetProfileResponse\x12\"\n" +
-	"\x04user\x18\x01 \x01(\v2\x0e.types.v1.UserR\x04user2g\n" +
+	"\x04user\x18\x01 \x01(\v2\x0e.types.v1.UserR\x04user\"\x9f\x01\n" +
+	"\x14UpdateProfileRequest\x12\x16\n" +
+	"\x06avatar\x18\x01 \x01(\tR\x06avatar\x12\"\n" +
+	"\bfullname\x18\x02 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\bfullname\x12 \n" +
+	"\acountry\x18\x03 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\acountry\x12)\n" +
+	"\fphone_number\x18\x04 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\vphoneNumber\"U\n" +
+	"\x15UpdateProfileResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x12\"\n" +
+	"\x04user\x18\x02 \x01(\v2\x0e.types.v1.UserR\x04user2\xc7\x01\n" +
 	"\x0eProfileService\x12U\n" +
 	"\n" +
-	"GetProfile\x12\".user.profile.v1.GetProfileRequest\x1a#.user.profile.v1.GetProfileResponseB\xbe\x01\n" +
+	"GetProfile\x12\".user.profile.v1.GetProfileRequest\x1a#.user.profile.v1.GetProfileResponse\x12^\n" +
+	"\rUpdateProfile\x12%.user.profile.v1.UpdateProfileRequest\x1a&.user.profile.v1.UpdateProfileResponseB\xbe\x01\n" +
 	"\x13com.user.profile.v1B\fProfileProtoP\x01Z;github.com/vishalx07/next-mlm/gen/user/profile/v1;profilev1\xa2\x02\x03UPX\xaa\x02\x0fUser.Profile.V1\xca\x02\x0fUser\\Profile\\V1\xe2\x02\x1bUser\\Profile\\V1\\GPBMetadata\xea\x02\x11User::Profile::V1b\x06proto3"
 
 var (
@@ -127,21 +257,26 @@ func file_user_profile_v1_profile_proto_rawDescGZIP() []byte {
 	return file_user_profile_v1_profile_proto_rawDescData
 }
 
-var file_user_profile_v1_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_user_profile_v1_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_user_profile_v1_profile_proto_goTypes = []any{
-	(*GetProfileRequest)(nil),  // 0: user.profile.v1.GetProfileRequest
-	(*GetProfileResponse)(nil), // 1: user.profile.v1.GetProfileResponse
-	(*v1.User)(nil),            // 2: types.v1.User
+	(*GetProfileRequest)(nil),     // 0: user.profile.v1.GetProfileRequest
+	(*GetProfileResponse)(nil),    // 1: user.profile.v1.GetProfileResponse
+	(*UpdateProfileRequest)(nil),  // 2: user.profile.v1.UpdateProfileRequest
+	(*UpdateProfileResponse)(nil), // 3: user.profile.v1.UpdateProfileResponse
+	(*v1.User)(nil),               // 4: types.v1.User
 }
 var file_user_profile_v1_profile_proto_depIdxs = []int32{
-	2, // 0: user.profile.v1.GetProfileResponse.user:type_name -> types.v1.User
-	0, // 1: user.profile.v1.ProfileService.GetProfile:input_type -> user.profile.v1.GetProfileRequest
-	1, // 2: user.profile.v1.ProfileService.GetProfile:output_type -> user.profile.v1.GetProfileResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	4, // 0: user.profile.v1.GetProfileResponse.user:type_name -> types.v1.User
+	4, // 1: user.profile.v1.UpdateProfileResponse.user:type_name -> types.v1.User
+	0, // 2: user.profile.v1.ProfileService.GetProfile:input_type -> user.profile.v1.GetProfileRequest
+	2, // 3: user.profile.v1.ProfileService.UpdateProfile:input_type -> user.profile.v1.UpdateProfileRequest
+	1, // 4: user.profile.v1.ProfileService.GetProfile:output_type -> user.profile.v1.GetProfileResponse
+	3, // 5: user.profile.v1.ProfileService.UpdateProfile:output_type -> user.profile.v1.UpdateProfileResponse
+	4, // [4:6] is the sub-list for method output_type
+	2, // [2:4] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_user_profile_v1_profile_proto_init() }
@@ -155,7 +290,7 @@ func file_user_profile_v1_profile_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_profile_v1_profile_proto_rawDesc), len(file_user_profile_v1_profile_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
