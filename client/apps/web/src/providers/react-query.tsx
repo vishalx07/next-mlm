@@ -8,7 +8,7 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import * as z from "zod/v4";
 import { toast } from "@jamsr-ui/react";
-import { transport } from "@repo/gen/grpc-client";
+import { rpcTransport } from "@repo/gen/grpc-client";
 import { getErrorMessage } from "@repo/ui/utils";
 import { convertToMilliseconds } from "@repo/ui/utils/time";
 
@@ -18,7 +18,7 @@ type Props = {
 
 export const ReactQueryProvider = ({ children }: Props) => {
   return (
-    <TransportProvider transport={transport}>
+    <TransportProvider transport={rpcTransport}>
       <QueryClientProvider client={queryClient}>
         {children}
         <ReactQueryDevtools initialIsOpen={false} />

@@ -9,7 +9,7 @@ import { ProfileService } from "./services/user/profile/v1/profile_pb";
 const SessionKey = "x-session";
 const SessionAdminKey = "x-session-admin";
 
-export const transport = createConnectTransport({
+export const rpcTransport = createConnectTransport({
   baseUrl: env.NEXT_PUBLIC_API_URL,
   // fetch: (input, init) => fetch(input, { ...init, credentials: "include" }),
   interceptors: [
@@ -32,9 +32,9 @@ export const transport = createConnectTransport({
 });
 
 // root
-export const authClient = createClient(AuthService, transport);
+export const authClient = createClient(AuthService, rpcTransport);
 
 // user
-export const profileClient = createClient(ProfileService, transport);
+export const profileClient = createClient(ProfileService, rpcTransport);
 
 // admin
