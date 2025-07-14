@@ -21,7 +21,6 @@ export const useEnterDetails = (defaultValues: FormValues) => {
       {
         referralId: formData.referralId as number,
         fullname: formData.fullname,
-        username: formData.username,
         country: formData.country,
         phoneNumber: formData.phoneNumber,
         step1: {

@@ -26,7 +26,6 @@ export const registerStep2 = z
   .object({
     referralId: ZOD_SCHEMA.number().min(1, "Referral Id is required"),
     fullname: ZOD_SCHEMA.str().min(1, "Fullname is required"),
-    username: ZOD_SCHEMA.username(),
     country: ZOD_SCHEMA.str().min(1, "Country is required"),
     phoneNumber: ZOD_SCHEMA.str().min(1, "Phone number is required"),
   })

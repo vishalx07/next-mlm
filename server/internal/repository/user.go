@@ -14,7 +14,6 @@ type UserRepoInterface interface {
 	GetById(id string) (*models.User, error)
 	GetByUserId(userId int32) (*models.User, error)
 	GetByEmail(email string) (*models.User, error)
-	GetByUsername(username string) (*models.User, error)
 	GetAll() ([]*models.User, error)
 	Delete(id string) error
 	GenerateUserId() (int32, error)
@@ -61,15 +60,6 @@ func (repo *UserRepo) GetByUserId(userId int32) (*models.User, error) {
 func (repo *UserRepo) GetByEmail(email string) (*models.User, error) {
 	var user models.User
 	if err := repo.db.Where("email = ?", email).Take(&user).Error; err != nil {
-		return nil, err
-	}
-
-	return &user, nil
-}
-
-func (repo *UserRepo) GetByUsername(username string) (*models.User, error) {
-	var user models.User
-	if err := repo.db.Where("username = ?", username).Take(&user).Error; err != nil {
 		return nil, err
 	}
 

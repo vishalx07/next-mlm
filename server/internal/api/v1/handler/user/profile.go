@@ -44,7 +44,6 @@ func (h *ProfileHandler) transformUserModel(user *models.User) *typesv1.User {
 		Id:          user.Id,
 		UserId:      user.UserId,
 		Fullname:    user.Fullname,
-		Username:    user.Username,
 		Email:       user.Email,
 		Role:        enums.UserRoleToProto(user.Role),
 		Status:      enums.UserStatusToProto(user.Status),

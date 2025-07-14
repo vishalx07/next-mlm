@@ -9,15 +9,14 @@ message User {
   string id = 1;
   int32 user_id = 2;
   string fullname = 3;
-  string username = 4;
-  string email = 5;
-  enums.v1.UserRole role = 6;
-  enums.v1.UserStatus status = 7;
-  string avatar = 8;
-  string country = 9;
-  string phone_number = 10;
-  int32 referral_id = 11;
-  uint32 level = 12;
-  google.protobuf.Timestamp created_at = 13;
-  google.protobuf.Timestamp updated_at = 14;
+  string email = 4;
+  enums.v1.UserRole role = 5;
+  enums.v1.UserStatus status = 6;
+  string avatar = 7;
+  string country = 8;
+  string phone_number = 9;
+  int32 referral_id = 10;
+  uint32 level = 11;
+  google.protobuf.Timestamp created_at = 12;
+  google.protobuf.Timestamp updated_at = 13;
 }

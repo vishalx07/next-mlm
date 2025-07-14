@@ -123,14 +123,6 @@ func (h *AuthHandler) RegisterStep2(
 		return nil, connect.NewError(connect.CodeInternal, err)
 	}
 
-	// check username already exist
-	if err := h.userService.IsUsernameAlreadyExist(req.Msg.Username); err != nil {
-		if errors.Is(err, message.ErrUsernameAlreadyExist) {
-			return nil, connect.NewError(connect.CodeAlreadyExists, err)
-		}
-		return nil, connect.NewError(connect.CodeInternal, err)
-	}
-
 	// send otp
 	_, err := h.otpService.SendOtp(req.Msg.Step1.Email, enums.OtpPurpose_REGISTER)
 	if err != nil {
@@ -163,14 +155,6 @@ func (h *AuthHandler) Register(
 	// check email already exist
 	if err := h.userService.IsEmailAlreadyExist(user.Email); err != nil {
 		if errors.Is(err, message.ErrUserEmailAlreadyExist) {
-			return nil, connect.NewError(connect.CodeAlreadyExists, err)
-		}
-		return nil, connect.NewError(connect.CodeInternal, err)
-	}
-
-	// check username already exist
-	if err := h.userService.IsUsernameAlreadyExist(user.Username); err != nil {
-		if errors.Is(err, message.ErrUsernameAlreadyExist) {
 			return nil, connect.NewError(connect.CodeAlreadyExists, err)
 		}
 		return nil, connect.NewError(connect.CodeInternal, err)
@@ -237,7 +221,6 @@ func (h *AuthHandler) transformUserRPC(req *connect.Request[authv1.RegisterReque
 	return &models.User{
 		ReferralId: req.Msg.Step2.ReferralId,
 		Fullname:   req.Msg.Step2.Fullname,
-		Username:   req.Msg.Step2.Username,
 		Email:      req.Msg.Step1.Email,
 		Password:   &req.Msg.Step1.Password,
 		Country:    req.Msg.Step2.Country,
@@ -255,7 +238,6 @@ func (h *AuthHandler) transformUserModel(user *models.User) *typesv1.User {
 		Id:          user.Id,
 		UserId:      user.UserId,
 		Fullname:    user.Fullname,
-		Username:    user.Username,
 		Email:       user.Email,
 		Role:        enums.UserRoleToProto(user.Role),
 		Status:      enums.UserStatusToProto(user.Status),

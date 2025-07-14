@@ -47,7 +47,6 @@ export const onSuccessStep1 = (formValues: Omit<Step1, "step">) => {
     step: 2,
     referralId: "",
     fullname: "",
-    username: "",
     country: "",
     phoneNumber: "",
   };

@@ -17,12 +17,10 @@ type UserServiceInterface interface {
 	GetById(id string) (*models.User, error)
 	GetByUserId(userId int32) (*models.User, error)
 	GetByEmail(email string) (*models.User, error)
-	GetByUsername(username string) (*models.User, error)
 	GetAll() ([]*models.User, error)
 	Delete(id string) error
 	CheckUserExist(email string) (*models.User, error)
 	IsEmailAlreadyExist(email string) error
-	IsUsernameAlreadyExist(username string) error
 	CheckReferralIdExist(referralId int32) error
 	ValidateStatus(*models.User) error
 	GetPasswordOrThrowError(user *models.User) (string, error)
@@ -90,18 +88,6 @@ func (s *UserService) GetByEmail(email string) (*models.User, error) {
 	return user, nil
 }
 
-func (s *UserService) GetByUsername(username string) (*models.User, error) {
-	user, err := s.userRepo.GetByUsername(username)
-	if err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, message.ErrUserNotFound
-		}
-		return nil, message.ErrUserFailedToGetByUsername(err)
-	}
-
-	return user, nil
-}
-
 func (s *UserService) GetAll() ([]*models.User, error) {
 	users, err := s.userRepo.GetAll()
 	if err != nil {
@@ -137,17 +123,6 @@ func (s *UserService) IsEmailAlreadyExist(email string) error {
 	}
 
 	return message.ErrUserEmailAlreadyExist
-}
-
-func (s *UserService) IsUsernameAlreadyExist(username string) error {
-	if _, err := s.userRepo.GetByUsername(username); err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil
-		}
-		return message.ErrUserFailedToGetByUsername(err)
-	}
-
-	return message.ErrUsernameAlreadyExist
 }
 
 func (s *UserService) CheckReferralIdExist(referralId int32) error {

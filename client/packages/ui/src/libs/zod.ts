@@ -14,12 +14,6 @@ const number = () => z.coerce.number();
 
 const email = () => z.email("Invalid eamil address").trim().toLowerCase();
 
-const username = () =>
-  str()
-    .min(1, "Username is required")
-    .min(3, "Username must be at least 3 characters")
-    .toLowerCase();
-
 const password = (name: string = "Password") =>
   str()
     .min(1, `${name} is required`)
@@ -38,7 +32,6 @@ export const ZOD_SCHEMA = {
   strNullable,
   number,
   email,
-  username,
   password,
   otp,
 };

@@ -45,10 +45,6 @@ message RegisterStep1Response {
 message RegisterStep2Request {
   int32 referral_id = 1 [(buf.validate.field).required = true];
   string fullname = 2 [(buf.validate.field).required = true];
-  string username = 3 [
-    (buf.validate.field).required = true,
-    (buf.validate.field).string.min_len = 3
-  ];
   string country = 4 [(buf.validate.field).required = true];
   string phone_number = 5 [(buf.validate.field).required = true];
   RegisterStep1Request step1 = 6 [(buf.validate.field).required = true];

@@ -6,7 +6,6 @@ type User struct {
 	ID
 	UserId     int32            `gorm:"type:integer;uniqueIndex;not null"`
 	Fullname   string           `gorm:"size:256;not null"`
-	Username   string           `gorm:"size:256;uniqueIndex;not null"`
 	Email      string           `gorm:"size:256;uniqueIndex;not null"`
 	Password   *string          `gorm:"size:256"`
 	Role       enums.UserRole   `gorm:"type:user_role;default:USER;not null"`

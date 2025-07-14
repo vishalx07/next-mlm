@@ -31,18 +31,12 @@ export const EnterDetails = ({ defaultValues }: Props) => {
             isFilled
           />
         </div>
-        <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
-          <RHFInput<FormValues>
-            name="username"
-            label="Username"
-            isFilled
-          />
-          <RHFInput<FormValues>
-            name="country"
-            label="Country"
-            isFilled
-          />
-        </div>
+
+        <RHFInput<FormValues>
+          name="country"
+          label="Country"
+          isFilled
+        />
         <RHFInput<FormValues>
           name="phoneNumber"
           label="Phone Number"

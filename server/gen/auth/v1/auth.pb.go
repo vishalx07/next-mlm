@@ -239,7 +239,6 @@ type RegisterStep2Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ReferralId    int32                  `protobuf:"varint,1,opt,name=referral_id,json=referralId,proto3" json:"referral_id,omitempty"`
 	Fullname      string                 `protobuf:"bytes,2,opt,name=fullname,proto3" json:"fullname,omitempty"`
-	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
 	Country       string                 `protobuf:"bytes,4,opt,name=country,proto3" json:"country,omitempty"`
 	PhoneNumber   string                 `protobuf:"bytes,5,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
 	Step1         *RegisterStep1Request  `protobuf:"bytes,6,opt,name=step1,proto3" json:"step1,omitempty"`
@@ -287,13 +286,6 @@ func (x *RegisterStep2Request) GetReferralId() int32 {
 func (x *RegisterStep2Request) GetFullname() string {
 	if x != nil {
 		return x.Fullname
-	}
-	return ""
-}
-
-func (x *RegisterStep2Request) GetUsername() string {
-	if x != nil {
-		return x.Username
 	}
 	return ""
 }
@@ -502,13 +494,11 @@ const file_auth_v1_auth_proto_rawDesc = "" +
 	"\bpassword\x18\x02 \x01(\tB\n" +
 	"\xbaH\a\xc8\x01\x01r\x02\x10\x06R\bpassword\"1\n" +
 	"\x15RegisterStep1Response\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"\x95\x02\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\xed\x01\n" +
 	"\x14RegisterStep2Request\x12'\n" +
 	"\vreferral_id\x18\x01 \x01(\x05B\x06\xbaH\x03\xc8\x01\x01R\n" +
 	"referralId\x12\"\n" +
-	"\bfullname\x18\x02 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\bfullname\x12&\n" +
-	"\busername\x18\x03 \x01(\tB\n" +
-	"\xbaH\a\xc8\x01\x01r\x02\x10\x03R\busername\x12 \n" +
+	"\bfullname\x18\x02 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\bfullname\x12 \n" +
 	"\acountry\x18\x04 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\acountry\x12)\n" +
 	"\fphone_number\x18\x05 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\vphoneNumber\x12;\n" +
 	"\x05step1\x18\x06 \x01(\v2\x1d.auth.v1.RegisterStep1RequestB\x06\xbaH\x03\xc8\x01\x01R\x05step1\"1\n" +

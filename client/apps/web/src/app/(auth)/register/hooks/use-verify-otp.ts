@@ -32,7 +32,6 @@ export const useVerifyOtp = (defaultValues: FormValues) => {
         step2: {
           referralId: formData.referralId as number,
           fullname: formData.fullname,
-          username: formData.username,
           country: formData.country,
           phoneNumber: formData.phoneNumber,
           // pass step1 to satisfy proto validation

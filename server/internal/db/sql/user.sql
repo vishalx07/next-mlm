@@ -2,7 +2,6 @@ CREATE TABLE "user" (
   "id" VARCHAR(24) NOT NULL,
   "user_id" INTEGER NOT NULL,
   "fullname" VARCHAR(256) NOT NULL,
-  "username" VARCHAR(256) NOT NULL,
   "email" VARCHAR(256) NOT NULL,
   "password" VARCHAR(256),
   "role" user_role NOT NULL DEFAULT 'USER',
@@ -18,7 +17,5 @@ CREATE TABLE "user" (
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS "idx_user_email" ON "user" ("email");
-
-CREATE UNIQUE INDEX IF NOT EXISTS "idx_user_username" ON "user" ("username");
 
 CREATE UNIQUE INDEX IF NOT EXISTS "idx_user_user_id" ON "user" ("user_id");

@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file types/v1/user.proto.
  */
 export const file_types_v1_user: GenFile = /*@__PURE__*/
-  fileDesc("ChN0eXBlcy92MS91c2VyLnByb3RvEgh0eXBlcy52MSLZAgoEVXNlchIKCgJpZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgFEhAKCGZ1bGxuYW1lGAMgASgJEhAKCHVzZXJuYW1lGAQgASgJEg0KBWVtYWlsGAUgASgJEiAKBHJvbGUYBiABKA4yEi5lbnVtcy52MS5Vc2VyUm9sZRIkCgZzdGF0dXMYByABKA4yFC5lbnVtcy52MS5Vc2VyU3RhdHVzEg4KBmF2YXRhchgIIAEoCRIPCgdjb3VudHJ5GAkgASgJEhQKDHBob25lX251bWJlchgKIAEoCRITCgtyZWZlcnJhbF9pZBgLIAEoBRINCgVsZXZlbBgMIAEoDRIuCgpjcmVhdGVkX2F0GA0gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgp1cGRhdGVkX2F0GA4gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcGIGcHJvdG8z", [file_enums_v1_enums, file_google_protobuf_timestamp]);
+  fileDesc("ChN0eXBlcy92MS91c2VyLnByb3RvEgh0eXBlcy52MSLHAgoEVXNlchIKCgJpZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgFEhAKCGZ1bGxuYW1lGAMgASgJEg0KBWVtYWlsGAQgASgJEiAKBHJvbGUYBSABKA4yEi5lbnVtcy52MS5Vc2VyUm9sZRIkCgZzdGF0dXMYBiABKA4yFC5lbnVtcy52MS5Vc2VyU3RhdHVzEg4KBmF2YXRhchgHIAEoCRIPCgdjb3VudHJ5GAggASgJEhQKDHBob25lX251bWJlchgJIAEoCRITCgtyZWZlcnJhbF9pZBgKIAEoBRINCgVsZXZlbBgLIAEoDRIuCgpjcmVhdGVkX2F0GAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgp1cGRhdGVkX2F0GA0gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcGIGcHJvdG8z", [file_enums_v1_enums, file_google_protobuf_timestamp]);
 
 /**
  * @generated from message types.v1.User
@@ -36,57 +36,52 @@ export type User = Message<"types.v1.User"> & {
   fullname: string;
 
   /**
-   * @generated from field: string username = 4;
-   */
-  username: string;
-
-  /**
-   * @generated from field: string email = 5;
+   * @generated from field: string email = 4;
    */
   email: string;
 
   /**
-   * @generated from field: enums.v1.UserRole role = 6;
+   * @generated from field: enums.v1.UserRole role = 5;
    */
   role: UserRole;
 
   /**
-   * @generated from field: enums.v1.UserStatus status = 7;
+   * @generated from field: enums.v1.UserStatus status = 6;
    */
   status: UserStatus;
 
   /**
-   * @generated from field: string avatar = 8;
+   * @generated from field: string avatar = 7;
    */
   avatar: string;
 
   /**
-   * @generated from field: string country = 9;
+   * @generated from field: string country = 8;
    */
   country: string;
 
   /**
-   * @generated from field: string phone_number = 10;
+   * @generated from field: string phone_number = 9;
    */
   phoneNumber: string;
 
   /**
-   * @generated from field: int32 referral_id = 11;
+   * @generated from field: int32 referral_id = 10;
    */
   referralId: number;
 
   /**
-   * @generated from field: uint32 level = 12;
+   * @generated from field: uint32 level = 11;
    */
   level: number;
 
   /**
-   * @generated from field: google.protobuf.Timestamp created_at = 13;
+   * @generated from field: google.protobuf.Timestamp created_at = 12;
    */
   createdAt?: Timestamp;
 
   /**
-   * @generated from field: google.protobuf.Timestamp updated_at = 14;
+   * @generated from field: google.protobuf.Timestamp updated_at = 13;
    */
   updatedAt?: Timestamp;
 };
