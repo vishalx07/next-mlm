@@ -1,7 +1,7 @@
 import { useMutation } from "@connectrpc/connect-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { registerStep1 } from "@repo/gen/auth/v1/auth-AuthService_connectquery";
+import { AuthService } from "@repo/gen/auth/v1/auth_pb";
 import { onSuccessStep1 } from "@/stores/use-register-store";
 import { authValidator } from "@/validators";
 
@@ -14,7 +14,7 @@ export const useEnterEmail = (defaultValues: FormValues) => {
   });
   const { handleSubmit } = methods;
 
-  const { mutate, isPending } = useMutation(registerStep1);
+  const { mutate, isPending } = useMutation(AuthService.method.registerStep1);
 
   const onSubmit = handleSubmit((formData) => {
     mutate(

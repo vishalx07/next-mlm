@@ -3,7 +3,7 @@ import { useMutation } from "@connectrpc/connect-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
-import { register } from "@repo/gen/auth/v1/auth-AuthService_connectquery";
+import { AuthService } from "@repo/gen/auth/v1/auth_pb";
 import { SessionKey } from "@/configs";
 import { ROUTES } from "@/configs/routes";
 import { onSuccessStep3 } from "@/stores/use-register-store";
@@ -19,7 +19,7 @@ export const useVerifyOtp = (defaultValues: FormValues) => {
   });
   const { handleSubmit } = methods;
 
-  const { mutate, isPending } = useMutation(register);
+  const { mutate, isPending } = useMutation(AuthService.method.register);
 
   const onSubmit = handleSubmit((formData) => {
     mutate(

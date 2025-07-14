@@ -41,7 +41,6 @@ export const EnterDetails = ({ defaultValues }: Props) => {
           name="phoneNumber"
           label="Phone Number"
           isFilled
-          isNumberInput
         />
 
         <div className="grid w-full grid-cols-2 gap-4">

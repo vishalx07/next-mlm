@@ -3,7 +3,7 @@ import { useMutation } from "@connectrpc/connect-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Cookies from "js-cookie";
 import { useForm } from "react-hook-form";
-import { login } from "@repo/gen/auth/v1/auth-AuthService_connectquery";
+import { AuthService } from "@repo/gen/auth/v1/auth_pb";
 import { SessionKey } from "@/configs";
 import { ROUTES } from "@/configs/routes";
 import { authValidator } from "@/validators";
@@ -24,7 +24,7 @@ export const useLoginForm = () => {
   });
   const { handleSubmit } = methods;
 
-  const { mutate, isPending } = useMutation(login, {
+  const { mutate, isPending } = useMutation(AuthService.method.login, {
     onSuccess(data) {
       Cookies.set(SessionKey, data.token, {
         secure: true,
