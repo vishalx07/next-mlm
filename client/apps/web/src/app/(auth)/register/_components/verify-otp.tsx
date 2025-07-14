@@ -19,7 +19,7 @@ export const VerifyOtp = ({ defaultValues }: Props) => {
         className="text-foreground-secondary mb-6 text-center"
       >
         Otp has been send to email{" "}
-        <span className="text-foreground">{"kumars701113@gmail.com"}</span>
+        <span className="text-foreground">{defaultValues.email}</span>
       </Text>
 
       <RHFProvider

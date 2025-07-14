@@ -3,25 +3,23 @@ import { authValidator } from "@/validators";
 
 type Step1 = {
   step: 1;
-} & authValidator.RegisterSetp_1;
+} & authValidator.RegisterStep1;
 
 type Step2 = {
   step: 2;
-} & authValidator.RegisterStep_2;
+} & authValidator.RegisterStep2;
 
 type Step3 = {
   step: 3;
-} & authValidator.RegisterStep_3;
+} & authValidator.RegisterStep3;
 
 type State = Step1 | Step2 | Step3;
 
 const defaultValues: State = {
   step: 1,
-  referralId: "",
-  fullname: "",
-  username: "",
-  country: "",
-  phoneNumber: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
 };
 
 export const useRegisterStore = create<State>(() => defaultValues);
@@ -47,9 +45,11 @@ export const onSuccessStep1 = (formValues: Omit<Step1, "step">) => {
   const step2DefaultValues: Step2 = {
     ...formValues,
     step: 2,
-    email: "",
-    password: "",
-    confirmPassword: "",
+    referralId: "",
+    fullname: "",
+    username: "",
+    country: "",
+    phoneNumber: "",
   };
   useRegisterStore.setState(step2DefaultValues);
 };

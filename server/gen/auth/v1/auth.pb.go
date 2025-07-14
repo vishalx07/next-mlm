@@ -140,11 +140,8 @@ func (x *LoginResponse) GetUser() *v1.User {
 // Step 1
 type RegisterStep1Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ReferralId    int32                  `protobuf:"varint,1,opt,name=referral_id,json=referralId,proto3" json:"referral_id,omitempty"`
-	Fullname      string                 `protobuf:"bytes,2,opt,name=fullname,proto3" json:"fullname,omitempty"`
-	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
-	Country       string                 `protobuf:"bytes,4,opt,name=country,proto3" json:"country,omitempty"`
-	PhoneNumber   string                 `protobuf:"bytes,5,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
+	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -179,37 +176,16 @@ func (*RegisterStep1Request) Descriptor() ([]byte, []int) {
 	return file_auth_v1_auth_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *RegisterStep1Request) GetReferralId() int32 {
+func (x *RegisterStep1Request) GetEmail() string {
 	if x != nil {
-		return x.ReferralId
-	}
-	return 0
-}
-
-func (x *RegisterStep1Request) GetFullname() string {
-	if x != nil {
-		return x.Fullname
+		return x.Email
 	}
 	return ""
 }
 
-func (x *RegisterStep1Request) GetUsername() string {
+func (x *RegisterStep1Request) GetPassword() string {
 	if x != nil {
-		return x.Username
-	}
-	return ""
-}
-
-func (x *RegisterStep1Request) GetCountry() string {
-	if x != nil {
-		return x.Country
-	}
-	return ""
-}
-
-func (x *RegisterStep1Request) GetPhoneNumber() string {
-	if x != nil {
-		return x.PhoneNumber
+		return x.Password
 	}
 	return ""
 }
@@ -261,8 +237,12 @@ func (x *RegisterStep1Response) GetMessage() string {
 // Step 2
 type RegisterStep2Request struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Email         string                 `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
-	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	ReferralId    int32                  `protobuf:"varint,1,opt,name=referral_id,json=referralId,proto3" json:"referral_id,omitempty"`
+	Fullname      string                 `protobuf:"bytes,2,opt,name=fullname,proto3" json:"fullname,omitempty"`
+	Username      string                 `protobuf:"bytes,3,opt,name=username,proto3" json:"username,omitempty"`
+	Country       string                 `protobuf:"bytes,4,opt,name=country,proto3" json:"country,omitempty"`
+	PhoneNumber   string                 `protobuf:"bytes,5,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
+	Step1         *RegisterStep1Request  `protobuf:"bytes,6,opt,name=step1,proto3" json:"step1,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -297,18 +277,46 @@ func (*RegisterStep2Request) Descriptor() ([]byte, []int) {
 	return file_auth_v1_auth_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *RegisterStep2Request) GetEmail() string {
+func (x *RegisterStep2Request) GetReferralId() int32 {
 	if x != nil {
-		return x.Email
+		return x.ReferralId
+	}
+	return 0
+}
+
+func (x *RegisterStep2Request) GetFullname() string {
+	if x != nil {
+		return x.Fullname
 	}
 	return ""
 }
 
-func (x *RegisterStep2Request) GetPassword() string {
+func (x *RegisterStep2Request) GetUsername() string {
 	if x != nil {
-		return x.Password
+		return x.Username
 	}
 	return ""
+}
+
+func (x *RegisterStep2Request) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *RegisterStep2Request) GetPhoneNumber() string {
+	if x != nil {
+		return x.PhoneNumber
+	}
+	return ""
+}
+
+func (x *RegisterStep2Request) GetStep1() *RegisterStep1Request {
+	if x != nil {
+		return x.Step1
+	}
+	return nil
 }
 
 type RegisterStep2Response struct {
@@ -488,21 +496,22 @@ const file_auth_v1_auth_proto_rawDesc = "" +
 	"\rLoginResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\x14\n" +
 	"\x05token\x18\x02 \x01(\tR\x05token\x12\"\n" +
-	"\x04user\x18\x03 \x01(\v2\x0e.types.v1.UserR\x04user\"\xd8\x01\n" +
-	"\x14RegisterStep1Request\x12'\n" +
+	"\x04user\x18\x03 \x01(\v2\x0e.types.v1.UserR\x04user\"]\n" +
+	"\x14RegisterStep1Request\x12\x1d\n" +
+	"\x05email\x18\x01 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12&\n" +
+	"\bpassword\x18\x02 \x01(\tB\n" +
+	"\xbaH\a\xc8\x01\x01r\x02\x10\x06R\bpassword\"1\n" +
+	"\x15RegisterStep1Response\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"\x95\x02\n" +
+	"\x14RegisterStep2Request\x12'\n" +
 	"\vreferral_id\x18\x01 \x01(\x05B\x06\xbaH\x03\xc8\x01\x01R\n" +
 	"referralId\x12\"\n" +
 	"\bfullname\x18\x02 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\bfullname\x12&\n" +
 	"\busername\x18\x03 \x01(\tB\n" +
 	"\xbaH\a\xc8\x01\x01r\x02\x10\x03R\busername\x12 \n" +
 	"\acountry\x18\x04 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\acountry\x12)\n" +
-	"\fphone_number\x18\x05 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\vphoneNumber\"1\n" +
-	"\x15RegisterStep1Response\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\"]\n" +
-	"\x14RegisterStep2Request\x12\x1d\n" +
-	"\x05email\x18\x01 \x01(\tB\a\xbaH\x04r\x02`\x01R\x05email\x12&\n" +
-	"\bpassword\x18\x02 \x01(\tB\n" +
-	"\xbaH\a\xc8\x01\x01r\x02\x10\x06R\bpassword\"1\n" +
+	"\fphone_number\x18\x05 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\vphoneNumber\x12;\n" +
+	"\x05step1\x18\x06 \x01(\v2\x1d.auth.v1.RegisterStep1RequestB\x06\xbaH\x03\xc8\x01\x01R\x05step1\"1\n" +
 	"\x15RegisterStep2Response\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\"\xec\x01\n" +
 	"\x0fRegisterRequest\x12_\n" +
@@ -548,22 +557,23 @@ var file_auth_v1_auth_proto_goTypes = []any{
 }
 var file_auth_v1_auth_proto_depIdxs = []int32{
 	8, // 0: auth.v1.LoginResponse.user:type_name -> types.v1.User
-	2, // 1: auth.v1.RegisterRequest.step1:type_name -> auth.v1.RegisterStep1Request
-	4, // 2: auth.v1.RegisterRequest.step2:type_name -> auth.v1.RegisterStep2Request
-	8, // 3: auth.v1.RegisterResponse.user:type_name -> types.v1.User
-	0, // 4: auth.v1.AuthService.Login:input_type -> auth.v1.LoginRequest
-	2, // 5: auth.v1.AuthService.RegisterStep1:input_type -> auth.v1.RegisterStep1Request
-	4, // 6: auth.v1.AuthService.RegisterStep2:input_type -> auth.v1.RegisterStep2Request
-	6, // 7: auth.v1.AuthService.Register:input_type -> auth.v1.RegisterRequest
-	1, // 8: auth.v1.AuthService.Login:output_type -> auth.v1.LoginResponse
-	3, // 9: auth.v1.AuthService.RegisterStep1:output_type -> auth.v1.RegisterStep1Response
-	5, // 10: auth.v1.AuthService.RegisterStep2:output_type -> auth.v1.RegisterStep2Response
-	7, // 11: auth.v1.AuthService.Register:output_type -> auth.v1.RegisterResponse
-	8, // [8:12] is the sub-list for method output_type
-	4, // [4:8] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	2, // 1: auth.v1.RegisterStep2Request.step1:type_name -> auth.v1.RegisterStep1Request
+	2, // 2: auth.v1.RegisterRequest.step1:type_name -> auth.v1.RegisterStep1Request
+	4, // 3: auth.v1.RegisterRequest.step2:type_name -> auth.v1.RegisterStep2Request
+	8, // 4: auth.v1.RegisterResponse.user:type_name -> types.v1.User
+	0, // 5: auth.v1.AuthService.Login:input_type -> auth.v1.LoginRequest
+	2, // 6: auth.v1.AuthService.RegisterStep1:input_type -> auth.v1.RegisterStep1Request
+	4, // 7: auth.v1.AuthService.RegisterStep2:input_type -> auth.v1.RegisterStep2Request
+	6, // 8: auth.v1.AuthService.Register:input_type -> auth.v1.RegisterRequest
+	1, // 9: auth.v1.AuthService.Login:output_type -> auth.v1.LoginResponse
+	3, // 10: auth.v1.AuthService.RegisterStep1:output_type -> auth.v1.RegisterStep1Response
+	5, // 11: auth.v1.AuthService.RegisterStep2:output_type -> auth.v1.RegisterStep2Response
+	7, // 12: auth.v1.AuthService.Register:output_type -> auth.v1.RegisterResponse
+	9, // [9:13] is the sub-list for method output_type
+	5, // [5:9] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_auth_v1_auth_proto_init() }

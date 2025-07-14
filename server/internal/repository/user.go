@@ -93,7 +93,7 @@ func (repo *UserRepo) Delete(id string) error {
 
 func (repo *UserRepo) GenerateUserId() (int32, error) {
 	var user models.User
-	if err := repo.db.Take(&user).Order("user_id DESC").Error; err != nil {
+	if err := repo.db.Order("user_id DESC").Take(&user).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			// No users found, return default
 			return config.DEFAULT_USER_ID, nil

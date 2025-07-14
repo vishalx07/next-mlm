@@ -1,5 +1,6 @@
 import { Button } from "@jamsr-ui/react";
 import { RHFInput, RHFProvider } from "@jamsr-ui/rhf";
+import { onBack } from "@/stores/use-register-store";
 import { useEnterDetails, type FormValues } from "../hooks/use-enter-details";
 
 type Props = {
@@ -49,14 +50,23 @@ export const EnterDetails = ({ defaultValues }: Props) => {
           isNumberInput
         />
 
-        <Button
-          fullWidth
-          type="submit"
-          variant="flat"
-          isLoading={isPending}
-        >
-          Continue
-        </Button>
+        <div className="grid w-full grid-cols-2 gap-4">
+          <Button
+            fullWidth
+            variant="flat"
+            onClick={onBack}
+          >
+            Go Back
+          </Button>
+          <Button
+            fullWidth
+            type="submit"
+            variant="flat"
+            isLoading={isPending}
+          >
+            Continue
+          </Button>
+        </div>
       </RHFProvider>
     </>
   );

@@ -1,20 +1,20 @@
 import { useMutation } from "@connectrpc/connect-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { registerStep2 } from "@repo/gen/auth/v1/auth-AuthService_connectquery";
-import { onSuccessStep2 } from "@/stores/use-register-store";
+import { registerStep1 } from "@repo/gen/auth/v1/auth-AuthService_connectquery";
+import { onSuccessStep1 } from "@/stores/use-register-store";
 import { authValidator } from "@/validators";
 
-export type FormValues = authValidator.RegisterStep_2;
+export type FormValues = authValidator.RegisterStep1;
 
 export const useEnterEmail = (defaultValues: FormValues) => {
   const methods = useForm<FormValues>({
     defaultValues,
-    resolver: zodResolver(authValidator.registerStep_2),
+    resolver: zodResolver(authValidator.registerStep1),
   });
   const { handleSubmit } = methods;
 
-  const { mutate, isPending } = useMutation(registerStep2);
+  const { mutate, isPending } = useMutation(registerStep1);
 
   const onSubmit = handleSubmit((formData) => {
     mutate(
@@ -24,7 +24,7 @@ export const useEnterEmail = (defaultValues: FormValues) => {
       },
       {
         onSuccess() {
-          onSuccessStep2(formData);
+          onSuccessStep1(formData);
         },
       },
     );

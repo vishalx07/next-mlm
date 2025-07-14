@@ -11,9 +11,9 @@ export const FormWrapper = () => {
 
   switch (defaultValues.step) {
     case 1:
-      return <EnterDetails defaultValues={defaultValues} />;
-    case 2:
       return <EnterEmail defaultValues={defaultValues} />;
+    case 2:
+      return <EnterDetails defaultValues={defaultValues} />;
     case 3:
       return <VerifyOtp defaultValues={defaultValues} />;
     default:

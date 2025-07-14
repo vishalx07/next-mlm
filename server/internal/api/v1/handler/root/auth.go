@@ -88,17 +88,9 @@ func (h *AuthHandler) RegisterStep1(
 	ctx context.Context,
 	req *connect.Request[authv1.RegisterStep1Request],
 ) (*connect.Response[authv1.RegisterStep1Response], error) {
-	// check referral id exist
-	if err := h.userService.CheckReferralIdExist(req.Msg.ReferralId); err != nil {
-		if errors.Is(err, message.ErrUserReferralIdNotExist) {
-			return nil, connect.NewError(connect.CodeNotFound, err)
-		}
-		return nil, connect.NewError(connect.CodeInternal, err)
-	}
-
-	// check username already exist
-	if err := h.userService.IsUsernameAlreadyExist(req.Msg.Username); err != nil {
-		if errors.Is(err, message.ErrUsernameAlreadyExist) {
+	// check email already exist
+	if err := h.userService.IsEmailAlreadyExist(req.Msg.Email); err != nil {
+		if errors.Is(err, message.ErrUserEmailAlreadyExist) {
 			return nil, connect.NewError(connect.CodeAlreadyExists, err)
 		}
 		return nil, connect.NewError(connect.CodeInternal, err)
@@ -116,15 +108,31 @@ func (h *AuthHandler) RegisterStep2(
 	req *connect.Request[authv1.RegisterStep2Request],
 ) (*connect.Response[authv1.RegisterStep2Response], error) {
 	// check email already exist
-	if err := h.userService.IsEmailAlreadyExist(req.Msg.Email); err != nil {
+	if err := h.userService.IsEmailAlreadyExist(req.Msg.Step1.Email); err != nil {
 		if errors.Is(err, message.ErrUserEmailAlreadyExist) {
 			return nil, connect.NewError(connect.CodeAlreadyExists, err)
 		}
 		return nil, connect.NewError(connect.CodeInternal, err)
 	}
 
+	// check referral id exist
+	if err := h.userService.CheckReferralIdExist(req.Msg.ReferralId); err != nil {
+		if errors.Is(err, message.ErrUserReferralIdNotExist) {
+			return nil, connect.NewError(connect.CodeNotFound, err)
+		}
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	// check username already exist
+	if err := h.userService.IsUsernameAlreadyExist(req.Msg.Username); err != nil {
+		if errors.Is(err, message.ErrUsernameAlreadyExist) {
+			return nil, connect.NewError(connect.CodeAlreadyExists, err)
+		}
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
 	// send otp
-	_, err := h.otpService.SendOtp(req.Msg.Email, enums.OtpPurpose_REGISTER)
+	_, err := h.otpService.SendOtp(req.Msg.Step1.Email, enums.OtpPurpose_REGISTER)
 	if err != nil {
 		return nil, connect.NewError(connect.CodeInternal, err)
 	}
@@ -227,13 +235,13 @@ func (h *AuthHandler) Register(
 // Transforms
 func (h *AuthHandler) transformUserRPC(req *connect.Request[authv1.RegisterRequest]) *models.User {
 	return &models.User{
-		ReferralId: req.Msg.Step1.ReferralId,
-		Fullname:   req.Msg.Step1.Fullname,
-		Username:   req.Msg.Step1.Username,
-		Email:      req.Msg.Step2.Email,
-		Password:   &req.Msg.Step2.Password,
-		Country:    req.Msg.Step1.Country,
-		Phone:      req.Msg.Step1.PhoneNumber,
+		ReferralId: req.Msg.Step2.ReferralId,
+		Fullname:   req.Msg.Step2.Fullname,
+		Username:   req.Msg.Step2.Username,
+		Email:      req.Msg.Step1.Email,
+		Password:   &req.Msg.Step1.Password,
+		Country:    req.Msg.Step2.Country,
+		Phone:      req.Msg.Step2.PhoneNumber,
 	}
 }
 
