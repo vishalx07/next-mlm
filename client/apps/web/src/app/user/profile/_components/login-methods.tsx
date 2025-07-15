@@ -13,10 +13,11 @@ import { FluentIcon, LogosIcon } from "@repo/ui/config/icons";
 
 type Props = {
   providers: User["providers"];
+  loginMethod: AuthProvider;
 };
 
-export const LoginMethods = ({ providers }: Props) => {
-  const options = Options({ providers });
+export const LoginMethods = (props: Props) => {
+  const options = Options(props);
 
   return (
     <Card>
@@ -71,7 +72,7 @@ export const LoginMethods = ({ providers }: Props) => {
   );
 };
 
-function Options({ providers }: Props): {
+function Options({ providers, loginMethod }: Props): {
   icon: React.ReactNode;
   provider: string;
   description: string;
@@ -104,7 +105,7 @@ function Options({ providers }: Props): {
           Enable
         </Button>
       ),
-      isCurrent: true,
+      isCurrent: loginMethod === AuthProvider.EMAIL_PASSWORD,
     },
     {
       icon: <LogosIcon.Google className="size-5" />,
@@ -121,6 +122,7 @@ function Options({ providers }: Props): {
           {isGoogle ? "Disable" : "Enable"}
         </Button>
       ),
+      isCurrent: loginMethod === AuthProvider.GOOGLE,
     },
     {
       icon: <LogosIcon.Linkedin className="size-5" />,
@@ -137,6 +139,7 @@ function Options({ providers }: Props): {
           {isLinkedin ? "Disable" : "Enable"}
         </Button>
       ),
+      isCurrent: loginMethod === AuthProvider.LINKEDIN,
     },
   ];
 }

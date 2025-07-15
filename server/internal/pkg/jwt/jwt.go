@@ -8,11 +8,13 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 	config "github.com/vishalx07/next-mlm/internal/config"
 	cuid "github.com/vishalx07/next-mlm/internal/pkg/cuid"
+	enums "github.com/vishalx07/next-mlm/internal/pkg/types/enums"
 )
 
 const APP_NAME = "next-mlm"
 
 type CustomClaims struct {
+	Provider enums.AuthProvider `json:"provider"`
 	jwt.RegisteredClaims
 }
 
@@ -26,20 +28,29 @@ func (c *CustomClaims) Validate() error {
 	if err := cuid.Validate(c.Subject); err != nil {
 		return fmt.Errorf("invalid token subject: %w", err)
 	}
+	// validate provider
+	if c.Provider == "" {
+		return errors.New("invalid token: missing provider")
+	}
+	if err := c.Provider.IsValid(); err != nil {
+		return fmt.Errorf("invalid token purpose: %w", err)
+	}
 
 	return nil
 }
 
 type GenerateTokenArgs struct {
-	Id     string
-	Expiry time.Duration
-	Env    *config.Env
+	Id       string
+	Provider enums.AuthProvider
+	Expiry   time.Duration
+	Env      *config.Env
 }
 
 func GenerateToken(args *GenerateTokenArgs) (string, error) {
 	secretKey := []byte(args.Env.JWTSecret)
 
 	claims := &CustomClaims{
+		args.Provider,
 		jwt.RegisteredClaims{
 			Subject:   args.Id,                                         // Subject: Unique user identifier
 			Issuer:    APP_NAME,                                        // Issuer: Identifies the entity that issued the token
@@ -57,12 +68,17 @@ func GenerateToken(args *GenerateTokenArgs) (string, error) {
 	return signedToken, nil
 }
 
+type TokenClaims struct {
+	Id       string             `json:"id"`
+	Provider enums.AuthProvider `json:"provider"`
+}
+
 type VerifyTokenArgs struct {
 	Token string
 	Env   *config.Env
 }
 
-func VerifyToken(args *VerifyTokenArgs) (id string, err error) {
+func VerifyToken(args *VerifyTokenArgs) (*TokenClaims, error) {
 	secretKey := []byte(args.Env.JWTSecret)
 
 	token, err := jwt.ParseWithClaims(
@@ -80,15 +96,15 @@ func VerifyToken(args *VerifyTokenArgs) (id string, err error) {
 	)
 
 	if err != nil {
-		return "", fmt.Errorf("error parsing token: %w", err)
+		return nil, fmt.Errorf("error parsing token: %w", err)
 	}
 	claims, ok := token.Claims.(*CustomClaims)
 	if !ok {
-		return "", errors.New("unexpected claims type in token")
+		return nil, errors.New("unexpected claims type in token")
 	}
 	if !token.Valid {
-		return "", errors.New("invalid token")
+		return nil, errors.New("invalid token")
 	}
 
-	return claims.Subject, nil
+	return &TokenClaims{claims.Subject, claims.Provider}, nil
 }

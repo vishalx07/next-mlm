@@ -3,6 +3,7 @@ syntax = "proto3";
 package user.profile.v1;
 
 import "buf/validate/validate.proto";
+import "enums/v1/enums.proto";
 import "types/v1/user.proto";
 
 service ProfileService {
@@ -15,6 +16,7 @@ message GetProfileRequest {}
 
 message GetProfileResponse {
   types.v1.User user = 1;
+  enums.v1.AuthProvider login_method = 2;
 }
 
 message UpdateProfileRequest {

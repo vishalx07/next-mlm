@@ -9,12 +9,15 @@ export default async function page() {
     profileClient.getProfile({}, otps),
   );
   if (!result.success) return <FetchError error={result.error} />;
-  if (!result.data.user) return null;
+  if (!result.data.user || !result.data.loginMethod) return null;
 
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-12">
       <ProfileCard initialData={result.data} />
-      <LoginMethods providers={result.data.user.providers} />
+      <LoginMethods
+        providers={result.data.user.providers}
+        loginMethod={result.data.loginMethod}
+      />
     </div>
   );
 }

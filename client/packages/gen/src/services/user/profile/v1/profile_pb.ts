@@ -5,6 +5,8 @@
 import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
 import { file_buf_validate_validate } from "../../../buf/validate/validate_pb";
+import type { AuthProvider } from "../../../enums/v1/enums_pb";
+import { file_enums_v1_enums } from "../../../enums/v1/enums_pb";
 import type { User } from "../../../types/v1/user_pb";
 import { file_types_v1_user } from "../../../types/v1/user_pb";
 import type { Message } from "@bufbuild/protobuf";
@@ -13,7 +15,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file user/profile/v1/profile.proto.
  */
 export const file_user_profile_v1_profile: GenFile = /*@__PURE__*/
-  fileDesc("Ch11c2VyL3Byb2ZpbGUvdjEvcHJvZmlsZS5wcm90bxIPdXNlci5wcm9maWxlLnYxIhMKEUdldFByb2ZpbGVSZXF1ZXN0IjIKEkdldFByb2ZpbGVSZXNwb25zZRIcCgR1c2VyGAEgASgLMg4udHlwZXMudjEuVXNlciJ3ChRVcGRhdGVQcm9maWxlUmVxdWVzdBIOCgZhdmF0YXIYASABKAkSGAoIZnVsbG5hbWUYAiABKAlCBrpIA8gBARIXCgdjb3VudHJ5GAMgASgJQga6SAPIAQESHAoMcGhvbmVfbnVtYmVyGAQgASgJQga6SAPIAQEiRgoVVXBkYXRlUHJvZmlsZVJlc3BvbnNlEg8KB21lc3NhZ2UYASABKAkSHAoEdXNlchgCIAEoCzIOLnR5cGVzLnYxLlVzZXIyxwEKDlByb2ZpbGVTZXJ2aWNlElUKCkdldFByb2ZpbGUSIi51c2VyLnByb2ZpbGUudjEuR2V0UHJvZmlsZVJlcXVlc3QaIy51c2VyLnByb2ZpbGUudjEuR2V0UHJvZmlsZVJlc3BvbnNlEl4KDVVwZGF0ZVByb2ZpbGUSJS51c2VyLnByb2ZpbGUudjEuVXBkYXRlUHJvZmlsZVJlcXVlc3QaJi51c2VyLnByb2ZpbGUudjEuVXBkYXRlUHJvZmlsZVJlc3BvbnNlYgZwcm90bzM", [file_buf_validate_validate, file_types_v1_user]);
+  fileDesc("Ch11c2VyL3Byb2ZpbGUvdjEvcHJvZmlsZS5wcm90bxIPdXNlci5wcm9maWxlLnYxIhMKEUdldFByb2ZpbGVSZXF1ZXN0ImAKEkdldFByb2ZpbGVSZXNwb25zZRIcCgR1c2VyGAEgASgLMg4udHlwZXMudjEuVXNlchIsCgxsb2dpbl9tZXRob2QYAiABKA4yFi5lbnVtcy52MS5BdXRoUHJvdmlkZXIidwoUVXBkYXRlUHJvZmlsZVJlcXVlc3QSDgoGYXZhdGFyGAEgASgJEhgKCGZ1bGxuYW1lGAIgASgJQga6SAPIAQESFwoHY291bnRyeRgDIAEoCUIGukgDyAEBEhwKDHBob25lX251bWJlchgEIAEoCUIGukgDyAEBIkYKFVVwZGF0ZVByb2ZpbGVSZXNwb25zZRIPCgdtZXNzYWdlGAEgASgJEhwKBHVzZXIYAiABKAsyDi50eXBlcy52MS5Vc2VyMscBCg5Qcm9maWxlU2VydmljZRJVCgpHZXRQcm9maWxlEiIudXNlci5wcm9maWxlLnYxLkdldFByb2ZpbGVSZXF1ZXN0GiMudXNlci5wcm9maWxlLnYxLkdldFByb2ZpbGVSZXNwb25zZRJeCg1VcGRhdGVQcm9maWxlEiUudXNlci5wcm9maWxlLnYxLlVwZGF0ZVByb2ZpbGVSZXF1ZXN0GiYudXNlci5wcm9maWxlLnYxLlVwZGF0ZVByb2ZpbGVSZXNwb25zZWIGcHJvdG8z", [file_buf_validate_validate, file_enums_v1_enums, file_types_v1_user]);
 
 /**
  * @generated from message user.profile.v1.GetProfileRequest
@@ -36,6 +38,11 @@ export type GetProfileResponse = Message<"user.profile.v1.GetProfileResponse"> &
    * @generated from field: types.v1.User user = 1;
    */
   user?: User;
+
+  /**
+   * @generated from field: enums.v1.AuthProvider login_method = 2;
+   */
+  loginMethod: AuthProvider;
 };
 
 /**

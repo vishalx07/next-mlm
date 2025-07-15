@@ -10,7 +10,7 @@ import {
   Skeleton,
   Text,
 } from "@jamsr-ui/react";
-import { UserStatus } from "@repo/gen/enums/v1/enums_pb";
+import { AuthProvider, UserStatus } from "@repo/gen/enums/v1/enums_pb";
 import { type User } from "@repo/gen/types/v1/user_pb";
 import {
   ProfileService,
@@ -37,9 +37,13 @@ export const ProfileCard = ({ initialData }: Props) => {
 
   if (isLoading) return <Skeleton className="h-[100px] w-full rounded-2xl" />;
 
-  if (!data || !data.user) return null;
+  if (!data || !data.user || !data.loginMethod) return null;
 
   const { userId, fullname, avatar } = data.user;
+
+  const isEmail_Password = data.user.providers.includes(
+    AuthProvider.EMAIL_PASSWORD,
+  );
 
   return (
     <Card className="w-full">
@@ -82,7 +86,7 @@ export const ProfileCard = ({ initialData }: Props) => {
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {INFO(data.user).map((item) => (
+          {INFO(data.user, isEmail_Password).map((item) => (
             <InfoBox
               key={item.label}
               info={item}
@@ -94,7 +98,7 @@ export const ProfileCard = ({ initialData }: Props) => {
   );
 };
 
-function INFO(user: User): InfoBoxType[] {
+function INFO(user: User, isEmail_Password: boolean): InfoBoxType[] {
   const { email, referralId, status, country, phoneNumber, createdAt } = user;
 
   return [
@@ -105,8 +109,9 @@ function INFO(user: User): InfoBoxType[] {
     {
       label: "Password",
       value: String("*").repeat(8),
-      // endContent: <UpdatePassword />,
-      endContent: (
+      endContent: isEmail_Password ? (
+        <UpdatePassword />
+      ) : (
         <Button
           size="xs"
           variant="flat"

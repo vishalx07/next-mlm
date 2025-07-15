@@ -16,8 +16,19 @@ const (
 	AuthProvider_LINKEDIN       AuthProvider = "LINKEDIN"
 )
 
+var ValidAuthProviders = []AuthProvider{AuthProvider_EMAIL_PASSWORD, AuthProvider_GOOGLE, AuthProvider_LINKEDIN}
+
 func (p AuthProvider) String() string {
 	return string(p)
+}
+
+func (p AuthProvider) IsValid() error {
+	for _, provider := range ValidAuthProviders {
+		if p == provider {
+			return nil
+		}
+	}
+	return fmt.Errorf("invalid session value: %s", p)
 }
 
 // AuthProviders is a custom type representing a slice of AuthProvider enums.

@@ -9,12 +9,16 @@ import (
 	config "github.com/vishalx07/next-mlm/internal/config"
 	models "github.com/vishalx07/next-mlm/internal/models"
 	jwt "github.com/vishalx07/next-mlm/internal/pkg/jwt"
+	enums "github.com/vishalx07/next-mlm/internal/pkg/types/enums"
 	service "github.com/vishalx07/next-mlm/internal/service"
 )
 
 type contextKey string
 
-const KeyUser contextKey = "user"
+const (
+	KeyUser     contextKey         = "user"
+	KeyProvider enums.AuthProvider = "provider"
+)
 
 // Middleware reads cookie, validates JWT, fetches user, injects into context
 func AuthMiddleware(
@@ -32,7 +36,7 @@ func AuthMiddleware(
 
 		token := strings.TrimPrefix(bearerToken, "Bearer ")
 
-		id, err := jwt.VerifyToken(&jwt.VerifyTokenArgs{
+		claims, err := jwt.VerifyToken(&jwt.VerifyTokenArgs{
 			Token: token,
 			Env:   env,
 		})
@@ -41,14 +45,21 @@ func AuthMiddleware(
 			return
 		}
 
+		id := claims.Id
+		provider := claims.Provider
+
 		user, err := userService.GetById(id)
 		if err != nil {
 			http.Error(w, "Unauthorized", http.StatusUnauthorized)
 			return
 		}
 
-		ctx := context.WithValue(r.Context(), KeyUser, user)
-		next.ServeHTTP(w, r.WithContext(ctx))
+		ctx := r.Context()
+		ctx = context.WithValue(ctx, KeyUser, user)
+		ctx = context.WithValue(ctx, KeyProvider, provider)
+
+		r = r.WithContext(ctx)
+		next.ServeHTTP(w, r)
 	})
 }
 
@@ -59,4 +70,13 @@ func UserFromContext(ctx context.Context) *models.User {
 		log.Print("🚫 User not found in context")
 	}
 	return user
+}
+
+func ProviderFromContext(ctx context.Context) enums.AuthProvider {
+	provider, ok := ctx.Value(KeyProvider).(enums.AuthProvider)
+	if !ok {
+		// This really shouldn't happen—middleware already checks auth
+		log.Print("🚫 Provider not found in context")
+	}
+	return provider
 }

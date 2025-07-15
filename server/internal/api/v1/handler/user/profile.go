@@ -28,9 +28,11 @@ func (h *ProfileHandler) GetProfile(
 	req *connect.Request[profilev1.GetProfileRequest],
 ) (*connect.Response[profilev1.GetProfileResponse], error) {
 	user := middleware.UserFromContext(ctx)
+	provider := middleware.ProviderFromContext(ctx)
 
 	resp := connect.NewResponse(&profilev1.GetProfileResponse{
-		User: h.transformUserModel(user),
+		User:        h.transformUserModel(user),
+		LoginMethod: enums.AuthProviderToProto(provider),
 	})
 
 	return resp, nil

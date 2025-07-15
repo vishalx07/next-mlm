@@ -8,6 +8,7 @@ package profilev1
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
+	v11 "github.com/vishalx07/next-mlm/gen/enums/v1"
 	v1 "github.com/vishalx07/next-mlm/gen/types/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -62,6 +63,7 @@ func (*GetProfileRequest) Descriptor() ([]byte, []int) {
 type GetProfileResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	User          *v1.User               `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
+	LoginMethod   v11.AuthProvider       `protobuf:"varint,2,opt,name=login_method,json=loginMethod,proto3,enum=enums.v1.AuthProvider" json:"login_method,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -101,6 +103,13 @@ func (x *GetProfileResponse) GetUser() *v1.User {
 		return x.User
 	}
 	return nil
+}
+
+func (x *GetProfileResponse) GetLoginMethod() v11.AuthProvider {
+	if x != nil {
+		return x.LoginMethod
+	}
+	return v11.AuthProvider(0)
 }
 
 type UpdateProfileRequest struct {
@@ -227,10 +236,11 @@ var File_user_profile_v1_profile_proto protoreflect.FileDescriptor
 
 const file_user_profile_v1_profile_proto_rawDesc = "" +
 	"\n" +
-	"\x1duser/profile/v1/profile.proto\x12\x0fuser.profile.v1\x1a\x1bbuf/validate/validate.proto\x1a\x13types/v1/user.proto\"\x13\n" +
-	"\x11GetProfileRequest\"8\n" +
+	"\x1duser/profile/v1/profile.proto\x12\x0fuser.profile.v1\x1a\x1bbuf/validate/validate.proto\x1a\x14enums/v1/enums.proto\x1a\x13types/v1/user.proto\"\x13\n" +
+	"\x11GetProfileRequest\"s\n" +
 	"\x12GetProfileResponse\x12\"\n" +
-	"\x04user\x18\x01 \x01(\v2\x0e.types.v1.UserR\x04user\"\x9f\x01\n" +
+	"\x04user\x18\x01 \x01(\v2\x0e.types.v1.UserR\x04user\x129\n" +
+	"\flogin_method\x18\x02 \x01(\x0e2\x16.enums.v1.AuthProviderR\vloginMethod\"\x9f\x01\n" +
 	"\x14UpdateProfileRequest\x12\x16\n" +
 	"\x06avatar\x18\x01 \x01(\tR\x06avatar\x12\"\n" +
 	"\bfullname\x18\x02 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\bfullname\x12 \n" +
@@ -264,19 +274,21 @@ var file_user_profile_v1_profile_proto_goTypes = []any{
 	(*UpdateProfileRequest)(nil),  // 2: user.profile.v1.UpdateProfileRequest
 	(*UpdateProfileResponse)(nil), // 3: user.profile.v1.UpdateProfileResponse
 	(*v1.User)(nil),               // 4: types.v1.User
+	(v11.AuthProvider)(0),         // 5: enums.v1.AuthProvider
 }
 var file_user_profile_v1_profile_proto_depIdxs = []int32{
 	4, // 0: user.profile.v1.GetProfileResponse.user:type_name -> types.v1.User
-	4, // 1: user.profile.v1.UpdateProfileResponse.user:type_name -> types.v1.User
-	0, // 2: user.profile.v1.ProfileService.GetProfile:input_type -> user.profile.v1.GetProfileRequest
-	2, // 3: user.profile.v1.ProfileService.UpdateProfile:input_type -> user.profile.v1.UpdateProfileRequest
-	1, // 4: user.profile.v1.ProfileService.GetProfile:output_type -> user.profile.v1.GetProfileResponse
-	3, // 5: user.profile.v1.ProfileService.UpdateProfile:output_type -> user.profile.v1.UpdateProfileResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	5, // 1: user.profile.v1.GetProfileResponse.login_method:type_name -> enums.v1.AuthProvider
+	4, // 2: user.profile.v1.UpdateProfileResponse.user:type_name -> types.v1.User
+	0, // 3: user.profile.v1.ProfileService.GetProfile:input_type -> user.profile.v1.GetProfileRequest
+	2, // 4: user.profile.v1.ProfileService.UpdateProfile:input_type -> user.profile.v1.UpdateProfileRequest
+	1, // 5: user.profile.v1.ProfileService.GetProfile:output_type -> user.profile.v1.GetProfileResponse
+	3, // 6: user.profile.v1.ProfileService.UpdateProfile:output_type -> user.profile.v1.UpdateProfileResponse
+	5, // [5:7] is the sub-list for method output_type
+	3, // [3:5] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_user_profile_v1_profile_proto_init() }
