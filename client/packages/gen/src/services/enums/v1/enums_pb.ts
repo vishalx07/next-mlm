@@ -9,7 +9,7 @@ import { enumDesc, fileDesc } from "@bufbuild/protobuf/codegenv2";
  * Describes the file enums/v1/enums.proto.
  */
 export const file_enums_v1_enums: GenFile = /*@__PURE__*/
-  fileDesc("ChRlbnVtcy92MS9lbnVtcy5wcm90bxIIZW51bXMudjEqTgoIVXNlclJvbGUSGQoVVVNFUl9ST0xFX1VOU1BFQ0lGSUVEEAASEgoOVVNFUl9ST0xFX1VTRVIQARITCg9VU0VSX1JPTEVfQURNSU4QAipaCgpVc2VyU3RhdHVzEhsKF1VTRVJfU1RBVFVTX1VOU1BFQ0lGSUVEEAASFgoSVVNFUl9TVEFUVVNfQUNUSVZFEAESFwoTVVNFUl9TVEFUVVNfQkxPQ0tFRBACYgZwcm90bzM");
+  fileDesc("ChRlbnVtcy92MS9lbnVtcy5wcm90bxIIZW51bXMudjEqTgoIVXNlclJvbGUSGQoVVVNFUl9ST0xFX1VOU1BFQ0lGSUVEEAASEgoOVVNFUl9ST0xFX1VTRVIQARITCg9VU0VSX1JPTEVfQURNSU4QAipaCgpVc2VyU3RhdHVzEhsKF1VTRVJfU1RBVFVTX1VOU1BFQ0lGSUVEEAASFgoSVVNFUl9TVEFUVVNfQUNUSVZFEAESFwoTVVNFUl9TVEFUVVNfQkxPQ0tFRBACKoUBCgxBdXRoUHJvdmlkZXISHQoZQVVUSF9QUk9WSURFUl9VTlNQRUNJRklFRBAAEiAKHEFVVEhfUFJPVklERVJfRU1BSUxfUEFTU1dPUkQQARIYChRBVVRIX1BST1ZJREVSX0dPT0dMRRACEhoKFkFVVEhfUFJPVklERVJfTElOS0VESU4QA2IGcHJvdG8z");
 
 /**
  * @generated from enum enums.v1.UserRole
@@ -62,4 +62,35 @@ export enum UserStatus {
  */
 export const UserStatusSchema: GenEnum<UserStatus> = /*@__PURE__*/
   enumDesc(file_enums_v1_enums, 1);
+
+/**
+ * @generated from enum enums.v1.AuthProvider
+ */
+export enum AuthProvider {
+  /**
+   * @generated from enum value: AUTH_PROVIDER_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: AUTH_PROVIDER_EMAIL_PASSWORD = 1;
+   */
+  EMAIL_PASSWORD = 1,
+
+  /**
+   * @generated from enum value: AUTH_PROVIDER_GOOGLE = 2;
+   */
+  GOOGLE = 2,
+
+  /**
+   * @generated from enum value: AUTH_PROVIDER_LINKEDIN = 3;
+   */
+  LINKEDIN = 3,
+}
+
+/**
+ * Describes the enum enums.v1.AuthProvider.
+ */
+export const AuthProviderSchema: GenEnum<AuthProvider> = /*@__PURE__*/
+  enumDesc(file_enums_v1_enums, 2);
 

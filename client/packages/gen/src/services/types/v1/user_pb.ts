@@ -4,7 +4,7 @@
 
 import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { UserRole, UserStatus } from "../../enums/v1/enums_pb";
+import type { AuthProvider, UserRole, UserStatus } from "../../enums/v1/enums_pb";
 import { file_enums_v1_enums } from "../../enums/v1/enums_pb";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
@@ -14,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file types/v1/user.proto.
  */
 export const file_types_v1_user: GenFile = /*@__PURE__*/
-  fileDesc("ChN0eXBlcy92MS91c2VyLnByb3RvEgh0eXBlcy52MSLHAgoEVXNlchIKCgJpZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgFEhAKCGZ1bGxuYW1lGAMgASgJEg0KBWVtYWlsGAQgASgJEiAKBHJvbGUYBSABKA4yEi5lbnVtcy52MS5Vc2VyUm9sZRIkCgZzdGF0dXMYBiABKA4yFC5lbnVtcy52MS5Vc2VyU3RhdHVzEg4KBmF2YXRhchgHIAEoCRIPCgdjb3VudHJ5GAggASgJEhQKDHBob25lX251bWJlchgJIAEoCRITCgtyZWZlcnJhbF9pZBgKIAEoBRINCgVsZXZlbBgLIAEoDRIuCgpjcmVhdGVkX2F0GAwgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcBIuCgp1cGRhdGVkX2F0GA0gASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcGIGcHJvdG8z", [file_enums_v1_enums, file_google_protobuf_timestamp]);
+  fileDesc("ChN0eXBlcy92MS91c2VyLnByb3RvEgh0eXBlcy52MSLyAgoEVXNlchIKCgJpZBgBIAEoCRIPCgd1c2VyX2lkGAIgASgFEhAKCGZ1bGxuYW1lGAMgASgJEg0KBWVtYWlsGAQgASgJEiAKBHJvbGUYBSABKA4yEi5lbnVtcy52MS5Vc2VyUm9sZRIkCgZzdGF0dXMYBiABKA4yFC5lbnVtcy52MS5Vc2VyU3RhdHVzEg4KBmF2YXRhchgHIAEoCRIPCgdjb3VudHJ5GAggASgJEhQKDHBob25lX251bWJlchgJIAEoCRITCgtyZWZlcnJhbF9pZBgKIAEoBRINCgVsZXZlbBgLIAEoDRIpCglwcm92aWRlcnMYDCADKA4yFi5lbnVtcy52MS5BdXRoUHJvdmlkZXISLgoKY3JlYXRlZF9hdBgNIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXASLgoKdXBkYXRlZF9hdBgOIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXBiBnByb3RvMw", [file_enums_v1_enums, file_google_protobuf_timestamp]);
 
 /**
  * @generated from message types.v1.User
@@ -76,12 +76,17 @@ export type User = Message<"types.v1.User"> & {
   level: number;
 
   /**
-   * @generated from field: google.protobuf.Timestamp created_at = 12;
+   * @generated from field: repeated enums.v1.AuthProvider providers = 12;
+   */
+  providers: AuthProvider[];
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 13;
    */
   createdAt?: Timestamp;
 
   /**
-   * @generated from field: google.protobuf.Timestamp updated_at = 13;
+   * @generated from field: google.protobuf.Timestamp updated_at = 14;
    */
   updatedAt?: Timestamp;
 };

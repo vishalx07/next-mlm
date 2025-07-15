@@ -7,6 +7,7 @@ import (
 	"connectrpc.com/connect"
 	authv1 "github.com/vishalx07/next-mlm/gen/auth/v1"
 	"github.com/vishalx07/next-mlm/gen/auth/v1/authv1connect"
+	enumsv1 "github.com/vishalx07/next-mlm/gen/enums/v1"
 	typesv1 "github.com/vishalx07/next-mlm/gen/types/v1"
 	config "github.com/vishalx07/next-mlm/internal/config"
 	models "github.com/vishalx07/next-mlm/internal/models"
@@ -225,6 +226,7 @@ func (h *AuthHandler) transformUserRPC(req *connect.Request[authv1.RegisterReque
 		Password:   &req.Msg.Step1.Password,
 		Country:    req.Msg.Step2.Country,
 		Phone:      req.Msg.Step2.PhoneNumber,
+		Providers:  []enums.AuthProvider{enums.AuthProvider_EMAIL_PASSWORD},
 	}
 }
 
@@ -232,6 +234,12 @@ func (h *AuthHandler) transformUserModel(user *models.User) *typesv1.User {
 	var avatar string
 	if user.Avatar != nil {
 		avatar = *user.Avatar
+	}
+
+	// var pbProviders []enumsv1.AuthProvider
+	pbProviders := make([]enumsv1.AuthProvider, 0, len(user.Providers))
+	for _, p := range user.Providers {
+		pbProviders = append(pbProviders, enums.AuthProviderToProto(p))
 	}
 
 	return &typesv1.User{
@@ -246,6 +254,7 @@ func (h *AuthHandler) transformUserModel(user *models.User) *typesv1.User {
 		PhoneNumber: user.Phone,
 		ReferralId:  user.ReferralId,
 		Level:       user.Level,
+		Providers:   pbProviders,
 		CreatedAt:   timestamppb.New(user.CreatedAt),
 		UpdatedAt:   timestamppb.New(user.UpdatedAt),
 	}

@@ -7,11 +7,16 @@ import {
   Chip,
   Text,
 } from "@jamsr-ui/react";
+import { AuthProvider } from "@repo/gen/enums/v1/enums_pb";
+import { type User } from "@repo/gen/types/v1/user_pb";
 import { FluentIcon, LogosIcon } from "@repo/ui/config/icons";
-import { fDateTime } from "@repo/ui/utils/time";
 
-export const LoginMethods = () => {
-  const options = Options();
+type Props = {
+  providers: User["providers"];
+};
+
+export const LoginMethods = ({ providers }: Props) => {
+  const options = Options({ providers });
 
   return (
     <Card>
@@ -53,7 +58,7 @@ export const LoginMethods = () => {
                   variant="paragraph2"
                   className="text-foreground-secondary"
                 >
-                  Connected on {fDateTime(option.connectedOn)}
+                  {option.description}
                 </Text>
               </div>
             </div>
@@ -66,42 +71,29 @@ export const LoginMethods = () => {
   );
 };
 
-function Options(): {
+function Options({ providers }: Props): {
   icon: React.ReactNode;
   provider: string;
-  connectedOn: Date;
+  description: string;
   action: React.ReactNode;
   isCurrent?: boolean;
 }[] {
+  var isEmail_Password = false;
+  var isGoogle = false;
+  var isLinkedin = false;
+
+  providers.forEach((provider) => {
+    if (provider === AuthProvider.EMAIL_PASSWORD) isEmail_Password = true;
+    if (provider === AuthProvider.GOOGLE) isGoogle = true;
+    if (provider === AuthProvider.LINKEDIN) isLinkedin = true;
+  });
+
   return [
     {
       icon: <FluentIcon.Mail />,
       provider: "Email & Password",
-      connectedOn: new Date(),
-      action: null,
-      isCurrent: true,
-    },
-    {
-      icon: <LogosIcon.Google className="size-5" />,
-      provider: "Google",
-      connectedOn: new Date(),
-      action: (
-        <Button
-          size="sm"
-          radius="full"
-          variant="outlined"
-          color="danger"
-          className="border"
-        >
-          Disable
-        </Button>
-      ),
-    },
-    {
-      icon: <LogosIcon.Linkedin className="size-5" />,
-      provider: "LinkedIn",
-      connectedOn: new Date(),
-      action: (
+      description: "Log in with your email & password",
+      action: isEmail_Password ? null : (
         <Button
           size="sm"
           radius="full"
@@ -110,6 +102,39 @@ function Options(): {
           className="border"
         >
           Enable
+        </Button>
+      ),
+      isCurrent: true,
+    },
+    {
+      icon: <LogosIcon.Google className="size-5" />,
+      provider: "Google",
+      description: "Log in with OAuth Google Provider",
+      action: (
+        <Button
+          size="sm"
+          radius="full"
+          variant="outlined"
+          color={isGoogle ? "danger" : "success"}
+          className="border"
+        >
+          {isGoogle ? "Disable" : "Enable"}
+        </Button>
+      ),
+    },
+    {
+      icon: <LogosIcon.Linkedin className="size-5" />,
+      provider: "LinkedIn",
+      description: "Log in with OAuth LinkedIn Provider",
+      action: (
+        <Button
+          size="sm"
+          radius="full"
+          variant="outlined"
+          color={isLinkedin ? "danger" : "success"}
+          className="border"
+        >
+          {isLinkedin ? "Disable" : "Enable"}
         </Button>
       ),
     },

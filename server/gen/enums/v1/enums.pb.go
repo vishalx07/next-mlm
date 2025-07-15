@@ -119,6 +119,58 @@ func (UserStatus) EnumDescriptor() ([]byte, []int) {
 	return file_enums_v1_enums_proto_rawDescGZIP(), []int{1}
 }
 
+type AuthProvider int32
+
+const (
+	AuthProvider_AUTH_PROVIDER_UNSPECIFIED    AuthProvider = 0
+	AuthProvider_AUTH_PROVIDER_EMAIL_PASSWORD AuthProvider = 1
+	AuthProvider_AUTH_PROVIDER_GOOGLE         AuthProvider = 2
+	AuthProvider_AUTH_PROVIDER_LINKEDIN       AuthProvider = 3
+)
+
+// Enum value maps for AuthProvider.
+var (
+	AuthProvider_name = map[int32]string{
+		0: "AUTH_PROVIDER_UNSPECIFIED",
+		1: "AUTH_PROVIDER_EMAIL_PASSWORD",
+		2: "AUTH_PROVIDER_GOOGLE",
+		3: "AUTH_PROVIDER_LINKEDIN",
+	}
+	AuthProvider_value = map[string]int32{
+		"AUTH_PROVIDER_UNSPECIFIED":    0,
+		"AUTH_PROVIDER_EMAIL_PASSWORD": 1,
+		"AUTH_PROVIDER_GOOGLE":         2,
+		"AUTH_PROVIDER_LINKEDIN":       3,
+	}
+)
+
+func (x AuthProvider) Enum() *AuthProvider {
+	p := new(AuthProvider)
+	*p = x
+	return p
+}
+
+func (x AuthProvider) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AuthProvider) Descriptor() protoreflect.EnumDescriptor {
+	return file_enums_v1_enums_proto_enumTypes[2].Descriptor()
+}
+
+func (AuthProvider) Type() protoreflect.EnumType {
+	return &file_enums_v1_enums_proto_enumTypes[2]
+}
+
+func (x AuthProvider) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AuthProvider.Descriptor instead.
+func (AuthProvider) EnumDescriptor() ([]byte, []int) {
+	return file_enums_v1_enums_proto_rawDescGZIP(), []int{2}
+}
+
 var File_enums_v1_enums_proto protoreflect.FileDescriptor
 
 const file_enums_v1_enums_proto_rawDesc = "" +
@@ -132,7 +184,12 @@ const file_enums_v1_enums_proto_rawDesc = "" +
 	"UserStatus\x12\x1b\n" +
 	"\x17USER_STATUS_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12USER_STATUS_ACTIVE\x10\x01\x12\x17\n" +
-	"\x13USER_STATUS_BLOCKED\x10\x02B\x8f\x01\n" +
+	"\x13USER_STATUS_BLOCKED\x10\x02*\x85\x01\n" +
+	"\fAuthProvider\x12\x1d\n" +
+	"\x19AUTH_PROVIDER_UNSPECIFIED\x10\x00\x12 \n" +
+	"\x1cAUTH_PROVIDER_EMAIL_PASSWORD\x10\x01\x12\x18\n" +
+	"\x14AUTH_PROVIDER_GOOGLE\x10\x02\x12\x1a\n" +
+	"\x16AUTH_PROVIDER_LINKEDIN\x10\x03B\x8f\x01\n" +
 	"\fcom.enums.v1B\n" +
 	"EnumsProtoP\x01Z2github.com/vishalx07/next-mlm/gen/enums/v1;enumsv1\xa2\x02\x03EXX\xaa\x02\bEnums.V1\xca\x02\bEnums\\V1\xe2\x02\x14Enums\\V1\\GPBMetadata\xea\x02\tEnums::V1b\x06proto3"
 
@@ -148,10 +205,11 @@ func file_enums_v1_enums_proto_rawDescGZIP() []byte {
 	return file_enums_v1_enums_proto_rawDescData
 }
 
-var file_enums_v1_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_enums_v1_enums_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_enums_v1_enums_proto_goTypes = []any{
-	(UserRole)(0),   // 0: enums.v1.UserRole
-	(UserStatus)(0), // 1: enums.v1.UserStatus
+	(UserRole)(0),     // 0: enums.v1.UserRole
+	(UserStatus)(0),   // 1: enums.v1.UserStatus
+	(AuthProvider)(0), // 2: enums.v1.AuthProvider
 }
 var file_enums_v1_enums_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -171,7 +229,7 @@ func file_enums_v1_enums_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_enums_v1_enums_proto_rawDesc), len(file_enums_v1_enums_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,

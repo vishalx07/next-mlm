@@ -14,7 +14,7 @@ export default async function page() {
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-12">
       <ProfileCard initialData={result.data} />
-      <LoginMethods />
+      <LoginMethods providers={result.data.user.providers} />
     </div>
   );
 }

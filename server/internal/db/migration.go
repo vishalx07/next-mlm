@@ -43,6 +43,11 @@ func CreateEnumTypes(db *gorm.DB) error {
 		"user_role":   {enums.UserRole_USER.String(), enums.UserRole_ADMIN.String()},
 		"user_status": {enums.UserStatus_ACTIVE.String(), enums.UserStatus_BLOCKED.String()},
 		"otp_purpose": {enums.OtpPurpose_LOGIN.String(), enums.OtpPurpose_REGISTER.String()},
+		"auth_provider": {
+			enums.AuthProvider_EMAIL_PASSWORD.String(),
+			enums.AuthProvider_GOOGLE.String(),
+			enums.AuthProvider_LINKEDIN.String(),
+		},
 	}
 
 	for enumName, values := range enumTypes {

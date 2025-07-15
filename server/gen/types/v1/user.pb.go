@@ -36,8 +36,9 @@ type User struct {
 	PhoneNumber   string                 `protobuf:"bytes,9,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
 	ReferralId    int32                  `protobuf:"varint,10,opt,name=referral_id,json=referralId,proto3" json:"referral_id,omitempty"`
 	Level         uint32                 `protobuf:"varint,11,opt,name=level,proto3" json:"level,omitempty"`
-	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Providers     []v1.AuthProvider      `protobuf:"varint,12,rep,packed,name=providers,proto3,enum=enums.v1.AuthProvider" json:"providers,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -149,6 +150,13 @@ func (x *User) GetLevel() uint32 {
 	return 0
 }
 
+func (x *User) GetProviders() []v1.AuthProvider {
+	if x != nil {
+		return x.Providers
+	}
+	return nil
+}
+
 func (x *User) GetCreatedAt() *timestamppb.Timestamp {
 	if x != nil {
 		return x.CreatedAt
@@ -167,7 +175,7 @@ var File_types_v1_user_proto protoreflect.FileDescriptor
 
 const file_types_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x13types/v1/user.proto\x12\btypes.v1\x1a\x14enums/v1/enums.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb9\x03\n" +
+	"\x13types/v1/user.proto\x12\btypes.v1\x1a\x14enums/v1/enums.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xef\x03\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\x05R\x06userId\x12\x1a\n" +
@@ -181,11 +189,12 @@ const file_types_v1_user_proto_rawDesc = "" +
 	"\vreferral_id\x18\n" +
 	" \x01(\x05R\n" +
 	"referralId\x12\x14\n" +
-	"\x05level\x18\v \x01(\rR\x05level\x129\n" +
+	"\x05level\x18\v \x01(\rR\x05level\x124\n" +
+	"\tproviders\x18\f \x03(\x0e2\x16.enums.v1.AuthProviderR\tproviders\x129\n" +
 	"\n" +
-	"created_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"created_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\r \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtB\x8e\x01\n" +
+	"updated_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAtB\x8e\x01\n" +
 	"\fcom.types.v1B\tUserProtoP\x01Z2github.com/vishalx07/next-mlm/gen/types/v1;typesv1\xa2\x02\x03TXX\xaa\x02\bTypes.V1\xca\x02\bTypes\\V1\xe2\x02\x14Types\\V1\\GPBMetadata\xea\x02\tTypes::V1b\x06proto3"
 
 var (
@@ -205,18 +214,20 @@ var file_types_v1_user_proto_goTypes = []any{
 	(*User)(nil),                  // 0: types.v1.User
 	(v1.UserRole)(0),              // 1: enums.v1.UserRole
 	(v1.UserStatus)(0),            // 2: enums.v1.UserStatus
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(v1.AuthProvider)(0),          // 3: enums.v1.AuthProvider
+	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
 }
 var file_types_v1_user_proto_depIdxs = []int32{
 	1, // 0: types.v1.User.role:type_name -> enums.v1.UserRole
 	2, // 1: types.v1.User.status:type_name -> enums.v1.UserStatus
-	3, // 2: types.v1.User.created_at:type_name -> google.protobuf.Timestamp
-	3, // 3: types.v1.User.updated_at:type_name -> google.protobuf.Timestamp
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
-	4, // [4:4] is the sub-list for extension type_name
-	4, // [4:4] is the sub-list for extension extendee
-	0, // [0:4] is the sub-list for field type_name
+	3, // 2: types.v1.User.providers:type_name -> enums.v1.AuthProvider
+	4, // 3: types.v1.User.created_at:type_name -> google.protobuf.Timestamp
+	4, // 4: types.v1.User.updated_at:type_name -> google.protobuf.Timestamp
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_types_v1_user_proto_init() }
