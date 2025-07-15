@@ -10,8 +10,11 @@ import { ProfileService } from "./profile_pb";
 export const getProfile = ProfileService.method.getProfile;
 
 /**
- * rpc UpdatePassword(UpdatePasswordRequest) returns (UpdatePasswordResponse);
- *
  * @generated from rpc user.profile.v1.ProfileService.UpdateProfile
  */
 export const updateProfile = ProfileService.method.updateProfile;
+
+/**
+ * @generated from rpc user.profile.v1.ProfileService.UpdatePassword
+ */
+export const updatePassword = ProfileService.method.updatePassword;

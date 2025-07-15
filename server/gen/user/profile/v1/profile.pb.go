@@ -232,6 +232,102 @@ func (x *UpdateProfileResponse) GetUser() *v1.User {
 	return nil
 }
 
+type UpdatePasswordRequest struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	CurrentPassword string                 `protobuf:"bytes,1,opt,name=current_password,json=currentPassword,proto3" json:"current_password,omitempty"`
+	NewPassword     string                 `protobuf:"bytes,2,opt,name=new_password,json=newPassword,proto3" json:"new_password,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *UpdatePasswordRequest) Reset() {
+	*x = UpdatePasswordRequest{}
+	mi := &file_user_profile_v1_profile_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePasswordRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePasswordRequest) ProtoMessage() {}
+
+func (x *UpdatePasswordRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_profile_v1_profile_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePasswordRequest.ProtoReflect.Descriptor instead.
+func (*UpdatePasswordRequest) Descriptor() ([]byte, []int) {
+	return file_user_profile_v1_profile_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UpdatePasswordRequest) GetCurrentPassword() string {
+	if x != nil {
+		return x.CurrentPassword
+	}
+	return ""
+}
+
+func (x *UpdatePasswordRequest) GetNewPassword() string {
+	if x != nil {
+		return x.NewPassword
+	}
+	return ""
+}
+
+type UpdatePasswordResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdatePasswordResponse) Reset() {
+	*x = UpdatePasswordResponse{}
+	mi := &file_user_profile_v1_profile_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdatePasswordResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePasswordResponse) ProtoMessage() {}
+
+func (x *UpdatePasswordResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_profile_v1_profile_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePasswordResponse.ProtoReflect.Descriptor instead.
+func (*UpdatePasswordResponse) Descriptor() ([]byte, []int) {
+	return file_user_profile_v1_profile_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UpdatePasswordResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_user_profile_v1_profile_proto protoreflect.FileDescriptor
 
 const file_user_profile_v1_profile_proto_rawDesc = "" +
@@ -248,11 +344,18 @@ const file_user_profile_v1_profile_proto_rawDesc = "" +
 	"\fphone_number\x18\x04 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\vphoneNumber\"U\n" +
 	"\x15UpdateProfileResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\x12\"\n" +
-	"\x04user\x18\x02 \x01(\v2\x0e.types.v1.UserR\x04user2\xc7\x01\n" +
+	"\x04user\x18\x02 \x01(\v2\x0e.types.v1.UserR\x04user\"y\n" +
+	"\x15UpdatePasswordRequest\x121\n" +
+	"\x10current_password\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x0fcurrentPassword\x12-\n" +
+	"\fnew_password\x18\x02 \x01(\tB\n" +
+	"\xbaH\a\xc8\x01\x01r\x02\x10\x06R\vnewPassword\"2\n" +
+	"\x16UpdatePasswordResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage2\xaa\x02\n" +
 	"\x0eProfileService\x12U\n" +
 	"\n" +
 	"GetProfile\x12\".user.profile.v1.GetProfileRequest\x1a#.user.profile.v1.GetProfileResponse\x12^\n" +
-	"\rUpdateProfile\x12%.user.profile.v1.UpdateProfileRequest\x1a&.user.profile.v1.UpdateProfileResponseB\xbe\x01\n" +
+	"\rUpdateProfile\x12%.user.profile.v1.UpdateProfileRequest\x1a&.user.profile.v1.UpdateProfileResponse\x12a\n" +
+	"\x0eUpdatePassword\x12&.user.profile.v1.UpdatePasswordRequest\x1a'.user.profile.v1.UpdatePasswordResponseB\xbe\x01\n" +
 	"\x13com.user.profile.v1B\fProfileProtoP\x01Z;github.com/vishalx07/next-mlm/gen/user/profile/v1;profilev1\xa2\x02\x03UPX\xaa\x02\x0fUser.Profile.V1\xca\x02\x0fUser\\Profile\\V1\xe2\x02\x1bUser\\Profile\\V1\\GPBMetadata\xea\x02\x11User::Profile::V1b\x06proto3"
 
 var (
@@ -267,25 +370,29 @@ func file_user_profile_v1_profile_proto_rawDescGZIP() []byte {
 	return file_user_profile_v1_profile_proto_rawDescData
 }
 
-var file_user_profile_v1_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_user_profile_v1_profile_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_user_profile_v1_profile_proto_goTypes = []any{
-	(*GetProfileRequest)(nil),     // 0: user.profile.v1.GetProfileRequest
-	(*GetProfileResponse)(nil),    // 1: user.profile.v1.GetProfileResponse
-	(*UpdateProfileRequest)(nil),  // 2: user.profile.v1.UpdateProfileRequest
-	(*UpdateProfileResponse)(nil), // 3: user.profile.v1.UpdateProfileResponse
-	(*v1.User)(nil),               // 4: types.v1.User
-	(v11.AuthProvider)(0),         // 5: enums.v1.AuthProvider
+	(*GetProfileRequest)(nil),      // 0: user.profile.v1.GetProfileRequest
+	(*GetProfileResponse)(nil),     // 1: user.profile.v1.GetProfileResponse
+	(*UpdateProfileRequest)(nil),   // 2: user.profile.v1.UpdateProfileRequest
+	(*UpdateProfileResponse)(nil),  // 3: user.profile.v1.UpdateProfileResponse
+	(*UpdatePasswordRequest)(nil),  // 4: user.profile.v1.UpdatePasswordRequest
+	(*UpdatePasswordResponse)(nil), // 5: user.profile.v1.UpdatePasswordResponse
+	(*v1.User)(nil),                // 6: types.v1.User
+	(v11.AuthProvider)(0),          // 7: enums.v1.AuthProvider
 }
 var file_user_profile_v1_profile_proto_depIdxs = []int32{
-	4, // 0: user.profile.v1.GetProfileResponse.user:type_name -> types.v1.User
-	5, // 1: user.profile.v1.GetProfileResponse.login_method:type_name -> enums.v1.AuthProvider
-	4, // 2: user.profile.v1.UpdateProfileResponse.user:type_name -> types.v1.User
+	6, // 0: user.profile.v1.GetProfileResponse.user:type_name -> types.v1.User
+	7, // 1: user.profile.v1.GetProfileResponse.login_method:type_name -> enums.v1.AuthProvider
+	6, // 2: user.profile.v1.UpdateProfileResponse.user:type_name -> types.v1.User
 	0, // 3: user.profile.v1.ProfileService.GetProfile:input_type -> user.profile.v1.GetProfileRequest
 	2, // 4: user.profile.v1.ProfileService.UpdateProfile:input_type -> user.profile.v1.UpdateProfileRequest
-	1, // 5: user.profile.v1.ProfileService.GetProfile:output_type -> user.profile.v1.GetProfileResponse
-	3, // 6: user.profile.v1.ProfileService.UpdateProfile:output_type -> user.profile.v1.UpdateProfileResponse
-	5, // [5:7] is the sub-list for method output_type
-	3, // [3:5] is the sub-list for method input_type
+	4, // 5: user.profile.v1.ProfileService.UpdatePassword:input_type -> user.profile.v1.UpdatePasswordRequest
+	1, // 6: user.profile.v1.ProfileService.GetProfile:output_type -> user.profile.v1.GetProfileResponse
+	3, // 7: user.profile.v1.ProfileService.UpdateProfile:output_type -> user.profile.v1.UpdateProfileResponse
+	5, // 8: user.profile.v1.ProfileService.UpdatePassword:output_type -> user.profile.v1.UpdatePasswordResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
 	3, // [3:3] is the sub-list for extension extendee
 	0, // [0:3] is the sub-list for field type_name
@@ -302,7 +409,7 @@ func file_user_profile_v1_profile_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_profile_v1_profile_proto_rawDesc), len(file_user_profile_v1_profile_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

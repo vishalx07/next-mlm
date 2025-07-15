@@ -39,12 +39,16 @@ const (
 	// ProfileServiceUpdateProfileProcedure is the fully-qualified name of the ProfileService's
 	// UpdateProfile RPC.
 	ProfileServiceUpdateProfileProcedure = "/user.profile.v1.ProfileService/UpdateProfile"
+	// ProfileServiceUpdatePasswordProcedure is the fully-qualified name of the ProfileService's
+	// UpdatePassword RPC.
+	ProfileServiceUpdatePasswordProcedure = "/user.profile.v1.ProfileService/UpdatePassword"
 )
 
 // ProfileServiceClient is a client for the user.profile.v1.ProfileService service.
 type ProfileServiceClient interface {
 	GetProfile(context.Context, *connect.Request[v1.GetProfileRequest]) (*connect.Response[v1.GetProfileResponse], error)
 	UpdateProfile(context.Context, *connect.Request[v1.UpdateProfileRequest]) (*connect.Response[v1.UpdateProfileResponse], error)
+	UpdatePassword(context.Context, *connect.Request[v1.UpdatePasswordRequest]) (*connect.Response[v1.UpdatePasswordResponse], error)
 }
 
 // NewProfileServiceClient constructs a client for the user.profile.v1.ProfileService service. By
@@ -70,13 +74,20 @@ func NewProfileServiceClient(httpClient connect.HTTPClient, baseURL string, opts
 			connect.WithSchema(profileServiceMethods.ByName("UpdateProfile")),
 			connect.WithClientOptions(opts...),
 		),
+		updatePassword: connect.NewClient[v1.UpdatePasswordRequest, v1.UpdatePasswordResponse](
+			httpClient,
+			baseURL+ProfileServiceUpdatePasswordProcedure,
+			connect.WithSchema(profileServiceMethods.ByName("UpdatePassword")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // profileServiceClient implements ProfileServiceClient.
 type profileServiceClient struct {
-	getProfile    *connect.Client[v1.GetProfileRequest, v1.GetProfileResponse]
-	updateProfile *connect.Client[v1.UpdateProfileRequest, v1.UpdateProfileResponse]
+	getProfile     *connect.Client[v1.GetProfileRequest, v1.GetProfileResponse]
+	updateProfile  *connect.Client[v1.UpdateProfileRequest, v1.UpdateProfileResponse]
+	updatePassword *connect.Client[v1.UpdatePasswordRequest, v1.UpdatePasswordResponse]
 }
 
 // GetProfile calls user.profile.v1.ProfileService.GetProfile.
@@ -89,10 +100,16 @@ func (c *profileServiceClient) UpdateProfile(ctx context.Context, req *connect.R
 	return c.updateProfile.CallUnary(ctx, req)
 }
 
+// UpdatePassword calls user.profile.v1.ProfileService.UpdatePassword.
+func (c *profileServiceClient) UpdatePassword(ctx context.Context, req *connect.Request[v1.UpdatePasswordRequest]) (*connect.Response[v1.UpdatePasswordResponse], error) {
+	return c.updatePassword.CallUnary(ctx, req)
+}
+
 // ProfileServiceHandler is an implementation of the user.profile.v1.ProfileService service.
 type ProfileServiceHandler interface {
 	GetProfile(context.Context, *connect.Request[v1.GetProfileRequest]) (*connect.Response[v1.GetProfileResponse], error)
 	UpdateProfile(context.Context, *connect.Request[v1.UpdateProfileRequest]) (*connect.Response[v1.UpdateProfileResponse], error)
+	UpdatePassword(context.Context, *connect.Request[v1.UpdatePasswordRequest]) (*connect.Response[v1.UpdatePasswordResponse], error)
 }
 
 // NewProfileServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -114,12 +131,20 @@ func NewProfileServiceHandler(svc ProfileServiceHandler, opts ...connect.Handler
 		connect.WithSchema(profileServiceMethods.ByName("UpdateProfile")),
 		connect.WithHandlerOptions(opts...),
 	)
+	profileServiceUpdatePasswordHandler := connect.NewUnaryHandler(
+		ProfileServiceUpdatePasswordProcedure,
+		svc.UpdatePassword,
+		connect.WithSchema(profileServiceMethods.ByName("UpdatePassword")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/user.profile.v1.ProfileService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ProfileServiceGetProfileProcedure:
 			profileServiceGetProfileHandler.ServeHTTP(w, r)
 		case ProfileServiceUpdateProfileProcedure:
 			profileServiceUpdateProfileHandler.ServeHTTP(w, r)
+		case ProfileServiceUpdatePasswordProcedure:
+			profileServiceUpdatePasswordHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -135,4 +160,8 @@ func (UnimplementedProfileServiceHandler) GetProfile(context.Context, *connect.R
 
 func (UnimplementedProfileServiceHandler) UpdateProfile(context.Context, *connect.Request[v1.UpdateProfileRequest]) (*connect.Response[v1.UpdateProfileResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.profile.v1.ProfileService.UpdateProfile is not implemented"))
+}
+
+func (UnimplementedProfileServiceHandler) UpdatePassword(context.Context, *connect.Request[v1.UpdatePasswordRequest]) (*connect.Response[v1.UpdatePasswordResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.profile.v1.ProfileService.UpdatePassword is not implemented"))
 }

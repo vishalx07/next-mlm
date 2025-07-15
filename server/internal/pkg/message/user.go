@@ -6,7 +6,8 @@ import (
 )
 
 var (
-	UserUpdateSuccess = "User updated successfully"
+	UserUpdateSuccess         = "User updated successfully"
+	UserPasswordUpdateSuccess = "Password updated successfully"
 )
 
 var (

@@ -2,6 +2,7 @@ package user_handler
 
 import (
 	"context"
+	"errors"
 
 	"connectrpc.com/connect"
 	enumsv1 "github.com/vishalx07/next-mlm/gen/enums/v1"
@@ -9,6 +10,7 @@ import (
 	profilev1 "github.com/vishalx07/next-mlm/gen/user/profile/v1"
 	middleware "github.com/vishalx07/next-mlm/internal/middleware"
 	models "github.com/vishalx07/next-mlm/internal/models"
+	bcrypt "github.com/vishalx07/next-mlm/internal/pkg/bcrypt"
 	message "github.com/vishalx07/next-mlm/internal/pkg/message"
 	enums "github.com/vishalx07/next-mlm/internal/pkg/types/enums"
 	service "github.com/vishalx07/next-mlm/internal/service"
@@ -57,6 +59,38 @@ func (h *ProfileHandler) UpdateProfile(
 	resp := connect.NewResponse(&profilev1.UpdateProfileResponse{
 		Message: message.UserUpdateSuccess,
 		User:    h.transformUserModel(user),
+	})
+
+	return resp, nil
+}
+
+func (h *ProfileHandler) UpdatePassword(
+	ctx context.Context,
+	req *connect.Request[profilev1.UpdatePasswordRequest],
+) (*connect.Response[profilev1.UpdatePasswordResponse], error) {
+	user := middleware.UserFromContext(ctx)
+
+	// verify password
+	if err := h.userService.ValidatePassword(user, req.Msg.CurrentPassword); err != nil {
+		if errors.Is(err, message.ErrPasswordNotUsed) {
+			return nil, connect.NewError(connect.CodeFailedPrecondition, err)
+		}
+		return nil, connect.NewError(connect.CodeInvalidArgument, err)
+	}
+
+	// hash password
+	hashedPassword, err := bcrypt.HashPassword(req.Msg.NewPassword)
+	if err != nil {
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+	user.Password = &hashedPassword
+
+	if err := h.userService.Update(user); err != nil {
+		return nil, connect.NewError(connect.CodeInternal, err)
+	}
+
+	resp := connect.NewResponse(&profilev1.UpdatePasswordResponse{
+		Message: message.UserPasswordUpdateSuccess,
 	})
 
 	return resp, nil
