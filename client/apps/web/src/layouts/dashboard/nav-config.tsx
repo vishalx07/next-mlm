@@ -21,6 +21,25 @@ export const navConfig: NavItem[] = [
         icon: <DashboardIcon.Profile />,
         url: ROUTES.user.profile,
       },
+      {
+        title: "My Network",
+        icon: <DashboardIcon.MyNetwork />,
+        url: ROUTES.user.myNetwork.root,
+        items: [
+          {
+            title: "Genealogy",
+            url: ROUTES.user.myNetwork.genealogy,
+          },
+          {
+            title: "My Referrals",
+            url: ROUTES.user.myNetwork.myReferrals,
+          },
+          {
+            title: "Total Teams",
+            url: ROUTES.user.myNetwork.totalTeams,
+          },
+        ],
+      },
     ],
   },
   {

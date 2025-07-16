@@ -2,6 +2,9 @@ const route = <T extends string>(path: T) => `${path}` as const;
 
 const userRoute = <T extends string>(path: T) => route(`/user${path}`);
 
+const myNetwork = <T extends string>(path: T) =>
+  userRoute(`/my-network${path}`);
+
 export const ROUTES = {
   home: route("/"),
   // auth
@@ -14,6 +17,12 @@ export const ROUTES = {
     dashboard: userRoute("/dashboard"),
     plans: userRoute("/plans"),
     profile: userRoute("/profile"),
+    myNetwork: {
+      root: myNetwork(""),
+      genealogy: myNetwork("/genealogy"),
+      myReferrals: myNetwork("/my-referrals"),
+      totalTeams: myNetwork("/total-teams"),
+    },
   },
 };
 

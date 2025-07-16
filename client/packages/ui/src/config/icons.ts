@@ -8,12 +8,14 @@ import Pen from "../../public/icons/i-solar-pen-bold.svg";
 //
 import Dashboard from "../../public/svg/dashboard/dashboard.svg";
 import Level from "../../public/svg/dashboard/level.svg";
+import MyNetwork from "../../public/svg/dashboard/my-network.svg";
 import Plan from "../../public/svg/dashboard/plan.svg";
 import Profile from "../../public/svg/dashboard/profile.svg";
 
 export const DashboardIcon = {
   Dashboard,
   Level,
+  MyNetwork,
   Plan,
   Profile,
 };
