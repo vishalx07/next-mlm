@@ -7,6 +7,7 @@ import (
 	"connectrpc.com/connect"
 	"connectrpc.com/validate"
 	"github.com/vishalx07/next-mlm/gen/auth/v1/authv1connect"
+	"github.com/vishalx07/next-mlm/gen/user/my_network/v1/my_networkv1connect"
 	"github.com/vishalx07/next-mlm/gen/user/profile/v1/profilev1connect"
 	root_handler "github.com/vishalx07/next-mlm/internal/api/v1/handler/root"
 	user_handler "github.com/vishalx07/next-mlm/internal/api/v1/handler/user"
@@ -54,6 +55,10 @@ func RegisterHandler(s *server.Server) {
 	profileHandler := user_handler.NewProfileHandler(userService)
 	profileServicePath, profileServiceHandler := profilev1connect.NewProfileServiceHandler(profileHandler, connect.WithInterceptors(validateInterceptor))
 	mux.Handle(profileServicePath, userMw(profileServiceHandler))
+
+	myNetworkHandler := user_handler.NewMyNetworkHandler(userService)
+	myNetworkServicePath, myNetworkServiceHandler := my_networkv1connect.NewMyNetworkServiceHandler(myNetworkHandler)
+	mux.Handle(myNetworkServicePath, userMw(myNetworkServiceHandler))
 
 	// =============================== ADMIN SERVICES ===============================
 }

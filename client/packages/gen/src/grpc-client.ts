@@ -5,6 +5,7 @@ import { env } from "@repo/env";
 // import services
 import { AuthService } from "./services/auth/v1/auth_pb";
 import { ProfileService } from "./services/user/profile/v1/profile_pb";
+import { MyNetworkService } from "./services/user/my_network/v1/my_network_pb";
 
 const SessionKey = "x-session";
 const SessionAdminKey = "x-session-admin";
@@ -36,5 +37,6 @@ export const authClient = createClient(AuthService, rpcTransport);
 
 // user
 export const profileClient = createClient(ProfileService, rpcTransport);
+export const myNetworkClient = createClient(MyNetworkService, rpcTransport);
 
 // admin

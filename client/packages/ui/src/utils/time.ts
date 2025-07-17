@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import type { Timestamp } from "@repo/ui/types";
 
 type InputValue = Date | string | number | null;
 
@@ -52,10 +53,7 @@ export const getFutureTime = (ms: number): Date => {
   return new Date(Date.now() + ms);
 };
 
-export const timestampToDate = (timestamp: {
-  seconds: bigint;
-  nanos: number;
-}): Date => {
+export const timestampToDate = (timestamp: Timestamp): Date => {
   // Convert the seconds part to milliseconds
   const milliseconds = Number(timestamp.seconds) * 1000;
 

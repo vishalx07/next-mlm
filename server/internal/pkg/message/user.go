@@ -49,3 +49,7 @@ func ErrUserFailedToGetAll(err error) error {
 func ErrUserFailedToGenerateUserId(err error) error {
 	return fmt.Errorf("error generating user id: %w", err)
 }
+
+func ErrUserFailedToGetMyReferrals(err error) error {
+	return fmt.Errorf("error getting my referrals: %w", err)
+}

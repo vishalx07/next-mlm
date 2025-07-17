@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package user.my_network.v1;
+
+import "google/protobuf/timestamp.proto";
+
+service MyNetworkService {
+  // rpc GetGenealogy(GetGenealogyRequest) returns (GetGenealogyResponse);
+  rpc GetMyReferrals(GetMyReferralsRequest) returns (GetMyReferralsResponse);
+  // rpc GetTotalTeams(GetTotalTeamsRequest) returns (GetTotalTeamsResponse);
+}
+
+message GetMyReferralsRequest {}
+
+message GetMyReferralsResponse {
+  message Referral {
+    string id = 1;
+    int32 user_id = 2;
+    string fullname = 3;
+    string email = 4;
+    string avatar = 5;
+    string country = 6;
+    string phone_number = 7;
+    google.protobuf.Timestamp created_at = 8;
+  }
+  repeated Referral referrals = 1;
+}

@@ -17,6 +17,7 @@ type UserRepoInterface interface {
 	GetAll() ([]*models.User, error)
 	Delete(id string) error
 	GenerateUserId() (int32, error)
+	GetMyReferrals(userId int32) ([]*models.User, error)
 }
 
 type UserRepo struct {
@@ -93,4 +94,23 @@ func (repo *UserRepo) GenerateUserId() (int32, error) {
 	}
 
 	return user.UserId + 1, nil
+}
+
+func (repo *UserRepo) GetMyReferrals(userId int32) ([]*models.User, error) {
+	var users []*models.User
+	if err := repo.db.
+		Model(&models.User{}).
+		Where("referral_id = ?", userId).
+		Select(
+			[]string{
+				"id", "user_id", "fullname", "email",
+				"avatar", "country", "phone", "created_at",
+			},
+		).
+		Order("created_at DESC").
+		Find(&users).Error; err != nil {
+		return nil, err
+	}
+
+	return users, nil
 }
