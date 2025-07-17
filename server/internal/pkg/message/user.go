@@ -53,3 +53,7 @@ func ErrUserFailedToGenerateUserId(err error) error {
 func ErrUserFailedToGetMyReferrals(err error) error {
 	return fmt.Errorf("error getting my referrals: %w", err)
 }
+
+func ErrUserFailedToGetTotalTeam(err error) error {
+	return fmt.Errorf("error getting total team: %w", err)
+}

@@ -36,12 +36,15 @@ const (
 	// MyNetworkServiceGetMyReferralsProcedure is the fully-qualified name of the MyNetworkService's
 	// GetMyReferrals RPC.
 	MyNetworkServiceGetMyReferralsProcedure = "/user.my_network.v1.MyNetworkService/GetMyReferrals"
+	// MyNetworkServiceGetTotalTeamProcedure is the fully-qualified name of the MyNetworkService's
+	// GetTotalTeam RPC.
+	MyNetworkServiceGetTotalTeamProcedure = "/user.my_network.v1.MyNetworkService/GetTotalTeam"
 )
 
 // MyNetworkServiceClient is a client for the user.my_network.v1.MyNetworkService service.
 type MyNetworkServiceClient interface {
-	// rpc GetGenealogy(GetGenealogyRequest) returns (GetGenealogyResponse);
 	GetMyReferrals(context.Context, *connect.Request[v1.GetMyReferralsRequest]) (*connect.Response[v1.GetMyReferralsResponse], error)
+	GetTotalTeam(context.Context, *connect.Request[v1.GetTotalTeamRequest]) (*connect.Response[v1.GetTotalTeamResponse], error)
 }
 
 // NewMyNetworkServiceClient constructs a client for the user.my_network.v1.MyNetworkService
@@ -61,12 +64,19 @@ func NewMyNetworkServiceClient(httpClient connect.HTTPClient, baseURL string, op
 			connect.WithSchema(myNetworkServiceMethods.ByName("GetMyReferrals")),
 			connect.WithClientOptions(opts...),
 		),
+		getTotalTeam: connect.NewClient[v1.GetTotalTeamRequest, v1.GetTotalTeamResponse](
+			httpClient,
+			baseURL+MyNetworkServiceGetTotalTeamProcedure,
+			connect.WithSchema(myNetworkServiceMethods.ByName("GetTotalTeam")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // myNetworkServiceClient implements MyNetworkServiceClient.
 type myNetworkServiceClient struct {
 	getMyReferrals *connect.Client[v1.GetMyReferralsRequest, v1.GetMyReferralsResponse]
+	getTotalTeam   *connect.Client[v1.GetTotalTeamRequest, v1.GetTotalTeamResponse]
 }
 
 // GetMyReferrals calls user.my_network.v1.MyNetworkService.GetMyReferrals.
@@ -74,10 +84,15 @@ func (c *myNetworkServiceClient) GetMyReferrals(ctx context.Context, req *connec
 	return c.getMyReferrals.CallUnary(ctx, req)
 }
 
+// GetTotalTeam calls user.my_network.v1.MyNetworkService.GetTotalTeam.
+func (c *myNetworkServiceClient) GetTotalTeam(ctx context.Context, req *connect.Request[v1.GetTotalTeamRequest]) (*connect.Response[v1.GetTotalTeamResponse], error) {
+	return c.getTotalTeam.CallUnary(ctx, req)
+}
+
 // MyNetworkServiceHandler is an implementation of the user.my_network.v1.MyNetworkService service.
 type MyNetworkServiceHandler interface {
-	// rpc GetGenealogy(GetGenealogyRequest) returns (GetGenealogyResponse);
 	GetMyReferrals(context.Context, *connect.Request[v1.GetMyReferralsRequest]) (*connect.Response[v1.GetMyReferralsResponse], error)
+	GetTotalTeam(context.Context, *connect.Request[v1.GetTotalTeamRequest]) (*connect.Response[v1.GetTotalTeamResponse], error)
 }
 
 // NewMyNetworkServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -93,10 +108,18 @@ func NewMyNetworkServiceHandler(svc MyNetworkServiceHandler, opts ...connect.Han
 		connect.WithSchema(myNetworkServiceMethods.ByName("GetMyReferrals")),
 		connect.WithHandlerOptions(opts...),
 	)
+	myNetworkServiceGetTotalTeamHandler := connect.NewUnaryHandler(
+		MyNetworkServiceGetTotalTeamProcedure,
+		svc.GetTotalTeam,
+		connect.WithSchema(myNetworkServiceMethods.ByName("GetTotalTeam")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/user.my_network.v1.MyNetworkService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case MyNetworkServiceGetMyReferralsProcedure:
 			myNetworkServiceGetMyReferralsHandler.ServeHTTP(w, r)
+		case MyNetworkServiceGetTotalTeamProcedure:
+			myNetworkServiceGetTotalTeamHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -108,4 +131,8 @@ type UnimplementedMyNetworkServiceHandler struct{}
 
 func (UnimplementedMyNetworkServiceHandler) GetMyReferrals(context.Context, *connect.Request[v1.GetMyReferralsRequest]) (*connect.Response[v1.GetMyReferralsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.my_network.v1.MyNetworkService.GetMyReferrals is not implemented"))
+}
+
+func (UnimplementedMyNetworkServiceHandler) GetTotalTeam(context.Context, *connect.Request[v1.GetTotalTeamRequest]) (*connect.Response[v1.GetTotalTeamResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("user.my_network.v1.MyNetworkService.GetTotalTeam is not implemented"))
 }

@@ -5,10 +5,11 @@
 import { MyNetworkService } from "./my_network_pb";
 
 /**
- * rpc GetGenealogy(GetGenealogyRequest) returns (GetGenealogyResponse);
- *
- * rpc GetTotalTeams(GetTotalTeamsRequest) returns (GetTotalTeamsResponse);
- *
  * @generated from rpc user.my_network.v1.MyNetworkService.GetMyReferrals
  */
 export const getMyReferrals = MyNetworkService.method.getMyReferrals;
+
+/**
+ * @generated from rpc user.my_network.v1.MyNetworkService.GetTotalTeam
+ */
+export const getTotalTeam = MyNetworkService.method.getTotalTeam;

@@ -4,6 +4,8 @@
 
 import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
+import type { UserStatus } from "../../../enums/v1/enums_pb";
+import { file_enums_v1_enums } from "../../../enums/v1/enums_pb";
 import type { Timestamp } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_timestamp } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
@@ -12,7 +14,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file user/my_network/v1/my_network.proto.
  */
 export const file_user_my_network_v1_my_network: GenFile = /*@__PURE__*/
-  fileDesc("CiN1c2VyL215X25ldHdvcmsvdjEvbXlfbmV0d29yay5wcm90bxISdXNlci5teV9uZXR3b3JrLnYxIhcKFUdldE15UmVmZXJyYWxzUmVxdWVzdCKSAgoWR2V0TXlSZWZlcnJhbHNSZXNwb25zZRJGCglyZWZlcnJhbHMYASADKAsyMy51c2VyLm15X25ldHdvcmsudjEuR2V0TXlSZWZlcnJhbHNSZXNwb25zZS5SZWZlcnJhbBqvAQoIUmVmZXJyYWwSCgoCaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoBRIQCghmdWxsbmFtZRgDIAEoCRINCgVlbWFpbBgEIAEoCRIOCgZhdmF0YXIYBSABKAkSDwoHY291bnRyeRgGIAEoCRIUCgxwaG9uZV9udW1iZXIYByABKAkSLgoKY3JlYXRlZF9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAyewoQTXlOZXR3b3JrU2VydmljZRJnCg5HZXRNeVJlZmVycmFscxIpLnVzZXIubXlfbmV0d29yay52MS5HZXRNeVJlZmVycmFsc1JlcXVlc3QaKi51c2VyLm15X25ldHdvcmsudjEuR2V0TXlSZWZlcnJhbHNSZXNwb25zZWIGcHJvdG8z", [file_google_protobuf_timestamp]);
+  fileDesc("CiN1c2VyL215X25ldHdvcmsvdjEvbXlfbmV0d29yay5wcm90bxISdXNlci5teV9uZXR3b3JrLnYxIhcKFUdldE15UmVmZXJyYWxzUmVxdWVzdCKSAgoWR2V0TXlSZWZlcnJhbHNSZXNwb25zZRJGCglyZWZlcnJhbHMYASADKAsyMy51c2VyLm15X25ldHdvcmsudjEuR2V0TXlSZWZlcnJhbHNSZXNwb25zZS5SZWZlcnJhbBqvAQoIUmVmZXJyYWwSCgoCaWQYASABKAkSDwoHdXNlcl9pZBgCIAEoBRIQCghmdWxsbmFtZRgDIAEoCRINCgVlbWFpbBgEIAEoCRIOCgZhdmF0YXIYBSABKAkSDwoHY291bnRyeRgGIAEoCRIUCgxwaG9uZV9udW1iZXIYByABKAkSLgoKY3JlYXRlZF9hdBgIIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAiFQoTR2V0VG90YWxUZWFtUmVxdWVzdCK8AgoUR2V0VG90YWxUZWFtUmVzcG9uc2USOwoEdGVhbRgBIAMoCzItLnVzZXIubXlfbmV0d29yay52MS5HZXRUb3RhbFRlYW1SZXNwb25zZS5UZWFtGuYBCgRUZWFtEgoKAmlkGAEgASgJEg8KB3VzZXJfaWQYAiABKAUSEwoLcmVmZXJyYWxfaWQYAyABKAUSEAoIZnVsbG5hbWUYBCABKAkSDQoFZW1haWwYBSABKAkSDgoGYXZhdGFyGAYgASgJEg8KB2NvdW50cnkYByABKAkSFAoMcGhvbmVfbnVtYmVyGAggASgJEiQKBnN0YXR1cxgJIAEoDjIULmVudW1zLnYxLlVzZXJTdGF0dXMSLgoKY3JlYXRlZF9hdBgKIAEoCzIaLmdvb2dsZS5wcm90b2J1Zi5UaW1lc3RhbXAy3gEKEE15TmV0d29ya1NlcnZpY2USZwoOR2V0TXlSZWZlcnJhbHMSKS51c2VyLm15X25ldHdvcmsudjEuR2V0TXlSZWZlcnJhbHNSZXF1ZXN0GioudXNlci5teV9uZXR3b3JrLnYxLkdldE15UmVmZXJyYWxzUmVzcG9uc2USYQoMR2V0VG90YWxUZWFtEicudXNlci5teV9uZXR3b3JrLnYxLkdldFRvdGFsVGVhbVJlcXVlc3QaKC51c2VyLm15X25ldHdvcmsudjEuR2V0VG90YWxUZWFtUmVzcG9uc2ViBnByb3RvMw", [file_enums_v1_enums, file_google_protobuf_timestamp]);
 
 /**
  * @generated from message user.my_network.v1.GetMyReferralsRequest
@@ -97,20 +99,116 @@ export const GetMyReferralsResponse_ReferralSchema: GenMessage<GetMyReferralsRes
   messageDesc(file_user_my_network_v1_my_network, 1, 0);
 
 /**
+ * @generated from message user.my_network.v1.GetTotalTeamRequest
+ */
+export type GetTotalTeamRequest = Message<"user.my_network.v1.GetTotalTeamRequest"> & {
+};
+
+/**
+ * Describes the message user.my_network.v1.GetTotalTeamRequest.
+ * Use `create(GetTotalTeamRequestSchema)` to create a new message.
+ */
+export const GetTotalTeamRequestSchema: GenMessage<GetTotalTeamRequest> = /*@__PURE__*/
+  messageDesc(file_user_my_network_v1_my_network, 2);
+
+/**
+ * @generated from message user.my_network.v1.GetTotalTeamResponse
+ */
+export type GetTotalTeamResponse = Message<"user.my_network.v1.GetTotalTeamResponse"> & {
+  /**
+   * @generated from field: repeated user.my_network.v1.GetTotalTeamResponse.Team team = 1;
+   */
+  team: GetTotalTeamResponse_Team[];
+};
+
+/**
+ * Describes the message user.my_network.v1.GetTotalTeamResponse.
+ * Use `create(GetTotalTeamResponseSchema)` to create a new message.
+ */
+export const GetTotalTeamResponseSchema: GenMessage<GetTotalTeamResponse> = /*@__PURE__*/
+  messageDesc(file_user_my_network_v1_my_network, 3);
+
+/**
+ * @generated from message user.my_network.v1.GetTotalTeamResponse.Team
+ */
+export type GetTotalTeamResponse_Team = Message<"user.my_network.v1.GetTotalTeamResponse.Team"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: int32 user_id = 2;
+   */
+  userId: number;
+
+  /**
+   * @generated from field: int32 referral_id = 3;
+   */
+  referralId: number;
+
+  /**
+   * @generated from field: string fullname = 4;
+   */
+  fullname: string;
+
+  /**
+   * @generated from field: string email = 5;
+   */
+  email: string;
+
+  /**
+   * @generated from field: string avatar = 6;
+   */
+  avatar: string;
+
+  /**
+   * @generated from field: string country = 7;
+   */
+  country: string;
+
+  /**
+   * @generated from field: string phone_number = 8;
+   */
+  phoneNumber: string;
+
+  /**
+   * @generated from field: enums.v1.UserStatus status = 9;
+   */
+  status: UserStatus;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp created_at = 10;
+   */
+  createdAt?: Timestamp;
+};
+
+/**
+ * Describes the message user.my_network.v1.GetTotalTeamResponse.Team.
+ * Use `create(GetTotalTeamResponse_TeamSchema)` to create a new message.
+ */
+export const GetTotalTeamResponse_TeamSchema: GenMessage<GetTotalTeamResponse_Team> = /*@__PURE__*/
+  messageDesc(file_user_my_network_v1_my_network, 3, 0);
+
+/**
  * @generated from service user.my_network.v1.MyNetworkService
  */
 export const MyNetworkService: GenService<{
   /**
-   * rpc GetGenealogy(GetGenealogyRequest) returns (GetGenealogyResponse);
-   *
-   * rpc GetTotalTeams(GetTotalTeamsRequest) returns (GetTotalTeamsResponse);
-   *
    * @generated from rpc user.my_network.v1.MyNetworkService.GetMyReferrals
    */
   getMyReferrals: {
     methodKind: "unary";
     input: typeof GetMyReferralsRequestSchema;
     output: typeof GetMyReferralsResponseSchema;
+  },
+  /**
+   * @generated from rpc user.my_network.v1.MyNetworkService.GetTotalTeam
+   */
+  getTotalTeam: {
+    methodKind: "unary";
+    input: typeof GetTotalTeamRequestSchema;
+    output: typeof GetTotalTeamResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_user_my_network_v1_my_network, 0);

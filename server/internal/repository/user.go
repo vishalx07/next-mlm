@@ -18,6 +18,7 @@ type UserRepoInterface interface {
 	Delete(id string) error
 	GenerateUserId() (int32, error)
 	GetMyReferrals(userId int32) ([]*models.User, error)
+	GetTotalTeam(userId int32) ([]*models.User, error)
 }
 
 type UserRepo struct {
@@ -113,4 +114,22 @@ func (repo *UserRepo) GetMyReferrals(userId int32) ([]*models.User, error) {
 	}
 
 	return users, nil
+}
+
+func (repo *UserRepo) GetTotalTeam(userId int32) ([]*models.User, error) {
+	var team []*models.User
+	query := `
+      WITH RECURSIVE team AS (
+          SELECT * FROM "user" WHERE user_id = ?
+        UNION ALL
+          SELECT u.* FROM "user" u
+          INNER JOIN team t ON u.referral_id = t.user_id
+      )
+      SELECT * FROM team
+          ORDER BY created_at DESC;
+    `
+	if err := repo.db.Raw(query, userId).Scan(&team).Error; err != nil {
+		return nil, err
+	}
+	return team, nil
 }

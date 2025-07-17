@@ -27,6 +27,7 @@ type UserServiceInterface interface {
 	ValidatePassword(*models.User, string) error
 	GenerateUserId() (int32, error)
 	GetMyReferrals(userId int32) ([]*models.User, error)
+	GetTotalTeam(userId int32) ([]*models.User, error)
 }
 
 type UserService struct {
@@ -175,6 +176,14 @@ func (s *UserService) GetMyReferrals(userId int32) ([]*models.User, error) {
 	users, err := s.userRepo.GetMyReferrals(userId)
 	if err != nil {
 		return nil, message.ErrUserFailedToGetMyReferrals(err)
+	}
+	return users, nil
+}
+
+func (s *UserService) GetTotalTeam(userId int32) ([]*models.User, error) {
+	users, err := s.userRepo.GetTotalTeam(userId)
+	if err != nil {
+		return nil, message.ErrUserFailedToGetTotalTeam(err)
 	}
 	return users, nil
 }

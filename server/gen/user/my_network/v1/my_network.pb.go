@@ -7,6 +7,7 @@
 package my_networkv1
 
 import (
+	v1 "github.com/vishalx07/next-mlm/gen/enums/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -102,6 +103,86 @@ func (x *GetMyReferralsResponse) GetReferrals() []*GetMyReferralsResponse_Referr
 	return nil
 }
 
+type GetTotalTeamRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTotalTeamRequest) Reset() {
+	*x = GetTotalTeamRequest{}
+	mi := &file_user_my_network_v1_my_network_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTotalTeamRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTotalTeamRequest) ProtoMessage() {}
+
+func (x *GetTotalTeamRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_my_network_v1_my_network_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTotalTeamRequest.ProtoReflect.Descriptor instead.
+func (*GetTotalTeamRequest) Descriptor() ([]byte, []int) {
+	return file_user_my_network_v1_my_network_proto_rawDescGZIP(), []int{2}
+}
+
+type GetTotalTeamResponse struct {
+	state         protoimpl.MessageState       `protogen:"open.v1"`
+	Team          []*GetTotalTeamResponse_Team `protobuf:"bytes,1,rep,name=team,proto3" json:"team,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTotalTeamResponse) Reset() {
+	*x = GetTotalTeamResponse{}
+	mi := &file_user_my_network_v1_my_network_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTotalTeamResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTotalTeamResponse) ProtoMessage() {}
+
+func (x *GetTotalTeamResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_my_network_v1_my_network_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTotalTeamResponse.ProtoReflect.Descriptor instead.
+func (*GetTotalTeamResponse) Descriptor() ([]byte, []int) {
+	return file_user_my_network_v1_my_network_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *GetTotalTeamResponse) GetTeam() []*GetTotalTeamResponse_Team {
+	if x != nil {
+		return x.Team
+	}
+	return nil
+}
+
 type GetMyReferralsResponse_Referral struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -118,7 +199,7 @@ type GetMyReferralsResponse_Referral struct {
 
 func (x *GetMyReferralsResponse_Referral) Reset() {
 	*x = GetMyReferralsResponse_Referral{}
-	mi := &file_user_my_network_v1_my_network_proto_msgTypes[2]
+	mi := &file_user_my_network_v1_my_network_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -130,7 +211,7 @@ func (x *GetMyReferralsResponse_Referral) String() string {
 func (*GetMyReferralsResponse_Referral) ProtoMessage() {}
 
 func (x *GetMyReferralsResponse_Referral) ProtoReflect() protoreflect.Message {
-	mi := &file_user_my_network_v1_my_network_proto_msgTypes[2]
+	mi := &file_user_my_network_v1_my_network_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -202,11 +283,127 @@ func (x *GetMyReferralsResponse_Referral) GetCreatedAt() *timestamppb.Timestamp 
 	return nil
 }
 
+type GetTotalTeamResponse_Team struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	UserId        int32                  `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	ReferralId    int32                  `protobuf:"varint,3,opt,name=referral_id,json=referralId,proto3" json:"referral_id,omitempty"`
+	Fullname      string                 `protobuf:"bytes,4,opt,name=fullname,proto3" json:"fullname,omitempty"`
+	Email         string                 `protobuf:"bytes,5,opt,name=email,proto3" json:"email,omitempty"`
+	Avatar        string                 `protobuf:"bytes,6,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Country       string                 `protobuf:"bytes,7,opt,name=country,proto3" json:"country,omitempty"`
+	PhoneNumber   string                 `protobuf:"bytes,8,opt,name=phone_number,json=phoneNumber,proto3" json:"phone_number,omitempty"`
+	Status        v1.UserStatus          `protobuf:"varint,9,opt,name=status,proto3,enum=enums.v1.UserStatus" json:"status,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetTotalTeamResponse_Team) Reset() {
+	*x = GetTotalTeamResponse_Team{}
+	mi := &file_user_my_network_v1_my_network_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetTotalTeamResponse_Team) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTotalTeamResponse_Team) ProtoMessage() {}
+
+func (x *GetTotalTeamResponse_Team) ProtoReflect() protoreflect.Message {
+	mi := &file_user_my_network_v1_my_network_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTotalTeamResponse_Team.ProtoReflect.Descriptor instead.
+func (*GetTotalTeamResponse_Team) Descriptor() ([]byte, []int) {
+	return file_user_my_network_v1_my_network_proto_rawDescGZIP(), []int{3, 0}
+}
+
+func (x *GetTotalTeamResponse_Team) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *GetTotalTeamResponse_Team) GetUserId() int32 {
+	if x != nil {
+		return x.UserId
+	}
+	return 0
+}
+
+func (x *GetTotalTeamResponse_Team) GetReferralId() int32 {
+	if x != nil {
+		return x.ReferralId
+	}
+	return 0
+}
+
+func (x *GetTotalTeamResponse_Team) GetFullname() string {
+	if x != nil {
+		return x.Fullname
+	}
+	return ""
+}
+
+func (x *GetTotalTeamResponse_Team) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+func (x *GetTotalTeamResponse_Team) GetAvatar() string {
+	if x != nil {
+		return x.Avatar
+	}
+	return ""
+}
+
+func (x *GetTotalTeamResponse_Team) GetCountry() string {
+	if x != nil {
+		return x.Country
+	}
+	return ""
+}
+
+func (x *GetTotalTeamResponse_Team) GetPhoneNumber() string {
+	if x != nil {
+		return x.PhoneNumber
+	}
+	return ""
+}
+
+func (x *GetTotalTeamResponse_Team) GetStatus() v1.UserStatus {
+	if x != nil {
+		return x.Status
+	}
+	return v1.UserStatus(0)
+}
+
+func (x *GetTotalTeamResponse_Team) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
 var File_user_my_network_v1_my_network_proto protoreflect.FileDescriptor
 
 const file_user_my_network_v1_my_network_proto_rawDesc = "" +
 	"\n" +
-	"#user/my_network/v1/my_network.proto\x12\x12user.my_network.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x17\n" +
+	"#user/my_network/v1/my_network.proto\x12\x12user.my_network.v1\x1a\x14enums/v1/enums.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x17\n" +
 	"\x15GetMyReferralsRequest\"\xe3\x02\n" +
 	"\x16GetMyReferralsResponse\x12Q\n" +
 	"\treferrals\x18\x01 \x03(\v23.user.my_network.v1.GetMyReferralsResponse.ReferralR\treferrals\x1a\xf5\x01\n" +
@@ -219,9 +416,27 @@ const file_user_my_network_v1_my_network_proto_rawDesc = "" +
 	"\acountry\x18\x06 \x01(\tR\acountry\x12!\n" +
 	"\fphone_number\x18\a \x01(\tR\vphoneNumber\x129\n" +
 	"\n" +
-	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt2{\n" +
+	"created_at\x18\b \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\"\x15\n" +
+	"\x13GetTotalTeamRequest\"\x9c\x03\n" +
+	"\x14GetTotalTeamResponse\x12A\n" +
+	"\x04team\x18\x01 \x03(\v2-.user.my_network.v1.GetTotalTeamResponse.TeamR\x04team\x1a\xc0\x02\n" +
+	"\x04Team\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\x05R\x06userId\x12\x1f\n" +
+	"\vreferral_id\x18\x03 \x01(\x05R\n" +
+	"referralId\x12\x1a\n" +
+	"\bfullname\x18\x04 \x01(\tR\bfullname\x12\x14\n" +
+	"\x05email\x18\x05 \x01(\tR\x05email\x12\x16\n" +
+	"\x06avatar\x18\x06 \x01(\tR\x06avatar\x12\x18\n" +
+	"\acountry\x18\a \x01(\tR\acountry\x12!\n" +
+	"\fphone_number\x18\b \x01(\tR\vphoneNumber\x12,\n" +
+	"\x06status\x18\t \x01(\x0e2\x14.enums.v1.UserStatusR\x06status\x129\n" +
+	"\n" +
+	"created_at\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt2\xde\x01\n" +
 	"\x10MyNetworkService\x12g\n" +
-	"\x0eGetMyReferrals\x12).user.my_network.v1.GetMyReferralsRequest\x1a*.user.my_network.v1.GetMyReferralsResponseB\xd1\x01\n" +
+	"\x0eGetMyReferrals\x12).user.my_network.v1.GetMyReferralsRequest\x1a*.user.my_network.v1.GetMyReferralsResponse\x12a\n" +
+	"\fGetTotalTeam\x12'.user.my_network.v1.GetTotalTeamRequest\x1a(.user.my_network.v1.GetTotalTeamResponseB\xd1\x01\n" +
 	"\x16com.user.my_network.v1B\x0eMyNetworkProtoP\x01ZAgithub.com/vishalx07/next-mlm/gen/user/my_network/v1;my_networkv1\xa2\x02\x03UMX\xaa\x02\x11User.MyNetwork.V1\xca\x02\x11User\\MyNetwork\\V1\xe2\x02\x1dUser\\MyNetwork\\V1\\GPBMetadata\xea\x02\x13User::MyNetwork::V1b\x06proto3"
 
 var (
@@ -236,23 +451,32 @@ func file_user_my_network_v1_my_network_proto_rawDescGZIP() []byte {
 	return file_user_my_network_v1_my_network_proto_rawDescData
 }
 
-var file_user_my_network_v1_my_network_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_user_my_network_v1_my_network_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_user_my_network_v1_my_network_proto_goTypes = []any{
 	(*GetMyReferralsRequest)(nil),           // 0: user.my_network.v1.GetMyReferralsRequest
 	(*GetMyReferralsResponse)(nil),          // 1: user.my_network.v1.GetMyReferralsResponse
-	(*GetMyReferralsResponse_Referral)(nil), // 2: user.my_network.v1.GetMyReferralsResponse.Referral
-	(*timestamppb.Timestamp)(nil),           // 3: google.protobuf.Timestamp
+	(*GetTotalTeamRequest)(nil),             // 2: user.my_network.v1.GetTotalTeamRequest
+	(*GetTotalTeamResponse)(nil),            // 3: user.my_network.v1.GetTotalTeamResponse
+	(*GetMyReferralsResponse_Referral)(nil), // 4: user.my_network.v1.GetMyReferralsResponse.Referral
+	(*GetTotalTeamResponse_Team)(nil),       // 5: user.my_network.v1.GetTotalTeamResponse.Team
+	(*timestamppb.Timestamp)(nil),           // 6: google.protobuf.Timestamp
+	(v1.UserStatus)(0),                      // 7: enums.v1.UserStatus
 }
 var file_user_my_network_v1_my_network_proto_depIdxs = []int32{
-	2, // 0: user.my_network.v1.GetMyReferralsResponse.referrals:type_name -> user.my_network.v1.GetMyReferralsResponse.Referral
-	3, // 1: user.my_network.v1.GetMyReferralsResponse.Referral.created_at:type_name -> google.protobuf.Timestamp
-	0, // 2: user.my_network.v1.MyNetworkService.GetMyReferrals:input_type -> user.my_network.v1.GetMyReferralsRequest
-	1, // 3: user.my_network.v1.MyNetworkService.GetMyReferrals:output_type -> user.my_network.v1.GetMyReferralsResponse
-	3, // [3:4] is the sub-list for method output_type
-	2, // [2:3] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	4, // 0: user.my_network.v1.GetMyReferralsResponse.referrals:type_name -> user.my_network.v1.GetMyReferralsResponse.Referral
+	5, // 1: user.my_network.v1.GetTotalTeamResponse.team:type_name -> user.my_network.v1.GetTotalTeamResponse.Team
+	6, // 2: user.my_network.v1.GetMyReferralsResponse.Referral.created_at:type_name -> google.protobuf.Timestamp
+	7, // 3: user.my_network.v1.GetTotalTeamResponse.Team.status:type_name -> enums.v1.UserStatus
+	6, // 4: user.my_network.v1.GetTotalTeamResponse.Team.created_at:type_name -> google.protobuf.Timestamp
+	0, // 5: user.my_network.v1.MyNetworkService.GetMyReferrals:input_type -> user.my_network.v1.GetMyReferralsRequest
+	2, // 6: user.my_network.v1.MyNetworkService.GetTotalTeam:input_type -> user.my_network.v1.GetTotalTeamRequest
+	1, // 7: user.my_network.v1.MyNetworkService.GetMyReferrals:output_type -> user.my_network.v1.GetMyReferralsResponse
+	3, // 8: user.my_network.v1.MyNetworkService.GetTotalTeam:output_type -> user.my_network.v1.GetTotalTeamResponse
+	7, // [7:9] is the sub-list for method output_type
+	5, // [5:7] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_user_my_network_v1_my_network_proto_init() }
@@ -266,7 +490,7 @@ func file_user_my_network_v1_my_network_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_my_network_v1_my_network_proto_rawDesc), len(file_user_my_network_v1_my_network_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
