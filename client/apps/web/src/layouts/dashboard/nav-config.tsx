@@ -40,6 +40,11 @@ export const navConfig: NavItem[] = [
           },
         ],
       },
+      {
+        title: "Referral Link",
+        icon: <DashboardIcon.ReferralLink />,
+        url: ROUTES.user.referralLink,
+      },
     ],
   },
   {

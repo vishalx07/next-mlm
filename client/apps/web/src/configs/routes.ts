@@ -23,6 +23,7 @@ export const ROUTES = {
       myReferrals: myNetwork("/my-referrals"),
       totalTeams: myNetwork("/total-teams"),
     },
+    referralLink: userRoute("/referral-link"),
   },
 };
 
