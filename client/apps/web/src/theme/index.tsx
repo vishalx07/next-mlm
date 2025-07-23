@@ -182,7 +182,17 @@ export const ThemeProvider = ({ children }: Props) => {
             },
           }}
         >
-          <UIRHFConfigProvider>{children}</UIRHFConfigProvider>
+          <UIRHFConfigProvider
+            provider={{
+              slotProps: {
+                form: {
+                  autoComplete: "off",
+                },
+              },
+            }}
+          >
+            {children}
+          </UIRHFConfigProvider>
         </UIConfigProvider>
       </UINextConfigProvider>
     </UIProvider>

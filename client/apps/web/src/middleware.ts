@@ -20,7 +20,7 @@ export async function middleware(req: NextRequest) {
   }
 
   if (auth && AUTH_ROUTES.has(pathname)) {
-    return NextResponse.redirect(new URL(ROUTES.home, req.url));
+    return NextResponse.redirect(new URL(ROUTES.user.dashboard, req.url));
   }
 
   return NextResponse.next();
