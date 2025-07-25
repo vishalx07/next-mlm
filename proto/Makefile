@@ -1,14 +1,14 @@
 gen-server:
-buf generate
+	buf generate
 
 gen-client:
-buf generate --template buf.gen.web.yaml
+	buf generate --template buf.gen.web.yaml
 
 dep-update:
-buf dep update
+	buf dep update
 
 lint:
-buf lint
+	buf lint
 
 format:
-buf format -w
+	buf format -w

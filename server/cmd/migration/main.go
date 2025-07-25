@@ -2,12 +2,9 @@ package main
 
 import (
 	"log"
-	"net/http"
 
-	handler "github.com/vishalx07/next-mlm/internal/api/v1/handler"
 	config "github.com/vishalx07/next-mlm/internal/config"
 	DB "github.com/vishalx07/next-mlm/internal/db"
-	server "github.com/vishalx07/next-mlm/internal/pkg/server"
 )
 
 func main() {
@@ -29,14 +26,11 @@ func run() error {
 		return err
 	}
 
-	// Set up HTTP server
-	mux := http.NewServeMux()
-
-	server := server.NewServer(db, env, mux)
-
-	handler.RegisterHandler(server)
-
-	if err := server.Run(); err != nil {
+	// migrate
+	if err := DB.CreateEnumTypes(db); err != nil {
+		return err
+	}
+	if err := DB.AutoMigrate(db); err != nil {
 		return err
 	}
 
